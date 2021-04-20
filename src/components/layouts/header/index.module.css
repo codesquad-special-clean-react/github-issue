@@ -1,0 +1,16 @@
+.header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 7rem;
+  position: sticky;
+  top: 0;
+  font-weight: 600;
+  font-size: 2rem;
+  background-color: #25292f;
+  color: white;
+}
+
+.book-icon {
+  width: 100px;
+}
