@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import styled from 'styled-components'
+import LabelList from "./LabelList";
 
 const IssuesContents = () => {
   const [isActiveLabels, setIsActiveLabels] = useState(false)
@@ -20,6 +21,8 @@ const IssuesContents = () => {
         <TabButton active={isActiveLabels} onClick={() => onClickLabels()}>Labels</TabButton>
         <TabButton active={isActiveMilestones} onClick={() => onClickMilestones()}>Milestones</TabButton>
         <CreateButton>New label</CreateButton>
+
+        <LabelList/>
       </Container>
   );
 };
