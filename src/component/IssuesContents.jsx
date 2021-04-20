@@ -45,7 +45,7 @@ border: none;
 background-color: #2CB44B;
 color: white;
 position: absolute;
-right: 10em;
+right: 12em;
 `
 
 export default IssuesContents;
