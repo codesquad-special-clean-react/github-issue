@@ -1,12 +1,7 @@
-import styles from "./App.module.css";
-import Main from "./components/pages/main";
+import Index from "./components/pages/index";
 
 function App() {
-  return (
-    <div className={styles.app}>
-      <Main />
-    </div>
-  );
+  return <Index />;
 }
 
 export default App;
