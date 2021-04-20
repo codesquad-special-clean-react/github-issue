@@ -1,9 +1,11 @@
 import './App.css';
+import Issues from "./page/Issues";
 
 function App() {
   return (
-      <div>
-      </div>
+      <>
+        <Issues/>
+      </>
   );
 }
 
