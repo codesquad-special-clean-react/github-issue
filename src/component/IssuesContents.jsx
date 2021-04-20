@@ -1,9 +1,8 @@
 import React from 'react';
 
-const IssuesContents = ({ title = "ISSUES" }) => {
+const IssuesContents = () => {
   return (
       <div>
-        <span>{title}</span>
       </div>
   );
 };
