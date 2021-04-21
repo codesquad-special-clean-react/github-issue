@@ -19,7 +19,7 @@ const Labels = () => {
 
   return (
     <LabelsWrapper>
-      <LabelHead />
+      <LabelHead labels={labels} />
       <ul>{labelList}</ul>
     </LabelsWrapper>
   );

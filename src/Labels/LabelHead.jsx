@@ -1,8 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 
-const LabelHead = () => {
-  return <Head>4 lables</Head>;
+const LabelHead = ({ labels }) => {
+  return <Head>{labels.length} lables</Head>;
 };
 
 const Head = styled.div`
