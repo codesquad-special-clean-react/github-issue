@@ -19,7 +19,7 @@ const MenuWrapper = styled.div`
 
   & div {
     display: flex;
-    border: 1px solid grey;
+    border: 1px solid rgb(241, 243, 245);
   }
 
   & div > button {
@@ -36,7 +36,7 @@ const MenuWrapper = styled.div`
 
 const AddBtn = styled.button`
   width: 100px;
-  border: 1px solid grey;
+  border: 1px solid rgb(241, 243, 245);
   background-color: #04b404;
   color: white;
   border-radius: 5px;
