@@ -3,31 +3,31 @@ import styled from "styled-components";
 
 import LabelHead from "./LabelHead";
 import LabelItem from "./LabelItem";
+import { getLabels } from "../../service/LabelRepository";
 
 const Labels = () => {
   const [labels, setLabels] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:3001/labels")
-      .then((res) => res.json())
-      .then((datas) => setLabels(datas));
+    const fetchData = async () => {
+      const datas = await getLabels();
+      setLabels(datas);
+    };
+    fetchData();
   }, []);
-
-  // console.log(labels);
 
   const handleDelete = (id) => {
     setLabels(labels.filter((label) => label.id !== id));
   };
 
+  const labelList = labels.map((label) => (
+    <LabelItem key={label.id} label={label} handleDelete={handleDelete} />
+  ));
+
   return (
     <LabelsWrapper>
       <LabelHead labels={labels} />
-      {/* <ul>{labelList}</ul> */}
-      <ul>
-        {labels.map((label) => (
-          <LabelItem key={label.id} label={label} handleDelete={handleDelete} />
-        ))}
-      </ul>
+      <ul>{labelList}</ul>
     </LabelsWrapper>
   );
 };
