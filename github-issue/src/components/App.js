@@ -1,8 +1,15 @@
 import '../css/App.css';
+import Title from '../components/Title'
+import Header from '../components/Header'
+import LabelList from '../components/LabelList'
 
 function App() {
   return (
-    <div className="App"></div>
+    <>
+        <Title/>
+        <Header/>
+        <LabelList/>
+    </>
   );
 }
 
