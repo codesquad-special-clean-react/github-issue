@@ -33,7 +33,6 @@ const Label = styled.div`
   width: 30%;
   cursor: pointer;
 
-  ${(props) => console.log("Label color", props.color)}
   & > span {
     padding: 0.3em;
     background-color: ${(props) => (props.color ? props.color : "red")};

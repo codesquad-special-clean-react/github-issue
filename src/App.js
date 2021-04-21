@@ -1,7 +1,10 @@
+import styled from "styled-components";
+
 import Header from "./Header/Header";
 import Menu from "./Menu/Menu";
 import Labels from "./Labels/Labels";
-import styled from "styled-components";
+import Milestones from "./Milestones/Milestones";
+import { useState } from "react";
 
 const MainWrapper = styled.div`
   margin: 1em;
@@ -9,12 +12,14 @@ const MainWrapper = styled.div`
 `;
 
 function App() {
+  const [menu, setMenu] = useState("labels");
+
   return (
     <>
       <Header />
       <MainWrapper>
-        <Menu />
-        <Labels />
+        <Menu menu={menu} setMenu={setMenu} />
+        {menu === "labels" ? <Labels /> : <Milestones />}
       </MainWrapper>
     </>
   );

@@ -1,14 +1,30 @@
 import React from "react";
 import styled from "styled-components";
 
-const Menu = () => {
+const Menu = ({ menu, setMenu }) => {
+  const handleClick = (name) => () => setMenu(name);
+
   return (
     <MenuWrapper>
       <div>
-        <button className={"active"}>Labels</button>
-        <button>Milestones</button>
+        <button
+          className={menu === "labels" ? "active" : ""}
+          onClick={handleClick("labels")}
+        >
+          Labels
+        </button>
+        <button
+          className={menu === "milestones" ? "active" : ""}
+          onClick={handleClick("milestones")}
+        >
+          Milestones
+        </button>
       </div>
-      <AddBtn>New Label</AddBtn>
+      {menu === "labels" ? (
+        <AddBtn>New Label</AddBtn>
+      ) : (
+        <AddBtn>New milestone</AddBtn>
+      )}
     </MenuWrapper>
   );
 };
@@ -35,13 +51,12 @@ const MenuWrapper = styled.div`
 `;
 
 const AddBtn = styled.button`
-  width: 100px;
   border: 1px solid rgb(241, 243, 245);
   background-color: #04b404;
   color: white;
   border-radius: 5px;
   font-weight: bold;
-  padding: 5px;
+  padding: 1em;
   cursor: pointer;
 `;
 
