@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 
 import Dialog from "../Dialog/Dialog";
-import { deleteLabel } from "../../service/LabelRepository";
+import LabelFetch from "../../service/LabelFetch";
 
 const LabelItem = ({ label, handleDelete }) => {
   const [dialog, setDialog] = useState(false);
@@ -10,7 +10,7 @@ const LabelItem = ({ label, handleDelete }) => {
   const handleConfirm = async () => {
     setDialog(false);
     handleDelete(label.id);
-    await deleteLabel(label.id);
+    await LabelFetch.delete(label.id);
   };
 
   const handleCancel = () => {

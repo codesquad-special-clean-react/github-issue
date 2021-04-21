@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 
 import { getRandomColor } from "../../service/randomColor";
-import { create } from "../../service/LabelRepository";
+import LabelFetch from "../../service/LabelFetch";
 
 const AddLabelForm = ({ visible, hiddenLabelForm, createLabel }) => {
   const [name, setName] = useState("");
@@ -26,7 +26,7 @@ const AddLabelForm = ({ visible, hiddenLabelForm, createLabel }) => {
     };
 
     createLabel(body);
-    const result = await create(body);
+    const result = await LabelFetch.create(body);
     if (result) {
       hiddenLabelForm();
       setName("");

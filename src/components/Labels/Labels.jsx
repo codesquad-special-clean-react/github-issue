@@ -3,12 +3,12 @@ import styled from "styled-components";
 
 import LabelHead from "./LabelHead";
 import LabelItem from "./LabelItem";
-import { getLabels } from "../../service/LabelRepository";
+import LabelFetch from "../../service/LabelFetch.js";
 
 const Labels = ({ labels, setLabels }) => {
   useEffect(() => {
     const fetchData = async () => {
-      const datas = await getLabels();
+      const datas = await LabelFetch.read();
       setLabels(datas);
     };
     fetchData();
