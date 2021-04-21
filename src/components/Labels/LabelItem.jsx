@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 
 import Dialog from "../Dialog/Dialog";
-import { deleteLabel } from "../service/LabelRepository";
+import { deleteLabel } from "../../service/LabelRepository";
 
 const LabelItem = ({ label, handleDelete }) => {
   const [dialog, setDialog] = useState(false);

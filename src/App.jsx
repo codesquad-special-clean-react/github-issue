@@ -1,10 +1,10 @@
 import styled from "styled-components";
-
-import Header from "./Header/Header";
-import Menu from "./Menu/Menu";
-import Labels from "./Labels/Labels";
-import Milestones from "./Milestones/Milestones";
 import { useState } from "react";
+
+import Header from "./components/Header/Header";
+import Menu from "./components/Menu/Menu";
+import Labels from "./components/Labels/Labels";
+import Milestones from "./components/Milestones/Milestones";
 
 const MainWrapper = styled.div`
   margin: 1em;
