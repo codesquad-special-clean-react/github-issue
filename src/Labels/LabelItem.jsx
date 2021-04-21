@@ -1,20 +1,42 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 
-const LabelItem = ({ label }) => {
+import Dialog from "../Dialog/Dialog";
+import { deleteLabel } from "../service/LabelRepository";
+
+const LabelItem = ({ label, handleDelete }) => {
+  const [dialog, setDialog] = useState(false);
+
+  const handleConfirm = async () => {
+    setDialog(false);
+    handleDelete(label.id);
+    await deleteLabel(label.id);
+  };
+
+  const handleCancel = () => {
+    setDialog(false);
+  };
+
   return (
-    <LabelWrapper>
-      <LabelInfo>
-        <Label color={label.color}>
-          <span>{label.name}</span>
-        </Label>
-        <Description>{label.description}</Description>
-      </LabelInfo>
-      <LabelMenu>
-        <button>Edit</button>
-        <button>Delete</button>
-      </LabelMenu>
-    </LabelWrapper>
+    <>
+      <LabelWrapper>
+        <LabelInfo>
+          <Label color={label.color}>
+            <span>{label.name}</span>
+          </Label>
+          <Description>{label.description}</Description>
+        </LabelInfo>
+        <LabelMenu>
+          <button>Edit</button>
+          <button onClick={() => setDialog(true)}>Delete</button>
+        </LabelMenu>
+      </LabelWrapper>
+      <Dialog
+        visible={dialog}
+        handleCancel={handleCancel}
+        handleConfirm={handleConfirm}
+      />
+    </>
   );
 };
 

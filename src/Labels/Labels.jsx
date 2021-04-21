@@ -13,14 +13,21 @@ const Labels = () => {
       .then((datas) => setLabels(datas));
   }, []);
 
-  const labelList = labels.map((label) => (
-    <LabelItem key={label.id} label={label} />
-  ));
+  // console.log(labels);
+
+  const handleDelete = (id) => {
+    setLabels(labels.filter((label) => label.id !== id));
+  };
 
   return (
     <LabelsWrapper>
       <LabelHead labels={labels} />
-      <ul>{labelList}</ul>
+      {/* <ul>{labelList}</ul> */}
+      <ul>
+        {labels.map((label) => (
+          <LabelItem key={label.id} label={label} handleDelete={handleDelete} />
+        ))}
+      </ul>
     </LabelsWrapper>
   );
 };
