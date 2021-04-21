@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
-const Menu = ({ menu, setMenu }) => {
+const Menu = ({ menu, setMenu, openLabelForm }) => {
   const handleClick = (name) => () => setMenu(name);
 
   return (
@@ -21,7 +21,7 @@ const Menu = ({ menu, setMenu }) => {
         </button>
       </div>
       {menu === "labels" ? (
-        <AddBtn>New Label</AddBtn>
+        <AddBtn onClick={openLabelForm}>New Label</AddBtn>
       ) : (
         <AddBtn>New milestone</AddBtn>
       )}
