@@ -1,20 +1,26 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 
 import LabelHead from "./LabelHead";
 import LabelItem from "./LabelItem";
 
 const Labels = () => {
+  const [labels, setLabels] = useState([]);
+
+  useEffect(() => {
+    fetch("http://localhost:3001/labels")
+      .then((res) => res.json())
+      .then((datas) => setLabels(datas));
+  }, []);
+
+  const labelList = labels.map((label) => (
+    <LabelItem key={label.id} label={label} />
+  ));
+
   return (
     <LabelsWrapper>
       <LabelHead />
-      <ul>
-        <LabelItem />
-        <LabelItem />
-        <LabelItem />
-        <LabelItem />
-        <LabelItem />
-      </ul>
+      <ul>{labelList}</ul>
     </LabelsWrapper>
   );
 };

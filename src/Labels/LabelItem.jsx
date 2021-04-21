@@ -1,14 +1,14 @@
 import React from "react";
 import styled from "styled-components";
 
-const LabelItem = () => {
+const LabelItem = ({ label }) => {
   return (
     <LabelWrapper>
       <LabelInfo>
-        <Label>
-          <span>bug</span>
+        <Label color={label.color}>
+          <span>{label.name}</span>
         </Label>
-        <Description>label description</Description>
+        <Description>{label.description}</Description>
       </LabelInfo>
       <LabelMenu>
         <button>Edit</button>
@@ -31,12 +31,13 @@ const LabelInfo = styled.div`
 
 const Label = styled.div`
   width: 30%;
+  cursor: pointer;
 
+  ${(props) => console.log("Label color", props.color)}
   & > span {
     padding: 0.3em;
-    background-color: red;
-    color: white;
-    font-weight: bold;
+    background-color: ${(props) => (props.color ? props.color : "red")};
+    color: black;
     border-radius: 5px;
   }
 `;
