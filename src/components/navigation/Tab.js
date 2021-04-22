@@ -1,5 +1,5 @@
 import React from 'react';
-import { LabelIcon, MilestonesIcon } from '../assets/icons';
+import { LabelIcon, MilestonesIcon } from '../../assets/icons';
 import { tab_button, select } from './Tab.module.scss';
 
 const Tab = ({ tabName, isSelected }) => {

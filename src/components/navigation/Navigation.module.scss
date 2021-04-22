@@ -1,0 +1,11 @@
+.nav {
+    position: relative;
+    height: 110px;
+    
+    & > * {
+        display: inline-block;
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+}

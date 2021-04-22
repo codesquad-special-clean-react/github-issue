@@ -1,23 +1,24 @@
-@import '../utils/color.scss';
+@import '../../utils/color.scss';
 
 .tab_button {
     display: inline-block;
     color: $grey;
     font-weight: 600;
-    padding: 10px 15px;
+    padding: 5px 10px;
     border: 1px solid $lightGrey;
     cursor: pointer;
+    text-align: left;
 
     & * {
         vertical-align: middle;
     }
 
     &:first-child {
-        border-radius: 10px 0 0 10px;
+        border-radius: 5px 0 0 5px;
     }
 
     &:last-child {
-        border-radius: 0 10px 10px 0;
+        border-radius: 0 5px 5px 0;
     }
 }
 

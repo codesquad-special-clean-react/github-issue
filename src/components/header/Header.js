@@ -1,5 +1,5 @@
 import React from 'react';
-import { BookIcon } from '../assets/icons/index';
+import { BookIcon } from '../../assets/icons/index';
 import { header } from './Header.module.scss';
 
 const Header = () => {
