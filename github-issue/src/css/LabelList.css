@@ -1,5 +1,5 @@
 .label-list-container {
-  padding: 50px 10%;
+  padding: 50px 10% 0 10%;
 }
 
 .label-list {
@@ -52,9 +52,11 @@
 .label-item .label-buttons .edit {
   margin: 0 5px;
   color: #747b83;
+  cursor: pointer;
 }
 
 .label-item .label-buttons .delete {
   margin: 0 5px;
   color: #747b83;
+  cursor: pointer;
 }
