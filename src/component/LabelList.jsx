@@ -1,15 +1,18 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import styled from "styled-components";
 import LabelItem from "./LabelItem";
 
-const LabelList = () => {
-  const count = 0;
-  const labels = [{ name: "bug", description: "Something isn't working", color: "#bfd4f2" }];
+const LabelList = ({ labels }) => {
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    setData(() => labels)
+  }, [labels])
 
   return (
       <>
-        <LabelListHeader>{count} Labels</LabelListHeader>
-        {labels && labels.map(label => <LabelItem label={label}/>)}
+        <LabelListHeader>{data.length} Labels</LabelListHeader>
+        {data && data.map(label => <LabelItem key={label.id} label={label}/>)}
       </>
   );
 };
