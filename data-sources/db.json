@@ -1,1 +1,11 @@
-{}
+{
+  "labels": [
+    {
+      "id": 1,
+      "name": "bug",
+      "description": "Something isn't working",
+      "color": "#ffffff",
+      "backgroundColor": "#e53935"
+    }
+  ]
+}
