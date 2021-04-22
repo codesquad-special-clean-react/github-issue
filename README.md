@@ -1,3 +1,10 @@
+## API Mock server
+
+1. yarn add json-server
+2. json-server --watch ./data-sources/db.json -p 3001
+
+---
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
