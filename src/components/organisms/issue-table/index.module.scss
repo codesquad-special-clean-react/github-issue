@@ -23,7 +23,14 @@
     &:first-child {
       flex: 1;
     }
+
+    &:nth-child(2) {
+      flex: 4;
+    }
+
     &:last-child {
+      justify-content: flex-end;
+      padding-right: 1rem;
       flex: 1;
       div {
         button {
@@ -32,9 +39,6 @@
           }
         }
       }
-    }
-    &:nth-child(2) {
-      flex: 4;
     }
   }
 }

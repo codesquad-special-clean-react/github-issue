@@ -1,0 +1,11 @@
+.button {
+  border: none;
+  background: none;
+  font-size: 1rem;
+  color: #1f1f1f;
+  cursor: pointer;
+
+  &:hover {
+    opacity: 0.7;
+  }
+}

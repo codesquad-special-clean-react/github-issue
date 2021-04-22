@@ -1,5 +1,6 @@
 import styles from "./index.module.scss";
-import Label from "../../atoms/Label";
+import Label from "../../atoms/label";
+import ActionButton from "../../atoms/action-button";
 
 const IssueTable = ({ labels }) => {
   return (
@@ -23,8 +24,8 @@ const IssueTable = ({ labels }) => {
               <td>{label.description}</td>
               <td>
                 <div>
-                  <button>Edit</button>
-                  <button>Delete</button>
+                  <ActionButton>Edit</ActionButton>
+                  <ActionButton>Delete</ActionButton>
                 </div>
               </td>
             </tr>
