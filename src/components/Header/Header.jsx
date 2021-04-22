@@ -1,14 +1,8 @@
 import React from "react";
 import styled from "styled-components";
-import { BiBookBookmark } from "react-icons/bi";
 
 const Header = () => {
-  return (
-    <HeaderWrapper>
-      <BiBookBookmark></BiBookBookmark>
-      ISSUES
-    </HeaderWrapper>
-  );
+  return <HeaderWrapper>ISSUES</HeaderWrapper>;
 };
 
 const HeaderWrapper = styled.header`
