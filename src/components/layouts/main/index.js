@@ -1,12 +1,7 @@
 import styles from "./index.module.css";
-import IssueTable from "../../organisms/issue-table";
 
-const Main = () => {
-  return (
-    <main className={styles.main}>
-      <IssueTable />
-    </main>
-  );
+const Main = ({ children }) => {
+  return <main className={styles.main}>{children}</main>;
 };
 
 export default Main;

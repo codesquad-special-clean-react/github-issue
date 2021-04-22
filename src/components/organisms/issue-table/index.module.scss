@@ -17,6 +17,9 @@
   height: 4rem;
 
   td {
+    display: flex;
+    align-items: center;
+    height: 100%;
     &:first-child {
       flex: 1;
     }
