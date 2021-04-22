@@ -7,6 +7,8 @@ import Labels from "./components/Labels/Labels";
 import Milestones from "./components/Milestones/Milestones";
 import AddLabelForm from "./components/AddLabelForm/AddLabelForm";
 
+import LabelFetch from "./service/LabelFetch";
+
 function App() {
   const [labels, setLabels] = useState([]);
   const [menu, setMenu] = useState("labels");
@@ -14,9 +16,26 @@ function App() {
 
   const hiddenLabelForm = () => setNewForm(false);
   const openLabelForm = () => setNewForm(true);
-  const createLabel = (label) => setLabels(labels.concat(label));
-  const updateLabel = (_label) => {
-    setLabels(labels.map((label) => (label.id === _label.id ? _label : label)));
+
+  const createLabel = async (body) => {
+    setLabels(labels.concat(body));
+    const result = await LabelFetch.create(body);
+    result ? console.log("성공") : console.log("실패");
+  };
+
+  const updateLabel = async (updatedLabel) => {
+    setLabels(
+      labels.map((label) =>
+        label.id === updatedLabel.id ? updatedLabel : label
+      )
+    );
+    const result = await LabelFetch.update(updatedLabel.id, updatedLabel);
+    result ? console.log("성공") : console.log("실패");
+  };
+
+  const deleteLabel = async (id) => {
+    setLabels(labels.filter((label) => label.id !== id));
+    await LabelFetch.delete(id);
   };
 
   return (
@@ -24,17 +43,20 @@ function App() {
       <Header />
       <MainWrapper>
         <Menu menu={menu} setMenu={setMenu} openLabelForm={openLabelForm} />
-        <AddLabelForm
-          visible={newForm}
-          hiddenLabelForm={hiddenLabelForm}
-          createLabel={createLabel}
-        />
         {menu === "labels" ? (
-          <Labels
-            labels={labels}
-            setLabels={setLabels}
-            updateLabel={updateLabel}
-          />
+          <>
+            <AddLabelForm
+              visible={newForm}
+              hiddenLabelForm={hiddenLabelForm}
+              createLabel={createLabel}
+            />
+            <Labels
+              labels={labels}
+              setLabels={setLabels}
+              updateLabel={updateLabel}
+              deleteLabel={deleteLabel}
+            />
+          </>
         ) : (
           <Milestones />
         )}

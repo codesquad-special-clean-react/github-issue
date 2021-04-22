@@ -2,10 +2,9 @@ import React, { useState } from "react";
 import styled from "styled-components";
 
 import Dialog from "../Dialog/Dialog";
-import LabelFetch from "../../service/LabelFetch";
 import UpdateLabelForm from "../UpdateLabelForm/UpdateLabelForm";
 
-const LabelItem = ({ label, handleDelete, updateLabel }) => {
+const LabelItem = ({ label, updateLabel, deleteLabel }) => {
   const [dialog, setDialog] = useState(false);
   const [updateMode, setUpdateMode] = useState(false);
   const [name, setName] = useState(label.name);
@@ -14,8 +13,7 @@ const LabelItem = ({ label, handleDelete, updateLabel }) => {
 
   const handleConfirm = async () => {
     setDialog(false);
-    handleDelete(label.id);
-    await LabelFetch.delete(label.id);
+    deleteLabel(label.id);
   };
 
   const handleCancel = () => {

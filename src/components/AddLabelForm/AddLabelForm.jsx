@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import styled from "styled-components";
 
 import { getRandomColor } from "../../service/randomColor";
-import LabelFetch from "../../service/LabelFetch";
 
 const AddLabelForm = ({ visible, hiddenLabelForm, createLabel }) => {
   const [name, setName] = useState("Label preview");
@@ -26,13 +25,10 @@ const AddLabelForm = ({ visible, hiddenLabelForm, createLabel }) => {
     };
 
     createLabel(body);
-    const result = await LabelFetch.create(body);
-    if (result) {
-      hiddenLabelForm();
-      setName("");
-      setDescription("");
-      onChangeColor();
-    }
+    hiddenLabelForm();
+    setName("");
+    setDescription("");
+    onChangeColor();
   };
 
   return (
@@ -87,12 +83,6 @@ const FormWrapper = styled.div`
   padding: 1em;
 `;
 
-// const Preview = styled.span`
-//   padding: 0.5em;
-//   background-color: ${(props) => (props.color ? props.color : "red")};
-//   font-size: 0.8em;
-//   font-weight: bold;
-// `;
 const Label = styled.div`
   width: 30%;
   cursor: pointer;

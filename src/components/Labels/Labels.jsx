@@ -5,7 +5,7 @@ import LabelHead from "./LabelHead";
 import LabelItem from "./LabelItem";
 import LabelFetch from "../../service/LabelFetch.js";
 
-const Labels = ({ labels, setLabels, updateLabel }) => {
+const Labels = ({ labels, setLabels, updateLabel, deleteLabel }) => {
   useEffect(() => {
     const fetchData = async () => {
       const datas = await LabelFetch.read();
@@ -14,16 +14,12 @@ const Labels = ({ labels, setLabels, updateLabel }) => {
     fetchData();
   }, [setLabels]);
 
-  const handleDelete = (id) => {
-    setLabels(labels.filter((label) => label.id !== id));
-  };
-
   const labelList = labels.map((label) => (
     <LabelItem
       key={label.id}
       label={label}
-      handleDelete={handleDelete}
       updateLabel={updateLabel}
+      deleteLabel={deleteLabel}
     />
   ));
 

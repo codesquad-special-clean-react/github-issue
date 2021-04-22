@@ -2,7 +2,6 @@ import React from "react";
 import styled from "styled-components";
 
 import { getRandomColor } from "../../service/randomColor";
-import LabelFetch from "../../service/LabelFetch";
 
 const UpdateLabelForm = ({
   label,
@@ -33,11 +32,8 @@ const UpdateLabelForm = ({
       color,
     };
 
-    updateLabel(updatedLabel);
-    const result = await LabelFetch.update(label.id, updatedLabel);
-    if (result) {
-      cancelUpdateMode();
-    }
+    await updateLabel(updatedLabel);
+    cancelUpdateMode();
   };
 
   return (
