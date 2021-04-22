@@ -24,6 +24,18 @@ class LabelFetch {
     const response = await fetch(`http://localhost:3001/labels/${id}`, option);
     return response.json();
   }
+
+  async update(id, body) {
+    const option = {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(body),
+    };
+    const response = await fetch(`http://localhost:3001/labels/${id}`, option);
+    return response.json();
+  }
 }
 
 export default new LabelFetch();

@@ -7,11 +7,6 @@ import Labels from "./components/Labels/Labels";
 import Milestones from "./components/Milestones/Milestones";
 import AddLabelForm from "./components/AddLabelForm/AddLabelForm";
 
-const MainWrapper = styled.div`
-  margin: 1em;
-  padding: 1em;
-`;
-
 function App() {
   const [labels, setLabels] = useState([]);
   const [menu, setMenu] = useState("labels");
@@ -20,6 +15,9 @@ function App() {
   const hiddenLabelForm = () => setNewForm(false);
   const openLabelForm = () => setNewForm(true);
   const createLabel = (label) => setLabels(labels.concat(label));
+  const updateLabel = (_label) => {
+    setLabels(labels.map((label) => (label.id === _label.id ? _label : label)));
+  };
 
   return (
     <>
@@ -32,7 +30,11 @@ function App() {
           createLabel={createLabel}
         />
         {menu === "labels" ? (
-          <Labels labels={labels} setLabels={setLabels} />
+          <Labels
+            labels={labels}
+            setLabels={setLabels}
+            updateLabel={updateLabel}
+          />
         ) : (
           <Milestones />
         )}
@@ -40,5 +42,10 @@ function App() {
     </>
   );
 }
+
+const MainWrapper = styled.div`
+  margin: 1em;
+  padding: 1em;
+`;
 
 export default App;

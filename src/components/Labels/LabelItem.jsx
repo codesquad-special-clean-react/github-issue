@@ -3,9 +3,14 @@ import styled from "styled-components";
 
 import Dialog from "../Dialog/Dialog";
 import LabelFetch from "../../service/LabelFetch";
+import UpdateLabelForm from "../UpdateLabelForm/UpdateLabelForm";
 
-const LabelItem = ({ label, handleDelete }) => {
+const LabelItem = ({ label, handleDelete, updateLabel }) => {
   const [dialog, setDialog] = useState(false);
+  const [updateMode, setUpdateMode] = useState(false);
+  const [name, setName] = useState(label.name);
+  const [color, setColor] = useState(label.color);
+  const [description, setDescription] = useState(label.description);
 
   const handleConfirm = async () => {
     setDialog(false);
@@ -17,26 +22,48 @@ const LabelItem = ({ label, handleDelete }) => {
     setDialog(false);
   };
 
+  const cancelUpdateMode = () => {
+    setUpdateMode(false);
+  };
+
+  const changeUpdateMode = () => {
+    setUpdateMode(true);
+  };
+
   return (
-    <>
+    <div style={{ borderBottom: "1px solid #f1f3f5" }}>
       <LabelWrapper>
         <LabelInfo>
-          <Label color={label.color}>
-            <span>{label.name}</span>
+          <Label color={color}>
+            <span>{name}</span>
           </Label>
-          <Description>{label.description}</Description>
+          {!updateMode && <Description>{label.description}</Description>}
         </LabelInfo>
         <LabelMenu>
-          <button>Edit</button>
+          {!updateMode && <button onClick={changeUpdateMode}>Edit</button>}
           <button onClick={() => setDialog(true)}>Delete</button>
         </LabelMenu>
       </LabelWrapper>
+      {updateMode && (
+        <UpdateLabelForm
+          visible={updateMode}
+          label={label}
+          cancelUpdateMode={cancelUpdateMode}
+          name={name}
+          setName={setName}
+          color={color}
+          setColor={setColor}
+          description={description}
+          setDescription={setDescription}
+          updateLabel={updateLabel}
+        />
+      )}
       <Dialog
         visible={dialog}
         handleCancel={handleCancel}
         handleConfirm={handleConfirm}
       />
-    </>
+    </div>
   );
 };
 
@@ -57,7 +84,7 @@ const Label = styled.div`
 
   & > span {
     padding: 0.3em;
-    background-color: ${(props) => (props.color ? props.color : "red")};
+    background-color: ${(props) => (props.color ? props.color : "white")};
     color: black;
     border-radius: 5px;
   }

@@ -5,7 +5,7 @@ import { getRandomColor } from "../../service/randomColor";
 import LabelFetch from "../../service/LabelFetch";
 
 const AddLabelForm = ({ visible, hiddenLabelForm, createLabel }) => {
-  const [name, setName] = useState("Label preview");
+  const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [color, setColor] = useState(getRandomColor());
 
@@ -38,9 +38,7 @@ const AddLabelForm = ({ visible, hiddenLabelForm, createLabel }) => {
   return (
     <FormWrapper>
       <div>
-        <Label color={color}>
-          <span>{name !== "" ? name : "Label preview"}</span>
-        </Label>
+        <Preview color={color}>{name !== "" ? name : "Label preview"}</Preview>
       </div>
       <div style={{ display: "flex", justifyContent: "space-between" }}>
         <FormBox>
@@ -87,22 +85,11 @@ const FormWrapper = styled.div`
   padding: 1em;
 `;
 
-// const Preview = styled.span`
-//   padding: 0.5em;
-//   background-color: ${(props) => (props.color ? props.color : "red")};
-//   font-size: 0.8em;
-//   font-weight: bold;
-// `;
-const Label = styled.div`
-  width: 30%;
-  cursor: pointer;
-
-  & > span {
-    padding: 0.3em;
-    background-color: ${(props) => (props.color ? props.color : "white")};
-    color: black;
-    border-radius: 5px;
-  }
+const Preview = styled.span`
+  padding: 0.5em;
+  background-color: ${(props) => (props.color ? props.color : "red")};
+  font-size: 0.8em;
+  font-weight: bold;
 `;
 
 const FormBox = styled.div`
