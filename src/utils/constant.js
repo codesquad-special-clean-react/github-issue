@@ -1,5 +1,8 @@
+const TAB_LABEL = 'Labels';
+const TAB_MILESTONES = 'Milestones';
+
 const tabs = {
-  label: 'Labels',
-  milestones: 'Milestones',
+  label: TAB_LABEL,
+  milestones: TAB_MILESTONES,
 };
-export { tabs };
+export { TAB_LABEL, TAB_MILESTONES, tabs };
