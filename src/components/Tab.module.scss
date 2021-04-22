@@ -1,0 +1,28 @@
+@import '../utils/color.scss';
+
+.tab_button {
+    display: inline-block;
+    color: $darkGrey;
+    font-weight: 600;
+    padding: 10px 15px;
+    border: 1px solid $lightGrey;
+    cursor: pointer;
+
+    & * {
+        vertical-align: middle;
+    }
+
+    &:first-child {
+        border-radius: 10px 0 0 10px;
+    }
+
+    &:last-child {
+        border-radius: 0 10px 10px 0;
+    }
+}
+
+.select {
+    color: $white;
+    background: $blue;
+    border: 1px solid $blue;
+}
