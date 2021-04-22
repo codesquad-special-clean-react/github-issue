@@ -6,10 +6,12 @@ import IssueTable from "../../organisms/issue-table";
 import { fetchLabels } from "../../../apis/labels";
 import Toolbar from "../../organisms/toolbar";
 import { TABS } from "../../../constants/common";
+import NewLabelSection from "../../organisms/new-label-section";
 
 const Index = () => {
   const [labels, setLabels] = useState([]);
   const [activeTab, setActiveTab] = useState(TABS.LABELS);
+  const [openNewLabel, setOpenNewLabel] = useState(false);
 
   useEffect(() => {
     fetchLabels()
@@ -25,9 +27,18 @@ const Index = () => {
     <main className={styles.index}>
       <Header />
       <Main>
-        <Toolbar activeTab={activeTab} setActiveTab={setActiveTab} />
+        <Toolbar
+          activeTab={activeTab}
+          setActiveTab={setActiveTab}
+          setOpenNewLabel={setOpenNewLabel}
+        />
         {activeTab === TABS.LABELS ? (
-          <IssueTable labels={labels} />
+          <>
+            {openNewLabel && (
+              <NewLabelSection setOpenNewLabel={setOpenNewLabel} />
+            )}
+            <IssueTable labels={labels} />
+          </>
         ) : (
           "UNDER CONSTRUCTION"
         )}

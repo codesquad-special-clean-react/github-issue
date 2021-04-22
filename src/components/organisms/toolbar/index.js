@@ -1,13 +1,13 @@
 import styles from "./index.module.scss";
 import { TABS } from "../../../constants/common";
-const Toolbar = ({ activeTab, setActiveTab }) => {
+const Toolbar = ({ activeTab, setActiveTab, setOpenNewLabel }) => {
   const activeStyle = {
     color: "#fff",
     backgroundColor: "#0058fd",
     fontWeight: 600,
   };
 
-  const handleClick = (tab) => () => {
+  const handleTabClick = (tab) => () => {
     setActiveTab(tab);
   };
 
@@ -16,19 +16,24 @@ const Toolbar = ({ activeTab, setActiveTab }) => {
       <div className={styles["button-group"]}>
         <button
           style={activeTab === TABS.LABELS ? activeStyle : null}
-          onClick={handleClick(TABS.LABELS)}
+          onClick={handleTabClick(TABS.LABELS)}
         >
           Labels
         </button>
         <button
           style={activeTab === TABS.MILESTONES ? activeStyle : null}
-          onClick={handleClick(TABS.MILESTONES)}
+          onClick={handleTabClick(TABS.MILESTONES)}
         >
           Milestones
         </button>
       </div>
 
-      <button className={styles["new-label"]}>New label</button>
+      <button
+        className={styles["new-label"]}
+        onClick={() => setOpenNewLabel(true)}
+      >
+        New label
+      </button>
     </div>
   );
 };
