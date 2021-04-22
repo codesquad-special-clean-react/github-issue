@@ -1,0 +1,25 @@
+{
+  "labels" : [
+    {
+      "id": 1,
+      "name": "bug",
+      "desc": "Something isn't working",
+      "color": "#d85656",
+      "deleteBool": false
+    },
+    {
+      "id": 2,
+      "name": "feature",
+      "desc": "New",
+      "color": "#7339e4",
+      "deleteBool": false
+    },
+    {
+      "id": 3,
+      "name": "invalid",
+      "desc": "invalid item",
+      "color": "#ffffff",
+      "deleteBool": false
+    }
+  ]
+}
