@@ -1,10 +1,21 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import styled from 'styled-components'
-import LabelList from "./LabelList";
+import LabelList from "../LabelList";
+import {getLabels} from "../../api/issueApi";
 
 const IssuesContents = () => {
   const [isActiveLabels, setIsActiveLabels] = useState(false)
   const [isActiveMilestones, setIsActiveMilestones] = useState(false)
+  const [labels, setLabels] = useState([])
+
+  useEffect(() => {
+    const fetchLabels = async () => {
+      const data = await getLabels()
+      console.log(data)
+      setLabels(() => data)
+    }
+    fetchLabels()
+  }, [])
 
   const onClickLabels = () => {
     setIsActiveLabels(() => true)
@@ -22,7 +33,7 @@ const IssuesContents = () => {
         <TabButton active={isActiveMilestones} onClick={() => onClickMilestones()}>Milestones</TabButton>
         <CreateButton>New label</CreateButton>
 
-        <LabelList/>
+        <LabelList labels={labels}/>
       </Container>
   );
 };

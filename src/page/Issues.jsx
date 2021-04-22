@@ -1,6 +1,6 @@
 import React from 'react';
 import IssuesHeader from "../component/IssuesHeader";
-import IssuesContents from "../component/IssuesContents";
+import IssuesContents from "../component/template/IssuesContents";
 
 const Issues = () => {
   return (
