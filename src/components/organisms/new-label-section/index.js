@@ -1,8 +1,11 @@
 import styles from "./index.module.scss";
 import Label from "../../atoms/label";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { getRandomColor } from "../../../utils/colors";
+import { postLabel } from "../../../apis/labels";
+import { LabelsContext } from "../../pages/labels/context";
 const NewLabelSection = ({ setOpenNewLabel }) => {
+  const { setLabelsFromServer } = useContext(LabelsContext);
   const [color, setColor] = useState(getRandomColor());
   const [formData, setFormData] = useState({
     name: "",
@@ -16,6 +19,22 @@ const NewLabelSection = ({ setOpenNewLabel }) => {
     }));
   };
 
+  const initializeData = () => {
+    setFormData({ name: "", description: "" });
+    setColor(getRandomColor());
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    await postLabel({
+      ...formData,
+      backgroundColor: color,
+      color: "#fff",
+    });
+    initializeData();
+    setLabelsFromServer();
+  };
+
   return (
     <section className={styles["new-label-section"]}>
       <div className={styles["container"]}>
@@ -26,10 +45,11 @@ const NewLabelSection = ({ setOpenNewLabel }) => {
             color={"#fff"}
           />
         </div>
-        <form className={styles["form"]}>
+        <form className={styles["form"]} onSubmit={handleSubmit}>
           <div className={styles["form-control"]}>
             <label htmlFor="name">Label name</label>
             <input
+              value={formData.name}
               type="text"
               placeholder="Label name"
               id="name"
@@ -41,6 +61,7 @@ const NewLabelSection = ({ setOpenNewLabel }) => {
             <label htmlFor="description">Description</label>
             <input
               type="text"
+              value={formData.description}
               placeholder="Description"
               id="description"
               name="description"
