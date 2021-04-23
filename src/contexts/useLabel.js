@@ -1,29 +1,82 @@
 import React, { useContext, useReducer } from 'react';
 
-const initialLabels = [
-  'bug',
-  'feature',
-  'good first issue',
-  'help wanted',
-  'invalid',
-];
+const ADD_LABEl = 'ADD_LABEl';
+const EDIT_LABEL = 'EDIT_LABEL';
+const DELETE_LABEL = 'DELETE_LABEL';
+
+const initialState = {
+  loading: false,
+  labels: [
+    {
+      name: 'bug',
+      color: '#D73949',
+      description: `Something isn't working`,
+      _createdAt: '2021-04-23T04:33:10.346Z',
+      _updatedAt: '2021-04-23T04:33:10.346Z',
+    },
+    {
+      name: 'feature',
+      color: '#0375CA',
+      description: `New feature or request`,
+      _createdAt: '2021-04-23T04:33:10.346Z',
+      _updatedAt: '2021-04-23T04:33:10.346Z',
+    },
+    {
+      name: 'good first issue',
+      color: '#7058FF',
+      description: `Good for newcomers`,
+      _createdAt: '2021-04-23T04:33:10.346Z',
+      _updatedAt: '2021-04-23T04:33:10.346Z',
+    },
+    {
+      name: 'help wanted',
+      color: '#4F1FA9',
+      description: `Extra attention is needed`,
+      _createdAt: '2021-04-23T04:33:10.346Z',
+      _updatedAt: '2021-04-23T04:33:10.346Z',
+    },
+    {
+      name: 'invalid',
+      color: '#CB21B9',
+      description: `This doesn't seem right`,
+      _createdAt: '2021-04-23T04:33:10.346Z',
+      _updatedAt: '2021-04-23T04:33:10.346Z',
+    },
+  ],
+  error: null,
+};
 
 const labelReducer = (state, action) => {
   switch (action.type) {
-    case 'daf':
-      break;
-
+    case ADD_LABEl:
+      return { ...state, labels: [...state.labels, action.payload.newLabels] };
+    case EDIT_LABEL:
+      return {
+        ...state,
+        labels: state.labels.map((label) => ({
+          ...label,
+          ...action.payload.labelConfig,
+          _updatedAt: new Date().toISOString(),
+        })),
+      };
+    case DELETE_LABEL:
+      return {
+        ...state,
+        labels: state.labels.filter(
+          (label) => label.name === action.payload.name
+        ),
+      };
     default:
-      break;
+      return state;
   }
 };
 
 const LabelContext = React.createContext();
 
 export const LabelProvider = (props) => {
-  const [labels, dispatch] = useReducer(labelReducer, initialLabels);
+  const [state, dispatch] = useReducer(labelReducer, initialState);
 
-  return <LabelContext.Provider value={{ labels, dispatch }} {...props} />;
+  return <LabelContext.Provider value={{ state, dispatch }} {...props} />;
 };
 
 export const useLabel = () => useContext(LabelContext);

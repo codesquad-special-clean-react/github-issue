@@ -1,6 +1,10 @@
 import styled from 'styled-components';
 
-const Header = (props) => <HeaderBlock>ISSUE</HeaderBlock>;
+const Header = (props) => (
+  <HeaderBlock>
+    <h1>ISSUE</h1>
+  </HeaderBlock>
+);
 
 const HeaderBlock = styled.header`
   width: 100%;

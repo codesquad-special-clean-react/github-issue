@@ -8,6 +8,7 @@ import {
 } from 'react-router-dom';
 import { ThemeProvider } from 'theme/theme';
 import Layout from 'components/Layout';
+import { LabelProvider } from 'contexts/useLabel';
 
 const App = () => {
   return (
@@ -16,11 +17,13 @@ const App = () => {
       <ThemeProvider>
         <Router>
           <Layout>
-            <Switch>
-              <Route path="/milestones" component={Milestones}></Route>
-              <Route path="/labels" component={Labels}></Route>
-              <Redirect to="/labels" />
-            </Switch>
+            <LabelProvider>
+              <Switch>
+                <Route path="/milestones" component={Milestones}></Route>
+                <Route path="/labels" component={Labels}></Route>
+                <Redirect to="/labels" />
+              </Switch>
+            </LabelProvider>
           </Layout>
         </Router>
       </ThemeProvider>

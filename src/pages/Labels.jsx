@@ -1,12 +1,10 @@
-import ListContainer from 'components/ListContainer';
-import { LabelProvider } from 'contexts/useLabel';
+import { LabelListContainer, SubHeader } from 'components';
 
 const Labels = () => {
   return (
     <section>
-      <LabelProvider>
-        <ListContainer />
-      </LabelProvider>
+      <SubHeader />
+      <LabelListContainer />
     </section>
   );
 };

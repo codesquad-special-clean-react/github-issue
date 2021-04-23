@@ -4,11 +4,7 @@ import styled from 'styled-components';
 const Layout = ({ children }) => (
   <>
     <Header />
-
-    <MainBlock>
-      <SubHeader />
-      {children}
-    </MainBlock>
+    <MainBlock>{children}</MainBlock>
   </>
 );
 
