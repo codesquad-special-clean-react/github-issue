@@ -2,11 +2,18 @@ import { useEffect, useState } from "react";
 import styles from "./index.module.css";
 import Header from "../../layouts/header";
 import Main from "../../layouts/main";
-import IssueTable from "../../organisms/issue-table";
 import { fetchLabels } from "../../../apis/labels";
 import Toolbar from "../../organisms/toolbar";
 import { TABS } from "../../../constants/common";
-import NewLabelSection from "../../organisms/new-label-section";
+import Labels from "../labels";
+import Milestones from "../milestones";
+
+const renderPage = ({ tab, props }) => {
+  const Component = { [TABS.LABELS]: Labels, [TABS.MILESTONES]: Milestones }[
+    tab
+  ];
+  return <Component {...props} />;
+};
 
 const Index = () => {
   const [labels, setLabels] = useState([]);
@@ -15,7 +22,6 @@ const Index = () => {
 
   useEffect(() => {
     fetchLabels()
-      .then((response) => response.json())
       .then((data) => {
         setLabels(data);
       })
@@ -32,16 +38,10 @@ const Index = () => {
           setActiveTab={setActiveTab}
           setOpenNewLabel={setOpenNewLabel}
         />
-        {activeTab === TABS.LABELS ? (
-          <>
-            {openNewLabel && (
-              <NewLabelSection setOpenNewLabel={setOpenNewLabel} />
-            )}
-            <IssueTable labels={labels} />
-          </>
-        ) : (
-          "UNDER CONSTRUCTION"
-        )}
+        {renderPage({
+          tab: activeTab,
+          props: { labels, setOpenNewLabel, openNewLabel },
+        })}
       </Main>
     </main>
   );
