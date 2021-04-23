@@ -2,6 +2,7 @@ import NewLabelSection from "../../organisms/new-label-section";
 import IssueTable from "../../organisms/issue-table";
 import { useEffect, useState } from "react";
 import { fetchLabels } from "../../../apis/labels";
+import { LabelsContext } from "./context";
 
 const Labels = ({ openNewLabel, setOpenNewLabel }) => {
   const [labels, setLabels] = useState([]);
@@ -20,10 +21,10 @@ const Labels = ({ openNewLabel, setOpenNewLabel }) => {
   }, []);
 
   return (
-    <>
+    <LabelsContext.Provider value={{ setLabelsFromServer }}>
       {openNewLabel && <NewLabelSection setOpenNewLabel={setOpenNewLabel} />}
-      <IssueTable labels={labels} />
-    </>
+      <IssueTable labels={labels} fetchLabels={fetchLabels} />
+    </LabelsContext.Provider>
   );
 };
 
