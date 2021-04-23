@@ -1,0 +1,15 @@
+@import '../../utils/color.scss';
+
+.header {
+    background: $darkGrey;
+    color: $white;
+    font-weight: bold;
+    font-size: 20px;
+    padding: 30px 0;
+    text-align: center;
+
+    & * {
+        display: inline-block;
+        vertical-align: middle;
+    }
+}
