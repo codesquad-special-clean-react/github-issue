@@ -1,10 +1,8 @@
 import "../css/LabelItem.css";
 
 function LabelItem({labels}) {
-
-    console.log(labels);
-
     let items = "";
+
     if (labels.length > 0) {
         items = labels.map( ({ id, name, desc, color, deleteBool }) => (
             <li className="label-item" key={id} data-id={id}>

@@ -3,7 +3,7 @@ import "../css/button.css";
 import React, {useState} from 'react';
 import LabelCustom from "../components/LabelCustom";
 
-function Header({}) {
+function Header() {
     const [labelInputShow, setLabelInputShow] = useState(false);
 
     const openNewLabel = () => setLabelInputShow(!labelInputShow);

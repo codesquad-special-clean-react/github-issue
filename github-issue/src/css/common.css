@@ -14,7 +14,7 @@
 .input-title-style {
 }
 
-.input-title-style span {
+.input-title-style label {
     font-weight: bold;
     margin-bottom: 5px;
 }
