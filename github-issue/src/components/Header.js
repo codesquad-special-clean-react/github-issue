@@ -1,17 +1,27 @@
 import "../css/Header.css";
 import "../css/button.css";
+import React, {useState} from 'react';
+import LabelCustom from "../components/LabelCustom";
 
-function Header() {
+function Header({}) {
+    const [labelInputShow, setLabelInputShow] = useState(false);
+
+    const openNewLabel = () => setLabelInputShow(!labelInputShow);
+
     return (
-        <div className="header-container">
-            <tabGroup className="tab-style">
-                <button className="left active">Lables</button>
-                <button className="right">Milestones</button>
-            </tabGroup>
-            <buttonGroup>
-                <button className="button-style green">New label</button>
-            </buttonGroup>
-        </div>
+        <>
+            <div className="header-container">
+                <div className="tab-style">
+                    <button className="left active">Labels</button>
+                    <button className="right">Milestones</button>
+                </div>
+                <div>
+                    <button className="button-style green" onClick={openNewLabel}>New label</button>
+                </div>
+            </div>
+
+            {labelInputShow && <LabelCustom />}
+        </>
     );
 }
 

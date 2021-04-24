@@ -1,6 +1,6 @@
-import "../css/LabelCustom.css";
 import "../css/button.css";
 import "../css/common.css";
+import "../css/LabelCustom.css";
 import "../css/Header.css";
 
 const LabelCustom = () => {
