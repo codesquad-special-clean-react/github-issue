@@ -1,8 +1,17 @@
 import styles from "./index.module.scss";
 import Label from "../../atoms/label";
 import ActionButton from "../../atoms/action-button";
+import { deleteLabel } from "../../../apis/labels";
+import { useContext } from "react";
+import { LabelsContext } from "../../pages/labels/context";
 
 const IssueTable = ({ labels }) => {
+  const { setLabelsFromServer } = useContext(LabelsContext);
+  const handleDelBtnClick = (labelId) => async () => {
+    await deleteLabel(labelId);
+    setLabelsFromServer();
+  };
+
   return (
     <table className={styles.table}>
       <thead className={styles.thead}>
@@ -25,7 +34,9 @@ const IssueTable = ({ labels }) => {
               <td>
                 <div>
                   <ActionButton>Edit</ActionButton>
-                  <ActionButton>Delete</ActionButton>
+                  <ActionButton onClick={handleDelBtnClick(label.id)}>
+                    Delete
+                  </ActionButton>
                 </div>
               </td>
             </tr>

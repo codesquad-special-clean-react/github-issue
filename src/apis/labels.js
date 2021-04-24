@@ -23,3 +23,13 @@ export const postLabel = async (params) => {
     alert(e);
   }
 };
+
+export const deleteLabel = async (labelId) => {
+  try {
+    await fetch(`${LABELS_URL}/${labelId}`, {
+      method: "DELETE",
+    });
+  } catch (e) {
+    alert(e);
+  }
+};
