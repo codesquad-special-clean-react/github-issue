@@ -1,3 +1,5 @@
+@import "../../../styles";
+
 .table {
   border: 1px solid lightgray;
   width: 100%;
@@ -10,35 +12,5 @@
 }
 
 .tr {
-  padding-left: 1rem;
-  border: 1px solid lightgray;
-  display: flex;
-  align-items: center;
-  height: 4rem;
-
-  td {
-    display: flex;
-    align-items: center;
-    height: 100%;
-    &:first-child {
-      flex: 1;
-    }
-
-    &:nth-child(2) {
-      flex: 4;
-    }
-
-    &:last-child {
-      justify-content: flex-end;
-      padding-right: 1rem;
-      flex: 1;
-      div {
-        button {
-          &:first-child {
-            margin-right: 0.5rem;
-          }
-        }
-      }
-    }
-  }
+  @include issue-table-tr;
 }
