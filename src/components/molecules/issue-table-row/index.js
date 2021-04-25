@@ -4,12 +4,12 @@ import ActionButton from "../../atoms/action-button";
 import { deleteLabel } from "../../../apis/labels";
 import { useContext, useState } from "react";
 import { LabelsContext } from "../../pages/labels/context";
-import NewLabelSection from "../../organisms/label-form-section";
+import LabelFormSection from "../../organisms/label-form-section";
 
 const IssueTableRow = ({ label }) => {
   const { setLabelsFromServer } = useContext(LabelsContext);
   const [openUpdate, setOpenUpdate] = useState(false);
-
+  const { name, color, backgroundColor, description } = label;
   const handleDelBtnClick = (labelId) => async () => {
     await deleteLabel(labelId);
     setLabelsFromServer();
@@ -18,18 +18,27 @@ const IssueTableRow = ({ label }) => {
     <tr className={styles.tr} key={label.id}>
       {openUpdate ? (
         <td>
-          <NewLabelSection setOpenLabelForm={setOpenUpdate} />
+          <LabelFormSection
+            setOpenLabelForm={setOpenUpdate}
+            isUpdate
+            labelId={label.id}
+            defaultValue={{
+              name,
+              backgroundColor,
+              description,
+            }}
+          />
         </td>
       ) : (
         <>
           <td>
             <Label
-              name={label.name}
-              color={label.color}
-              backgroundColor={label.backgroundColor}
+              name={name}
+              color={color}
+              backgroundColor={backgroundColor}
             />
           </td>
-          <td>{label.description}</td>
+          <td>{description}</td>
           <td>
             <div>
               <ActionButton onClick={() => setOpenUpdate(true)}>

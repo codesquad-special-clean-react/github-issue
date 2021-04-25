@@ -2,14 +2,26 @@ import styles from "./index.module.scss";
 import Label from "../../atoms/label";
 import { useContext, useState } from "react";
 import { getRandomColor } from "../../../utils/colors";
-import { postLabel } from "../../../apis/labels";
+import { deleteLabel, postLabel, putLabel } from "../../../apis/labels";
 import { LabelsContext } from "../../pages/labels/context";
-const LabelFormSection = ({ setOpenLabelForm }) => {
-  const { setLabelsFromServer } = useContext(LabelsContext);
-  const [color, setColor] = useState(getRandomColor());
-  const [formData, setFormData] = useState({
+import ActionButton from "../../atoms/action-button";
+const LabelFormSection = ({
+  setOpenLabelForm,
+  labelId = null,
+  isUpdate = false,
+  defaultValue = {
+    backgroundColor: getRandomColor(),
     name: "",
     description: "",
+  },
+}) => {
+  const { backgroundColor, name, description } = defaultValue;
+
+  const { setLabelsFromServer } = useContext(LabelsContext);
+  const [color, setColor] = useState(backgroundColor);
+  const [formData, setFormData] = useState({
+    name,
+    description,
   });
 
   const handleChange = ({ target: { name, value } }) => {
@@ -25,13 +37,19 @@ const LabelFormSection = ({ setOpenLabelForm }) => {
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    await postLabel({
+    const params = {
       ...formData,
       backgroundColor: color,
       color: "#fff",
-    });
-    initializeData();
+    };
+    e.preventDefault();
+    if (isUpdate) {
+      await putLabel({ params, labelId });
+      setOpenLabelForm(false);
+    } else {
+      await postLabel(params);
+      initializeData();
+    }
     setLabelsFromServer();
   };
 
@@ -44,6 +62,17 @@ const LabelFormSection = ({ setOpenLabelForm }) => {
             backgroundColor={color}
             color={"#fff"}
           />
+          {isUpdate && (
+            <ActionButton
+              onClick={async () => {
+                await deleteLabel(labelId);
+                setLabelsFromServer();
+                setOpenLabelForm(false);
+              }}
+            >
+              Delete
+            </ActionButton>
+          )}
         </div>
         <form className={styles["form"]} onSubmit={handleSubmit}>
           <div className={styles["form-control"]}>
@@ -96,7 +125,7 @@ const LabelFormSection = ({ setOpenLabelForm }) => {
             className={styles["create-label-button"]}
             disabled={!formData.name || !formData.description}
           >
-            Create label
+            {isUpdate ? "Save changes" : "Create label"}
           </button>
         </form>
       </div>
