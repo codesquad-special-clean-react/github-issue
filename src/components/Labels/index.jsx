@@ -1,18 +1,23 @@
 import styled from "styled-components";
 import LabelItem from "./components/LabelItem";
+import LabelCreate from "./components/LabelCreate";
 
 export default function LabelList({ labelList }) {
   return (
-    <LabelListWrapper>
-      <LabelTitle>{labelList.length} labels</LabelTitle>
-      <LabelItem labelList={labelList} />
-    </LabelListWrapper>
+    <>
+      <LabelCreate />
+      <LabelListWrapper>
+        <LabelTitle>{labelList.length} labels</LabelTitle>
+        <LabelItem labelList={labelList} />
+      </LabelListWrapper>
+    </>
   );
 }
 
 const LabelListWrapper = styled.dl`
   border: 1px solid ${({ theme }) => theme.colors.grey};
   border-radius: 3px;
+  overflow: hidden;
 
   dt,
   dd {

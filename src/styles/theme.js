@@ -4,7 +4,7 @@ const colors = {
   white: "#ffffff",
   black: "#111111",
   grey: "#cccccc",
-  lightGrey: "#ebebeb",
+  lightGrey: "#f9f9f9",
   blue: "#1a73e8",
   green: "#60d805",
 };
@@ -16,7 +16,9 @@ const container = css`
 `;
 
 const commonButtonStyle = css`
-  padding: 10px 15px;
+  padding: 7px 13px;
+  background: ${({ theme }) => theme.colors.green};
+  border: 1px solid ${({ theme }) => theme.colors.grey};
   border-radius: 3px;
   font-size: 14px;
   cursor: pointer;

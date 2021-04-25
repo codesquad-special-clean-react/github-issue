@@ -5,18 +5,16 @@ export default function LabelItem({ labelList }) {
     <>
       {labelList.map(({ name, theme, desc }) => {
         return (
-          <>
-            <LabelItemWrapper>
-              <PreViewLabel>
-                <Label color={theme}>{name}</Label>
-              </PreViewLabel>
-              <LabelDesc>{desc}</LabelDesc>
-              <LabelEditBtnWrap>
-                <LabelEditBtn>Edit</LabelEditBtn>
-                <LabelEditBtn>Delete</LabelEditBtn>
-              </LabelEditBtnWrap>
-            </LabelItemWrapper>
-          </>
+          <LabelItemWrapper key={name}>
+            <PreViewLabel>
+              <Label color={theme}>{name}</Label>
+            </PreViewLabel>
+            <LabelDesc>{desc}</LabelDesc>
+            <LabelEditBtnWrap>
+              <LabelEditBtn>Edit</LabelEditBtn>
+              <LabelEditBtn>Delete</LabelEditBtn>
+            </LabelEditBtnWrap>
+          </LabelItemWrapper>
         );
       })}
     </>

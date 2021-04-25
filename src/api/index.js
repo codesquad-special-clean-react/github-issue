@@ -10,3 +10,22 @@ export const getLabelData = async () => {
     console.log(err);
   }
 };
+
+export const createLabelData = async ({ id, name, theme, desc }) => {
+  try {
+    await fetch(`${LOCAL_URL}/labels`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        id,
+        name,
+        theme,
+        desc,
+      }),
+    });
+  } catch (err) {
+    console.log(err);
+  }
+};

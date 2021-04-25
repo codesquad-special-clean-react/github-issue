@@ -5,14 +5,16 @@ const TAB_ITEMS = [
   { id: 1, title: "Milestones" },
 ];
 
-export default function IssuesTab({ currentMenu, menuTabHandler }) {
+export default function IssuesTab(props) {
+  const { currentMenu, menuTabHandler, createLabel } = props;
+
   return (
     <IssuesTabWrapper>
       <IssuesTabMenu>
         {TAB_ITEMS.map(({ id, title }) => {
           return (
             <IssuesTabMenuItem
-              key={title}
+              key={id}
               active={id === currentMenu}
               onClick={() => {
                 menuTabHandler(id);
@@ -24,9 +26,7 @@ export default function IssuesTab({ currentMenu, menuTabHandler }) {
         })}
       </IssuesTabMenu>
 
-      <CreateLabel bg="green" color="white">
-        New Label
-      </CreateLabel>
+      <CreateLabel onClick={createLabel}>New Label</CreateLabel>
     </IssuesTabWrapper>
   );
 }
@@ -49,16 +49,13 @@ const IssuesTabMenu = styled.ul`
 `;
 
 const IssuesTabMenuItem = styled.li`
-  ${({ theme }) => theme.commonButtonStyle}
-
+  padding: 7px 13px;
   border-radius: 0;
   background: ${({ active, theme }) => active && theme.colors.blue};
   color: ${({ active, theme }) => active && theme.colors.white};
+  cursor: pointer;
 `;
 
 const CreateLabel = styled.button`
   ${({ theme }) => theme.commonButtonStyle}
-
-  border: 1px solid ${({ theme }) => theme.colors.grey};
-  background: ${({ theme }) => theme.colors.green};
 `;
