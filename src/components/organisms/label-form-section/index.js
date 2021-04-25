@@ -4,7 +4,7 @@ import { useContext, useState } from "react";
 import { getRandomColor } from "../../../utils/colors";
 import { postLabel } from "../../../apis/labels";
 import { LabelsContext } from "../../pages/labels/context";
-const NewLabelSection = ({ setOpenNewLabel }) => {
+const LabelFormSection = ({ setOpenLabelForm }) => {
   const { setLabelsFromServer } = useContext(LabelsContext);
   const [color, setColor] = useState(getRandomColor());
   const [formData, setFormData] = useState({
@@ -87,7 +87,7 @@ const NewLabelSection = ({ setOpenNewLabel }) => {
             className={styles["cancel-button"]}
             type="button"
             onClick={() => {
-              setOpenNewLabel(false);
+              setOpenLabelForm(false);
             }}
           >
             Cancel
@@ -104,4 +104,4 @@ const NewLabelSection = ({ setOpenNewLabel }) => {
   );
 };
 
-export default NewLabelSection;
+export default LabelFormSection;
