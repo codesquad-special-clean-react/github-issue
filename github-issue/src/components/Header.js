@@ -20,7 +20,7 @@ function Header() {
                 </div>
             </div>
 
-            {labelInputShow && <LabelCustom />}
+            {labelInputShow && <LabelCustom openNewLabel={openNewLabel}/>}
         </>
     );
 }

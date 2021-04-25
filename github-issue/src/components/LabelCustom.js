@@ -5,40 +5,41 @@ import "../css/LabelCustom.css";
 import "../css/Header.css";
 import React, {useState, useEffect} from "react";
 
-const LabelCustom = () => {
+const LabelCustom = ({openNewLabel}) => {
     const [name, setName] = useState("");
     const [desc, setDesc] = useState("");
     const [color, setColor] = useState("");
+    const [disabledYn, setDisabledYn] = useState(false);
 
     const onChangeName = ({target}) => {
-        setName(target.value);
+        const nameVal = target.value;
+
+        setName(nameVal);
+        setDisabledYn(nameVal.trim().length > 0);
     }
 
     const onChangeDesc = ({target}) => {
-        setDesc(target.value);
+        const descVal = target.value;
+
+        setDesc(descVal);
+        setDisabledYn(descVal.trim().length > 0);
     }
 
     const onClickCreateLabel = ({target}) => {
-        target.classList.remove("disabled");
-        target.removeAttribute("disabled");
+        console.log("ㅋㄹ!");
     }
 
     const disabledNewLabelBtn = () => {
         const $newLabelBtn = document.querySelector("#createLabelBtn");
 
-        if (name.trim().length > 0 || desc.trim().length > 0) {
-            $newLabelBtn.setAttribute("disabled", false);
-            $newLabelBtn.classList.remove("disabled");
-        }
-        else {
-            $newLabelBtn.setAttribute("disabled", true);
-            $newLabelBtn.classList.add("disabled");
-        }
+        (disabledYn)
+            ? $newLabelBtn.classList.remove("disabled")
+            : $newLabelBtn.classList.add("disabled");
     }
 
     useEffect(() => {
         disabledNewLabelBtn();
-    }, [name, desc])
+    }, [disabledYn])
 
 
     return (
@@ -68,8 +69,8 @@ const LabelCustom = () => {
                         </div>
                     </div>
 
-                    <button className="button-style cancel-btn">Cancel</button>
-                    <button className="button-style green disabled" id="createLabelBtn" onClick={onClickCreateLabel} disabled>
+                    <button className="button-style cancel-btn" onClick={openNewLabel}>Cancel</button>
+                    <button className="button-style green disabled" id="createLabelBtn" onClick={onClickCreateLabel} disabled={disabledYn}>
                         Create Label
                     </button>
                 </div>
