@@ -1,4 +1,4 @@
-import NewLabelSection from "../../organisms/new-label-section";
+import LabelFormSection from "../../organisms/label-form-section";
 import IssueTable from "../../organisms/issue-table";
 import { useEffect, useState } from "react";
 import { fetchLabels } from "../../../apis/labels";
@@ -22,7 +22,7 @@ const Labels = ({ openNewLabel, setOpenNewLabel }) => {
 
   return (
     <LabelsContext.Provider value={{ setLabelsFromServer }}>
-      {openNewLabel && <NewLabelSection setOpenNewLabel={setOpenNewLabel} />}
+      {openNewLabel && <LabelFormSection setOpenLabelForm={setOpenNewLabel} />}
       <IssueTable labels={labels} fetchLabels={fetchLabels} />
     </LabelsContext.Provider>
   );
