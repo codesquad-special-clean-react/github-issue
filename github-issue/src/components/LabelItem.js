@@ -9,11 +9,9 @@ function LabelItem({}) {
     const getLabels = () => {
         fetchLabels("http://localhost:3001/labels")
             .then((data) => {
-                console.log("data ", data)
                 setLabels(data);
             })
             .then(()=>{
-                // console.log("222");
                 makeLabelItems();
             })
     }
