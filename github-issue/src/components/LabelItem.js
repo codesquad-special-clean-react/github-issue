@@ -1,6 +1,6 @@
 import "../css/LabelItem.css";
 import { useState, useEffect } from 'react';
-import {fetchLabels, labelApi} from "../api/LabelApi";
+import {fetchLabels, deteleLabel} from "../api/LabelApi";
 
 function LabelItem({}) {
     const [labels, setLabels] = useState("");
@@ -19,7 +19,7 @@ function LabelItem({}) {
     const onClickDelete = async ({currentTarget}) => {
         const id = currentTarget.closest("li.label-item").getAttribute("data-id");
 
-        await labelApi('http://localhost:3001/labels', id);
+        await deteleLabel('http://localhost:3001/labels', id);
         await getLabels();
     }
 
@@ -46,8 +46,7 @@ function LabelItem({}) {
 
     useEffect( ()=> {
         getLabels();
-    }, [])
-
+    }, []);
 
     return (
         <>
