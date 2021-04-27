@@ -4,51 +4,60 @@ import "../css/common.css";
 import "../css/LabelCustom.css";
 import "../css/Header.css";
 import React, {useState, useEffect} from "react";
+import styled from 'styled-components';
 
 const LabelCustom = ({openNewLabel}) => {
-    const [name, setName] = useState("");
-    const [desc, setDesc] = useState("");
-    const [color, setColor] = useState("");
+    // const [name, setName] = useState("");
+    // const [desc, setDesc] = useState("");
+    // const [color, setColor] = useState("");
+    const [newLabelInfo, setNewLabelInfo] = useState({
+        name: "",
+        desc: "",
+        color: "",
+    })
     const [disabledYn, setDisabledYn] = useState(false);
-
+    const [errorMessage, setErrorMessage] = useState("");
 
     const onChangeName = ({target}) => {
-        const nameVal = target.value;
+        const newLabelName = target.value;
 
-        if (nameVal.length > 20) return alert("최대 20자 까지 입력가능합니다.");
+        setNewLabelInfo({
+            ...newLabelInfo,
+            name: newLabelName
+        });
 
-        setName(nameVal);
-        setDisabledYn(nameVal || desc || color);
+        setDisabledYn(newLabelName || newLabelInfo.desc || newLabelInfo.color);
+        setErrorMessage(newLabelName.length === 20 ? "최대 20자 까지 입력가능합니다." : "");
     }
 
     const onChangeDesc = ({target}) => {
-        const descVal = target.value;
+        const newLabelDescription = target.value;
 
-        setDesc(descVal);
-        setDisabledYn(descVal || name || color);
+        setNewLabelInfo({ ...newLabelInfo, desc: newLabelDescription });
+        setDisabledYn(newLabelDescription || newLabelInfo.name || newLabelInfo.color);
     }
 
     const onChangeColor = ({target}) => {
-        const colorVal = target.value;
+        const newLabelColor = target.value;
 
-        setColor(colorVal);
-        setDisabledYn(colorVal || name || desc);
+        setNewLabelInfo({ ...newLabelInfo, color: newLabelColor });
+        setDisabledYn(newLabelColor || newLabelInfo.name || newLabelInfo.desc);
     }
 
     const makeRandomColor = () => {
         const randomColor = `#${Math.round(Math.random() * 0xffffff).toString(16)}`
 
-        setColor(randomColor);
+        setNewLabelInfo({ ...newLabelInfo, color: randomColor });
     }
 
     const onClickCreateLabel = ({target}) => {
         let chkValidation = [];
 
-        if (!name) chkValidation.push("이름")
-        if (!desc) chkValidation.push("상세")
-        if (!color) chkValidation.push("색상")
-        
-        if (chkValidation.length > 0) return alert(`${chkValidation.join(" / ")} 정보를 입력해 주세요`);
+        if (!newLabelInfo.name) chkValidation.push("이름")
+        if (!newLabelInfo.desc) chkValidation.push("상세")
+        if (!newLabelInfo.color) chkValidation.push("색상")
+
+        if (chkValidation.length > 0) setErrorMessage(`${chkValidation.join(" / ")} 정보를 입력해 주세요`);
     }
 
     const disabledNewLabelBtn = () => {
@@ -57,20 +66,18 @@ const LabelCustom = ({openNewLabel}) => {
         (disabledYn)
             ? $newLabelBtn.classList.remove("disabled")
             : $newLabelBtn.classList.add("disabled");
-
     }
 
     useEffect(() => {
         disabledNewLabelBtn();
-    }, [disabledYn, color])
+    }, [disabledYn, newLabelInfo.color, errorMessage])
 
 
     return (
         <>
             <div className="label-custom-container new-label-form">
-
                 <div className="label-preview label-name">
-                    {name && <div style={{backgroundColor: color}}>{name}</div>}
+                    {newLabelInfo.name && <div style={{backgroundColor: newLabelInfo.color}}>{newLabelInfo.name}</div>}
                 </div>
 
                 <div className="label-info">
@@ -88,7 +95,7 @@ const LabelCustom = ({openNewLabel}) => {
                         <label>Color</label>
                         <div>
                             <button className="button-style reset-btn" onClick={makeRandomColor}></button>
-                            <input type="text" className="color-code" id="colorCodeInput" onChange={onChangeColor} value={color}/>
+                            <input type="text" className="color-code" id="colorCodeInput" onChange={onChangeColor} value={newLabelInfo.color}/>
                         </div>
                     </div>
 
@@ -97,9 +104,16 @@ const LabelCustom = ({openNewLabel}) => {
                         Create Label
                     </button>
                 </div>
+                {errorMessage && <ErrorMessage>* {errorMessage}</ErrorMessage>}
             </div>
         </>
     );
 };
 
 export default LabelCustom;
+
+const ErrorMessage = styled.span`
+        font-size: 16px;
+        font-weight: bold;
+        color: #d85656;
+    `;

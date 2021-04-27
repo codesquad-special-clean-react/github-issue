@@ -11,7 +11,7 @@ function LabelItem({}) {
             .then((data) => {
                 setLabels(data);
             })
-            .then(()=>{
+            .then(() => {
                 makeLabelItems();
             })
     }
@@ -24,23 +24,22 @@ function LabelItem({}) {
     }
 
     const makeLabelItems = () => {
-        if (labels.length > 0) {
-            items = labels.map( ({ id, name, desc, color, deleteBool }) => {
+        if (labels.length <= 0) return null;
 
-                return (
-                    <li className="label-item" key={id} data-id={id}>
-                        <div className="label-name">
-                            <div style={{backgroundColor: color}}>{name}</div>
-                        </div>
-                        <div className="description">{desc}</div>
-                        <div className="label-buttons">
-                            <div className="edit">Edit</div>
-                            <div className="delete" onClick={onClickDelete}>Delete</div>
-                        </div>
-                    </li>
-                )
-            });
-        }
+        items = labels.map( ({ id, name, desc, color, deleteBool }) => {
+            return (
+                <li className="label-item" key={id} data-id={id}>
+                    <div className="label-name">
+                        <div style={{backgroundColor: color}}>{name}</div>
+                    </div>
+                    <div className="description">{desc}</div>
+                    <div className="label-buttons">
+                        <div className="edit">Edit</div>
+                        <div className="delete" onClick={onClickDelete}>Delete</div>
+                    </div>
+                </li>
+            )
+        });
     }
 
     makeLabelItems();
@@ -48,6 +47,7 @@ function LabelItem({}) {
     useEffect( ()=> {
         getLabels();
     }, [])
+
 
     return (
         <>
