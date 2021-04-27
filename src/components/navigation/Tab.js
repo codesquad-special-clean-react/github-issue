@@ -4,16 +4,20 @@ import { LabelIcon, MilestonesIcon } from '../../assets/icons';
 import { tab_button, select } from './Tab.module.scss';
 
 const Tab = ({ tabName, isSelected }) => {
-  let tabIcon;
-  if (tabName === TAB_LABEL) {
-    tabIcon = <LabelIcon isSelected={isSelected} />;
-  } else if (tabName === TAB_MILESTONES) {
-    tabIcon = <MilestonesIcon isSelected={isSelected} />;
-  }
+  const TabIcon = (() => {
+    switch (tabName) {
+      case TAB_LABEL:
+        return <LabelIcon isSelected={isSelected} />;
+      case TAB_MILESTONES:
+        return <MilestonesIcon isSelected={isSelected} />;
+      default:
+        throw new Error('Any tab is selected');
+    }
+  })();
 
   return (
     <div className={`${tab_button} ${isSelected ? select : ''}`}>
-      <span>{tabIcon}</span>
+      <span>{TabIcon}</span>
       <span>{tabName}</span>
     </div>
   );

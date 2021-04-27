@@ -1,26 +1,32 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import Header from './components/header/Header';
 import Navigation from './components/navigation/Navigation';
-import { tabs, TAB_LABEL } from './utils/constant';
+import { TAB_LABEL, TAB_MILESTONES } from './utils/constant';
 import { body } from './App.module.scss';
 import LabelContainer from './components/labels/LabelContainer';
 import MilestonesContainer from './components/milestones/MilestonesContainer';
+import { AppContext } from './context/AppContext';
 
 function App() {
-  const [selectedTab, selectTab] = useState(tabs.label);
+  const { appState } = useContext(AppContext);
+  const { selectedTab } = appState;
 
   const SelectedContainer = (() => {
-    if (selectedTab === TAB_LABEL) {
-      return <LabelContainer />;
+    switch (selectedTab) {
+      case TAB_LABEL:
+        return <LabelContainer />;
+      case TAB_MILESTONES:
+        return <MilestonesContainer />;
+      default:
+        throw new Error('Any tab is selected.');
     }
-    return <MilestonesContainer />;
   })();
 
   return (
     <div>
       <Header />
       <div className={body}>
-        <Navigation selectedTab={selectedTab} />
+        <Navigation />
         {SelectedContainer}
       </div>
     </div>

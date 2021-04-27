@@ -4,8 +4,7 @@ import LabelItem from './LabelItem';
 import { LabelContext } from '../../context/LabelContext';
 
 const LabelListContainer = () => {
-  const { state } = useContext(LabelContext);
-  const { labels } = state;
+  const { labels } = useContext(LabelContext);
 
   return (
     <table className={table}>

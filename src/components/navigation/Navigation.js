@@ -1,13 +1,13 @@
 import React from 'react';
 import { nav } from './Navigation.module.scss';
-import NewLabelButton from './NewLabelButton';
+import NavButton from './NavButton';
 import TabContainer from './TabContainer';
 
-const Navigation = ({ selectedTab }) => {
+const Navigation = () => {
   return (
     <div className={nav}>
-      <TabContainer selectedTab={selectedTab} />
-      <NewLabelButton />
+      <TabContainer />
+      <NavButton />
     </div>
   );
 };

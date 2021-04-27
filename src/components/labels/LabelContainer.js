@@ -3,10 +3,10 @@ import { LabelContextProvider } from '../../context/LabelContext';
 import LabelForm from './LabelForm';
 import LabelListContainer from './LabelListContainer';
 
-const LabelContainer = () => {
+const LabelContainer = ({ isLabelFormOpen }) => {
   return (
     <LabelContextProvider>
-      <LabelForm />
+      <LabelForm isLabelFormOpen={isLabelFormOpen} />
       <LabelListContainer />
     </LabelContextProvider>
   );

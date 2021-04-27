@@ -1,43 +1,34 @@
 import { createContext, useEffect, useReducer } from 'react';
 import { requestLabels } from '../utils/api';
 
-function reducer(state, { type, payload }) {
-  const { labels } = state;
-
+function reducer(labels, { type, payload }) {
   switch (type) {
     case 'ADD_LABEL':
       const { newLabel } = payload;
-      return { ...state, labels: [...labels, newLabel] };
+      return [...labels, newLabel];
     case 'UPDATE_LABELS':
       const { newLabels } = payload;
-      return { ...state, labels: [...newLabels] };
-    case 'OPEN_LABEL_FORM':
-      return { ...state, isLabelFormOpen: true };
-    case 'CLOSE_LABEL_FORM':
-      return { ...state, isLabelFormOpen: false };
+      return [...newLabels];
     default:
-      throw new Error('No action');
+      throw new Error('No action is matched');
   }
 }
 
-const initialLabels = {
-  labels: [],
-  isLabelFormOpen: false,
-};
+const initialLabels = [];
 const LabelContext = createContext();
 
 function LabelContextProvider(props) {
-  const [state, dispatch] = useReducer(reducer, initialLabels);
+  const [labels, dispatchLabelContext] = useReducer(reducer, initialLabels);
 
   useEffect(() => {
     (async function getLabels() {
       const newLabels = await requestLabels();
-      dispatch({ type: 'UPDATE_LABELS', payload: { newLabels } });
+      dispatchLabelContext({ type: 'UPDATE_LABELS', payload: { newLabels } });
     })();
   }, []);
 
   return (
-    <LabelContext.Provider value={{ state, dispatch }}>
+    <LabelContext.Provider value={{ labels, dispatchLabelContext }}>
       {props.children}
     </LabelContext.Provider>
   );

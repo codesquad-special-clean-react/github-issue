@@ -1,7 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const LabelForm = () => {
+const LabelForm = ({ isLabelFormOpen }) => {
+  if (!isLabelFormOpen) return <></>;
   return (
     <div>
       <LabelTitle>Label preview</LabelTitle>
