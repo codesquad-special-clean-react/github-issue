@@ -15,14 +15,14 @@ const LabelCustom = ({openNewLabel}) => {
         const nameVal = target.value;
 
         setName(nameVal);
-        setDisabledYn(!nameVal.trim().length > 0);
+        setDisabledYn(nameVal.trim().length > 0);
     }
 
     const onChangeDesc = ({target}) => {
         const descVal = target.value;
 
         setDesc(descVal);
-        setDisabledYn(!descVal.trim().length > 0);
+        setDisabledYn(descVal.trim().length > 0);
     }
 
     const onClickCreateLabel = ({target}) => {
