@@ -1,25 +1,30 @@
-import React, { useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import styled from "styled-components";
 
 import LabelHead from "./LabelHead";
 import LabelItem from "./LabelItem";
 import LabelFetch from "../../service/LabelFetch.js";
+import { LabelsContext, setLabels } from "../../reducer/labelReducer";
 
-const Labels = ({ labels, setLabels, updateLabel, deleteLabel }) => {
+// const Labels = ({ labels, setLabels, updateLabel, deleteLabel }) => {
+const Labels = () => {
+  const { labels, labelsDispatch } = useContext(LabelsContext);
+
   useEffect(() => {
     const fetchData = async () => {
-      const datas = await LabelFetch.read();
-      setLabels(datas);
+      const labelList = await LabelFetch.read();
+      labelsDispatch(setLabels(labelList));
     };
+
     fetchData();
-  }, [setLabels]);
+  }, []);
 
   const labelList = labels.map((label) => (
     <LabelItem
       key={label.id}
       label={label}
-      updateLabel={updateLabel}
-      deleteLabel={deleteLabel}
+      // updateLabel={updateLabel}
+      // deleteLabel={deleteLabel}
     />
   ));
 

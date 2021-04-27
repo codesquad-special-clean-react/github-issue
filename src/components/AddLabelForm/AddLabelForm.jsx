@@ -1,16 +1,28 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import styled from "styled-components";
+import { LabelsContext, createLabel } from "../../reducer/labelReducer";
+import labelFetcher from "../../service/LabelFetch";
 
 import { getRandomColor } from "../../utils/utils";
 
-const AddLabelForm = ({ visible, hiddenLabelForm, createLabel }) => {
-  const [name, setName] = useState("Label preview");
-  const [description, setDescription] = useState("");
-  const [color, setColor] = useState(getRandomColor());
+const lableInitial = {
+  name: "Label preview",
+  description: "",
+  color: getRandomColor(),
+};
+
+const AddLabelForm = ({ visible, hiddenLabelForm }) => {
+  const { labelsDispatch } = useContext(LabelsContext);
+  const [label, setLabel] = useState(lableInitial);
+  const { name, description, color } = label;
 
   if (!visible) return null;
 
-  const onChangeColor = () => setColor(getRandomColor());
+  const onChangeName = (name) => setLabel({ ...label, name });
+  const onChangeDescription = (description) =>
+    setLabel({ ...label, description });
+  const onChangeColor = () => setLabel({ ...label, color: getRandomColor() });
+
   const onCreateLabel = async () => {
     if (!name) {
       console.log("Label name 은 필수 값입니다!!");
@@ -24,11 +36,16 @@ const AddLabelForm = ({ visible, hiddenLabelForm, createLabel }) => {
       color,
     };
 
-    createLabel(body);
-    hiddenLabelForm();
-    setName("");
-    setDescription("");
-    setColor(getRandomColor());
+    try {
+      const label = await labelFetcher.create(body);
+      if (label) {
+        labelsDispatch(createLabel(body));
+        hiddenLabelForm();
+        setLabel(lableInitial);
+      }
+    } catch (error) {
+      console.error(`Create Label Error: ${error}`);
+    }
   };
 
   return (
@@ -45,7 +62,7 @@ const AddLabelForm = ({ visible, hiddenLabelForm, createLabel }) => {
             <Input
               id="name"
               placeholder="Label name"
-              onChange={(event) => setName(event.target.value)}
+              onChange={({ target }) => onChangeName(target.value)}
             />
           </SubFormBox>
           <SubFormBox>
@@ -54,7 +71,7 @@ const AddLabelForm = ({ visible, hiddenLabelForm, createLabel }) => {
               id="description"
               style={{ width: "600px" }}
               placeholder="Description (optoinal)"
-              onChange={(event) => setDescription(event.target.value)}
+              onChange={({ target }) => onChangeDescription(target.value)}
             />
           </SubFormBox>
           <SubFormBox>
@@ -67,10 +84,10 @@ const AddLabelForm = ({ visible, hiddenLabelForm, createLabel }) => {
             </div>
           </SubFormBox>
         </FormBox>
-        <div style={{ display: "flex", marginTop: "30px" }}>
+        <ButtonGroup>
           <CancelBtn onClick={hiddenLabelForm}> Cancel </CancelBtn>
           <CreateBtn onClick={onCreateLabel}>Create label</CreateBtn>
-        </div>
+        </ButtonGroup>
       </div>
     </FormWrapper>
   );
@@ -120,6 +137,10 @@ const RefreshBtn = styled.button`
   background-color: ${(props) => (props.color ? props.color : "white")};
 `;
 
+const ButtonGroup = styled.div`
+  display: flex;
+  margin-top: 2em;
+`;
 const CancelBtn = styled.button`
   border: 1px solid #acacac;
   margin-right: 20px;
