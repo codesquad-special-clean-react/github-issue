@@ -1,16 +1,28 @@
-import React from "react";
+import React, { useContext } from "react";
 import styled from "styled-components";
 
-function Dialog({ visible, handleCancel, handleConfirm }) {
-  if (!visible) return null;
+import { DialogContext, dialogClose } from "@reducer/dialogReducer";
+
+function Dialog() {
+  const { isDialog, isDialogDispatch } = useContext(DialogContext);
+
+  if (!isDialog) return null;
+
+  const onConfirm = () => {
+    isDialogDispatch(dialogClose());
+  };
+
+  const onCancel = () => {
+    isDialogDispatch(dialogClose());
+  };
 
   return (
     <DarkBackground>
       <DialogBlock>
         <h3>“정말 이 레이블을 삭제하시겠습니까?”</h3>
         <ButtonGroup>
-          <Button onClick={handleCancel}>취소</Button>
-          <Button onClick={handleConfirm}>확인</Button>
+          <Button onClick={onCancel}>취소</Button>
+          <Button onClick={onConfirm}>확인</Button>
         </ButtonGroup>
       </DialogBlock>
     </DarkBackground>

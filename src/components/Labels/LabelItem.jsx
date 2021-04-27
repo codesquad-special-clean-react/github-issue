@@ -1,50 +1,57 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import styled from "styled-components";
 
 import Dialog from "@components/Dialog/Dialog";
 import UpdateLabelForm from "@components/UpdateLabelForm/UpdateLabelForm";
+import { DialogContext, dialogOpen } from "@reducer/dialogReducer";
 
 const LabelItem = ({ label, updateLabel, deleteLabel }) => {
-  const [dialog, setDialog] = useState(false);
-  const [updateMode, setUpdateMode] = useState(false);
+  const { isDialogDispatch } = useContext(DialogContext);
+
+  const [isUpdateMode, setIsUpdateMode] = useState(false);
+
   const [name, setName] = useState(label.name);
   const [color, setColor] = useState(label.color);
   const [description, setDescription] = useState(label.description);
 
-  const handleConfirm = () => {
-    setDialog(false);
-    deleteLabel(label.id);
-  };
+  // const handleConfirm = () => {
+  //   setIsDialog(false);
+  //   deleteLabel(label.id);
+  // };
 
-  const handleCancel = () => {
-    setDialog(false);
-  };
+  // const handleCancel = () => {
+  //   setIsDialog(false);
+  // };
 
   const cancelUpdateMode = () => {
-    setUpdateMode(false);
+    setIsUpdateMode(false);
   };
 
   const changeUpdateMode = () => {
-    setUpdateMode(true);
+    setIsUpdateMode(true);
+  };
+
+  const onDeleteClick = () => {
+    isDialogDispatch(dialogOpen());
   };
 
   return (
-    <div style={{ borderBottom: "1px solid #f1f3f5" }}>
+    <Item>
       <LabelWrapper>
         <LabelInfo>
           <Label color={color}>
             <span>{name}</span>
           </Label>
-          {!updateMode && <Description>{label.description}</Description>}
+          {!isUpdateMode && <Description>{label.description}</Description>}
         </LabelInfo>
         <LabelMenu>
-          {!updateMode && <button onClick={changeUpdateMode}>Edit</button>}
-          <button onClick={() => setDialog(true)}>Delete</button>
+          {!isUpdateMode && <button onClick={changeUpdateMode}>Edit</button>}
+          <button onClick={onDeleteClick}>Delete</button>
         </LabelMenu>
       </LabelWrapper>
-      {updateMode && (
+      {isUpdateMode && (
         <UpdateLabelForm
-          visible={updateMode}
+          visible={isUpdateMode}
           label={label}
           cancelUpdateMode={cancelUpdateMode}
           name={name}
@@ -56,14 +63,15 @@ const LabelItem = ({ label, updateLabel, deleteLabel }) => {
           updateLabel={updateLabel}
         />
       )}
-      <Dialog
-        visible={dialog}
-        handleCancel={handleCancel}
-        handleConfirm={handleConfirm}
-      />
-    </div>
+
+      <Dialog />
+    </Item>
   );
 };
+
+const Item = styled.div`
+  border-bottom: 1px solid #f1f3f5;
+`;
 
 const LabelWrapper = styled.li`
   display: flex;

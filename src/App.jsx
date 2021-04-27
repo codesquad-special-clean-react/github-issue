@@ -7,7 +7,8 @@ import Labels from "@components/Labels/Labels";
 import Milestones from "@components/Milestones/Milestones";
 import AddLabelForm from "@components/AddLabelForm/AddLabelForm";
 
-import labelsReducer, { LabelsContext } from "./reducer/labelReducer";
+import labelsReducer, { LabelsContext } from "@reducer/labelReducer";
+import dialogReducer, { DialogContext } from "@reducer/dialogReducer";
 
 function App() {
   const [menu, setMenu] = useState("labels");
@@ -17,6 +18,7 @@ function App() {
   const openLabelForm = () => setIsNewForm(true);
 
   const [labels, labelsDispatch] = useReducer(labelsReducer, []);
+  const [isDialog, isDialogDispatch] = useReducer(dialogReducer, false);
 
   const updateLabel = async (updatedLabel) => {
     // try {
@@ -47,28 +49,30 @@ function App() {
   return (
     <>
       <Header />
-      <MainWrapper>
-        <Menu menu={menu} setMenu={setMenu} openLabelForm={openLabelForm} />
-        {menu === "labels" ? (
-          <>
-            <LabelsContext.Provider value={{ labels, labelsDispatch }}>
-              <AddLabelForm
-                visible={isNewForm}
-                hiddenLabelForm={hiddenLabelForm}
-                // createLabel={createLabel}
-              />
-              <Labels
-                // labels={state}
-                // setLabels={setLabels}
-                updateLabel={updateLabel}
-                deleteLabel={deleteLabel}
-              />
-            </LabelsContext.Provider>
-          </>
-        ) : (
-          <Milestones />
-        )}
-      </MainWrapper>
+      <DialogContext.Provider value={{ isDialog, isDialogDispatch }}>
+        <MainWrapper>
+          <Menu menu={menu} setMenu={setMenu} openLabelForm={openLabelForm} />
+          {menu === "labels" ? (
+            <>
+              <LabelsContext.Provider value={{ labels, labelsDispatch }}>
+                <AddLabelForm
+                  visible={isNewForm}
+                  hiddenLabelForm={hiddenLabelForm}
+                  // createLabel={createLabel}
+                />
+                <Labels
+                  // labels={state}
+                  // setLabels={setLabels}
+                  updateLabel={updateLabel}
+                  deleteLabel={deleteLabel}
+                />
+              </LabelsContext.Provider>
+            </>
+          ) : (
+            <Milestones />
+          )}
+        </MainWrapper>
+      </DialogContext.Provider>
     </>
   );
 }

@@ -16,7 +16,7 @@ const Labels = () => {
     };
 
     fetchData();
-  }, []);
+  }, [labelsDispatch]);
 
   const labelList = labels.map((label) => (
     <LabelItem
