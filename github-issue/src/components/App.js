@@ -9,7 +9,6 @@ function App() {
     <>
         <Title/>
         <Header/>
-        <LabelCustom />
         <LabelList/>
     </>
   );
