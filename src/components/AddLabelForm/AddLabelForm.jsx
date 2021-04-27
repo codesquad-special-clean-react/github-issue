@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 
-import { getRandomColor } from "../../service/randomColor";
+import { getRandomColor } from "../../utils/utils";
 
 const AddLabelForm = ({ visible, hiddenLabelForm, createLabel }) => {
   const [name, setName] = useState("Label preview");
@@ -28,7 +28,7 @@ const AddLabelForm = ({ visible, hiddenLabelForm, createLabel }) => {
     hiddenLabelForm();
     setName("");
     setDescription("");
-    onChangeColor();
+    setColor(getRandomColor());
   };
 
   return (

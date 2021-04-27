@@ -11,7 +11,7 @@ const LabelItem = ({ label, updateLabel, deleteLabel }) => {
   const [color, setColor] = useState(label.color);
   const [description, setDescription] = useState(label.description);
 
-  const handleConfirm = async () => {
+  const handleConfirm = () => {
     setDialog(false);
     deleteLabel(label.id);
   };

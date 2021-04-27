@@ -1,6 +1,22 @@
 import React from "react";
 import styled from "styled-components";
 
+function Dialog({ visible, handleCancel, handleConfirm }) {
+  if (!visible) return null;
+
+  return (
+    <DarkBackground>
+      <DialogBlock>
+        <h3>“정말 이 레이블을 삭제하시겠습니까?”</h3>
+        <ButtonGroup>
+          <Button onClick={handleCancel}>취소</Button>
+          <Button onClick={handleConfirm}>확인</Button>
+        </ButtonGroup>
+      </DialogBlock>
+    </DarkBackground>
+  );
+}
+
 const DarkBackground = styled.div`
   position: fixed;
   left: 0;
@@ -43,21 +59,5 @@ const Button = styled.button`
     margin-left: 0.5rem;
   }
 `;
-
-function Dialog({ visible, handleCancel, handleConfirm }) {
-  if (!visible) return null;
-
-  return (
-    <DarkBackground>
-      <DialogBlock>
-        <h3>“정말 이 레이블을 삭제하시겠습니까?”</h3>
-        <ButtonGroup>
-          <Button onClick={handleCancel}>취소</Button>
-          <Button onClick={handleConfirm}>확인</Button>
-        </ButtonGroup>
-      </DialogBlock>
-    </DarkBackground>
-  );
-}
 
 export default Dialog;

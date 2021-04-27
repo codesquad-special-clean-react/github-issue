@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
-import { getRandomColor } from "../../service/randomColor";
+import { getRandomColor } from "../../utils/utils";
 
 const UpdateLabelForm = ({
   label,
@@ -38,42 +38,40 @@ const UpdateLabelForm = ({
 
   return (
     <FormWrapper>
-      <div style={{ display: "flex", justifyContent: "space-between" }}>
-        <FormBox>
-          <SubFormBox>
-            <label htmlFor="name">Label name</label>
-            <Input
-              id="name"
-              placeholder="Label name"
-              onChange={(event) => setName(event.target.value)}
-              value={name}
-            />
-          </SubFormBox>
-          <SubFormBox>
-            <label htmlFor="description">Label description</label>
-            <Input
-              id="description"
-              style={{ width: "600px" }}
-              placeholder="Description (optoinal)"
-              onChange={(event) => setDescription(event.target.value)}
-              value={description}
-            />
-          </SubFormBox>
-          <SubFormBox>
-            <label htmlFor="color">color</label>
-            <div style={{ display: "flex" }}>
-              <RefreshBtn color={color} onClick={onChangeColor}>
-                ↻
-              </RefreshBtn>
-              <Input value={color} readOnly />
-            </div>
-          </SubFormBox>
-        </FormBox>
-        <div style={{ display: "flex", marginTop: "30px" }}>
-          <CancelBtn onClick={onCancel}> Cancel </CancelBtn>
-          <CreateBtn onClick={onSaveChange}>Save changes</CreateBtn>
-        </div>
-      </div>
+      <FormBox>
+        <SubFormBox>
+          <label htmlFor="name">Label name</label>
+          <Input
+            id="name"
+            placeholder="Label name"
+            onChange={(event) => setName(event.target.value)}
+            value={name}
+          />
+        </SubFormBox>
+        <SubFormBox>
+          <label htmlFor="description">Label description</label>
+          <Input
+            id="description"
+            style={{ width: "600px" }}
+            placeholder="Description (optoinal)"
+            onChange={(event) => setDescription(event.target.value)}
+            value={description}
+          />
+        </SubFormBox>
+        <SubFormBox>
+          <label htmlFor="color">color</label>
+          <div>
+            <RefreshBtn color={color} onClick={onChangeColor}>
+              ↻
+            </RefreshBtn>
+            <Input value={color} readOnly />
+          </div>
+        </SubFormBox>
+      </FormBox>
+      <ButtonGroup>
+        <CancelBtn onClick={onCancel}> Cancel </CancelBtn>
+        <CreateBtn onClick={onSaveChange}>Save changes</CreateBtn>
+      </ButtonGroup>
     </FormWrapper>
   );
 };
@@ -81,6 +79,8 @@ const UpdateLabelForm = ({
 const FormWrapper = styled.div`
   background-color: transparent;
   padding: 1em;
+  display: felx;
+  justify-content: space-between;
 `;
 
 const FormBox = styled.div`
@@ -96,6 +96,10 @@ const SubFormBox = styled.div`
   & > label {
     font-weight: bold;
   }
+
+  & > div {
+    display: flex;
+  }
 `;
 
 const Input = styled.input`
@@ -106,6 +110,11 @@ const Input = styled.input`
 const RefreshBtn = styled.button`
   cursor: pointer;
   background-color: ${(props) => (props.color ? props.color : "white")};
+`;
+
+const ButtonGroup = styled.div`
+  display: flex;
+  margin-top: 2em;
 `;
 
 const CancelBtn = styled.button`
