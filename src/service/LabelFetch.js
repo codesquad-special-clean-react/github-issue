@@ -1,5 +1,5 @@
-import { api } from "../utils/utils";
-import { LABEL_URL } from "../utils/constant";
+import { api } from "@utils/utils";
+import { LABEL_URL } from "@utils/constant";
 
 const labelFetcher = {
   async create(body) {

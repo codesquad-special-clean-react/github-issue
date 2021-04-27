@@ -1,12 +1,11 @@
 import React, { useContext, useEffect } from "react";
 import styled from "styled-components";
 
-import LabelHead from "./LabelHead";
+import LabelFetch from "@service/LabelFetch.js";
+import { LabelsContext, setLabels } from "@reducer/labelReducer";
 import LabelItem from "./LabelItem";
-import LabelFetch from "../../service/LabelFetch.js";
-import { LabelsContext, setLabels } from "../../reducer/labelReducer";
+import LabelHead from "./LabelHead";
 
-// const Labels = ({ labels, setLabels, updateLabel, deleteLabel }) => {
 const Labels = () => {
   const { labels, labelsDispatch } = useContext(LabelsContext);
 

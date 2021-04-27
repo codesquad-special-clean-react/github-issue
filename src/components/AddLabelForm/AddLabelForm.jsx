@@ -1,9 +1,9 @@
 import React, { useContext, useState } from "react";
 import styled from "styled-components";
-import { LabelsContext, createLabel } from "../../reducer/labelReducer";
-import labelFetcher from "../../service/LabelFetch";
+import { LabelsContext, createLabel } from "@reducer/labelReducer";
+import labelFetcher from "@service/LabelFetch";
 
-import { getRandomColor } from "../../utils/utils";
+import { getRandomColor } from "@utils/utils";
 
 const lableInitial = {
   name: "Label preview",

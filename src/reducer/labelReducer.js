@@ -1,7 +1,4 @@
 import React from "react";
-import labelFetcher from "../service/LabelFetch";
-// import from "../"
-import LabelFetch from "../service/LabelFetch";
 
 // 액션 타입 만들기
 const SET_LABLES = "SET_LABELS";

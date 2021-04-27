@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
-import { getRandomColor } from "../../utils/utils";
+import { getRandomColor } from "@utils/utils";
 
 const UpdateLabelForm = ({
   label,

@@ -1,13 +1,12 @@
 import styled from "styled-components";
-import { useContext, useReducer, useState } from "react";
+import { useReducer, useState } from "react";
 
-import Header from "./components/Header/Header";
-import Menu from "./components/Menu/Menu";
-import Labels from "./components/Labels/Labels";
-import Milestones from "./components/Milestones/Milestones";
-import AddLabelForm from "./components/AddLabelForm/AddLabelForm";
+import Header from "@components/Header/Header";
+import Menu from "@components/Menu/Menu";
+import Labels from "@components/Labels/Labels";
+import Milestones from "@components/Milestones/Milestones";
+import AddLabelForm from "@components/AddLabelForm/AddLabelForm";
 
-import LabelFetch from "./service/LabelFetch";
 import labelsReducer, { LabelsContext } from "./reducer/labelReducer";
 
 function App() {
@@ -18,17 +17,6 @@ function App() {
   const openLabelForm = () => setIsNewForm(true);
 
   const [labels, labelsDispatch] = useReducer(labelsReducer, []);
-
-  const createLabel = async (body) => {
-    // try {
-    //   const label = await LabelFetch.create(body);
-    //   if (label) {
-    //     setLabels(labels.concat(label));
-    //   }
-    // } catch (error) {
-    //   console.error(`Create Label Error: ${error}`);
-    // }
-  };
 
   const updateLabel = async (updatedLabel) => {
     // try {
