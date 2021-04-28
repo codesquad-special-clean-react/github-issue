@@ -11,12 +11,10 @@ const UpdateLabelForm = ({ visible, label, setLabel, cancelUpdateMode }) => {
 
   if (!visible) return null;
 
-  const onChangeColor = () => setLabel({ ...label, color: getRandomColor() });
   const onCancel = () => {
     setLabel(originLabel);
     cancelUpdateMode();
   };
-
   const onSaveChange = async () => {
     const updatedLabel = {
       id: label.id,
@@ -38,6 +36,11 @@ const UpdateLabelForm = ({ visible, label, setLabel, cancelUpdateMode }) => {
   };
 
   const onSetLabelProperty = (target, key) => {
+    if (key === "color") {
+      setLabel({ ...label, color: getRandomColor() });
+      return;
+    }
+
     setLabel({ ...label, [key]: target.value });
   };
 
@@ -66,7 +69,10 @@ const UpdateLabelForm = ({ visible, label, setLabel, cancelUpdateMode }) => {
         <SubFormBox>
           <label htmlFor="color">color</label>
           <div>
-            <RefreshBtn color={label.color} onClick={onChangeColor}>
+            <RefreshBtn
+              color={label.color}
+              onClick={() => onSetLabelProperty(null, "color")}
+            >
               ↻
             </RefreshBtn>
             <Input value={label.color} readOnly />

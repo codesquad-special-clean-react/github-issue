@@ -18,10 +18,14 @@ const AddLabelForm = ({ visible, hiddenLabelForm }) => {
 
   if (!visible) return null;
 
-  const onChangeName = (name) => setLabel({ ...label, name });
-  const onChangeDescription = (description) =>
-    setLabel({ ...label, description });
-  const onChangeColor = () => setLabel({ ...label, color: getRandomColor() });
+  const onSetLabelProperty = (target, key) => {
+    if (key === "color") {
+      setLabel({ ...label, color: getRandomColor() });
+      return;
+    }
+
+    setLabel({ ...label, [key]: target.value });
+  };
 
   const onCreateLabel = async () => {
     if (!name) {
@@ -50,19 +54,19 @@ const AddLabelForm = ({ visible, hiddenLabelForm }) => {
 
   return (
     <FormWrapper>
-      <div>
+      <Preview>
         <Label color={color}>
           <span>{name !== "" ? name : "Label preview"}</span>
         </Label>
-      </div>
-      <div style={{ display: "flex", justifyContent: "space-between" }}>
+      </Preview>
+      <AddFormWrapper>
         <FormBox>
           <SubFormBox>
             <label htmlFor="name">Label name</label>
             <Input
               id="name"
               placeholder="Label name"
-              onChange={({ target }) => onChangeName(target.value)}
+              onChange={({ target }) => onSetLabelProperty(target, "name")}
             />
           </SubFormBox>
           <SubFormBox>
@@ -71,13 +75,18 @@ const AddLabelForm = ({ visible, hiddenLabelForm }) => {
               id="description"
               style={{ width: "600px" }}
               placeholder="Description (optoinal)"
-              onChange={({ target }) => onChangeDescription(target.value)}
+              onChange={({ target }) =>
+                onSetLabelProperty(target, "description")
+              }
             />
           </SubFormBox>
           <SubFormBox>
             <label htmlFor="color">color</label>
-            <div style={{ display: "flex" }}>
-              <RefreshBtn color={color} onClick={onChangeColor}>
+            <div>
+              <RefreshBtn
+                color={color}
+                onClick={() => onSetLabelProperty(null, "color")}
+              >
                 ↻
               </RefreshBtn>
               <Input value={color} readOnly />
@@ -88,7 +97,7 @@ const AddLabelForm = ({ visible, hiddenLabelForm }) => {
           <CancelBtn onClick={hiddenLabelForm}> Cancel </CancelBtn>
           <CreateBtn onClick={onCreateLabel}>Create label</CreateBtn>
         </ButtonGroup>
-      </div>
+      </AddFormWrapper>
     </FormWrapper>
   );
 };
@@ -98,6 +107,13 @@ const FormWrapper = styled.div`
   border: 2px solid #f1f3f5;
   background-color: #f8f9fa;
   padding: 1em;
+`;
+
+const Preview = styled.div``;
+
+const AddFormWrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
 `;
 
 const Label = styled.div`
@@ -124,6 +140,10 @@ const SubFormBox = styled.div`
 
   & > label {
     font-weight: bold;
+  }
+
+  & > div {
+    display: flex;
   }
 `;
 
