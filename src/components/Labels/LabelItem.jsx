@@ -1,27 +1,16 @@
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 
 import Dialog from "@components/Dialog/Dialog";
 import UpdateLabelForm from "@components/UpdateLabelForm/UpdateLabelForm";
-import { DialogContext, dialogOpen } from "@reducer/dialogReducer";
 
-const LabelItem = ({ label, updateLabel, deleteLabel }) => {
-  const { isDialogDispatch } = useContext(DialogContext);
-
+const LabelItem = ({ label, updateLabel }) => {
+  const [isDialog, setIsDialog] = useState(false);
   const [isUpdateMode, setIsUpdateMode] = useState(false);
 
   const [name, setName] = useState(label.name);
   const [color, setColor] = useState(label.color);
   const [description, setDescription] = useState(label.description);
-
-  // const handleConfirm = () => {
-  //   setIsDialog(false);
-  //   deleteLabel(label.id);
-  // };
-
-  // const handleCancel = () => {
-  //   setIsDialog(false);
-  // };
 
   const cancelUpdateMode = () => {
     setIsUpdateMode(false);
@@ -32,7 +21,7 @@ const LabelItem = ({ label, updateLabel, deleteLabel }) => {
   };
 
   const onDeleteClick = () => {
-    isDialogDispatch(dialogOpen());
+    setIsDialog(true);
   };
 
   return (
@@ -64,7 +53,7 @@ const LabelItem = ({ label, updateLabel, deleteLabel }) => {
         />
       )}
 
-      <Dialog />
+      <Dialog label={label} isDialog={isDialog} setIsDialog={setIsDialog} />
     </Item>
   );
 };

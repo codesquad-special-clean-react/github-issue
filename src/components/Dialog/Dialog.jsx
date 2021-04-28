@@ -1,19 +1,27 @@
 import React, { useContext } from "react";
 import styled from "styled-components";
 
-import { DialogContext, dialogClose } from "@reducer/dialogReducer";
+import { LabelsContext, deleteLabel } from "@reducer/labelReducer";
+import labelFetcher from "@src/service/LabelFetch";
 
-function Dialog() {
-  const { isDialog, isDialogDispatch } = useContext(DialogContext);
+function Dialog({ label, isDialog, setIsDialog }) {
+  const { labelsDispatch } = useContext(LabelsContext);
 
   if (!isDialog) return null;
 
-  const onConfirm = () => {
-    isDialogDispatch(dialogClose());
+  const onCancel = () => {
+    setIsDialog(false);
   };
 
-  const onCancel = () => {
-    isDialogDispatch(dialogClose());
+  const onConfirm = async () => {
+    try {
+      const response = await labelFetcher.delete(label.id);
+      if (response.ok) {
+        labelsDispatch(deleteLabel(label.id));
+      }
+    } catch (error) {
+      console.error(`Delete Label Error: ${error}`);
+    }
   };
 
   return (

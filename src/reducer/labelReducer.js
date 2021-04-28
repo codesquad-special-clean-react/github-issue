@@ -12,7 +12,7 @@ export const setLabels = (labels) => ({ type: SET_LABLES, labels });
 export const createLabel = (label) => ({ type: CREATE_LABEL, label });
 export const readLabels = () => ({ type: READ_LABELS });
 export const updateLabel = () => ({ type: UPDATE_LABEL });
-export const deleteLabel = () => ({ type: DELETE_LABEL });
+export const deleteLabel = (id) => ({ type: DELETE_LABEL, id });
 
 // 초기 상태 선언
 const initialLabels = [];
@@ -29,7 +29,7 @@ export default function labelsReducer(state = initialLabels, action) {
     case UPDATE_LABEL:
       break;
     case DELETE_LABEL:
-      break;
+      return state.filter((label) => label.id !== action.id);
     default:
       throw new Error();
   }
