@@ -3,22 +3,21 @@ import "../css/button.css";
 import "../css/common.css";
 import "../css/LabelCustom.css";
 import "../css/Header.css";
+import img from "../images/random-icon.png";
 import React, {useState, useEffect} from "react";
 import styled from 'styled-components';
-import {addLabels} from "../api/LabelApi";
+import {addLabels, deteleLabel} from "../api/LabelApi";
 
 const LabelCustom = ({openNewLabel}) => {
     const [newLabelInfo, setNewLabelInfo] = useState({
         name: "",
         desc: "",
         color: "#bfd4f2",
-        disabledYn: "",
+        disabledYn: false,
         errorMessage: "",
     });
 
-    const onChangeName = ({target}) => {
-        const newLabelName = target.value;
-
+    const onChangeName = ({target: {value: newLabelName}}) => {
         setNewLabelInfo({...newLabelInfo,
             name: newLabelName,
             disabledYn: (newLabelName || newLabelInfo.color),
@@ -26,17 +25,13 @@ const LabelCustom = ({openNewLabel}) => {
         });
     }
 
-    const onChangeDesc = ({target}) => {
-        const newLabelDescription = target.value;
-
+    const onChangeDesc = ({target: {value: newLabelDescription}}) => {
         setNewLabelInfo({ ...newLabelInfo,
             desc: newLabelDescription
         });
     }
 
-    const onChangeColor = ({target}) => {
-        const newLabelColor = target.value;
-
+    const onChangeColor = ({target: {value: newLabelColor}}) => {
         setNewLabelInfo({ ...newLabelInfo,
             color: newLabelColor,
             disabledYn: (newLabelColor || newLabelInfo.name),
@@ -62,13 +57,13 @@ const LabelCustom = ({openNewLabel}) => {
         });
 
         const param = {
-            "id": 4,        // todo :: count max idx
             "name": newLabelInfo.name,
             "desc": newLabelInfo.desc,
             "color": newLabelInfo.color,
         };
 
         addLabels('http://localhost:3001/labels', param);
+
     }
 
     const disabledNewLabelBtn = () => {
@@ -104,15 +99,15 @@ const LabelCustom = ({openNewLabel}) => {
                     <div className="input-title-style color">
                         <label>Color</label>
                         <div>
-                            <button className="button-style reset-btn" style={{backgroundColor: newLabelInfo.color}} onClick={makeRandomColor}></button>
+                            <Button type={"randomColor"} bgColor={newLabelInfo.color} onClick={makeRandomColor}/>
                             <input type="text" className="color-code" id="colorCodeInput" onChange={onChangeColor} value={newLabelInfo.color}/>
                         </div>
                     </div>
 
-                    <button className="button-style cancel-btn" onClick={openNewLabel}>Cancel</button>
-                    <button className="button-style green disabled" id="createLabelBtn" onClick={onClickCreateLabel} >
+                    <Button onClick={openNewLabel}>Cancel</Button>
+                    <Button type={"green"} disabledYn={newLabelInfo.disabledYn} id="createLabelBtn" onClick={onClickCreateLabel} >
                         Create Label
-                    </button>
+                    </Button>
                 </div>
                 {newLabelInfo.errorMessage && <ErrorMessage>* {newLabelInfo.errorMessage}</ErrorMessage>}
             </div>
@@ -126,4 +121,43 @@ const ErrorMessage = styled.span`
     font-size: 16px;
     font-weight: bold;
     color: #d85656;
+`;
+
+
+const Button = styled.button`
+    margin-right: 10px;
+    padding: 0 20px;
+    border-radius: 5px;
+    border: 1px solid #e4e7ea;
+    cursor: pointer;
+
+    &: last-child {
+        margin-right: 0;
+    }
+
+    ${props => {
+        switch (props.type) {
+            case "green":
+                return (`
+                    background-color: ${ props.disabledYn ? "#31c553" : "#94d3a2"};
+                    color: #ffffff;
+                    font-weight: bold;
+                    float: right;
+                `)
+                break;
+            case "randomColor":
+                return (`
+                    width: 35px;
+                    height: 100%;
+                    background: url("${img}") no-repeat;
+                    background-size: 40%;
+                    background-position: 50%;
+                    background-color: ${props.bgColor};
+                    border: none;
+                `)
+                break;
+            default:
+                return null;
+        }
+    }}
 `;

@@ -26,15 +26,15 @@ function Header() {
 export default Header;
 
 const LeftTab = styled.button`
-        border-radius: 5px 0 0 5px;
-    `;
+    border-radius: 5px 0 0 5px;
+`;
 
 const RightTab = styled.button`
-        border-radius: 0 5px 5px 0;
-    `;
+    border-radius: 0 5px 5px 0;
+`;
 
 const NewLabel = styled.button`
-        height: 36px;
-        float: right;
-     `;
+    height: 36px;
+    float: right;
+ `;
 

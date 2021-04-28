@@ -1,28 +1,40 @@
 {
   "labels": [
     {
-      "id": 1,
       "name": "bug",
       "desc": "Something isn't working",
       "color": "#d85656",
+      "id": 1
     },
     {
-      "id": 2,
       "name": "feature",
       "desc": "New",
       "color": "#7339e4",
+      "id": 2
     },
     {
-      "id": 3,
       "name": "invalid",
       "desc": "invalid item",
       "color": "#35c7d6",
+      "id": 3
     },
     {
-      "id": 4,
-      "name": "test",
-      "desc": "test desc",
-      "color": "#a015d3"
+      "name": "test1",
+      "desc": "s",
+      "color": "#bfd4f2",
+      "id": 4
+    },
+    {
+      "name": "test2",
+      "desc": "s",
+      "color": "#611c5b",
+      "id": 5
+    },
+    {
+      "name": "test3",
+      "desc": "test3 desc",
+      "color": "#11146e",
+      "id": 6
     }
   ]
 }
