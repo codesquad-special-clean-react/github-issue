@@ -1,12 +1,12 @@
-import "../css/label.css";
-import "../css/button.css";
-import "../css/common.css";
-import "../css/LabelCustom.css";
-import "../css/Header.css";
-import img from "../images/random-icon.png";
+import "../../css/label.css";
+import "../../css/button.css";
+import "../../css/common.css";
+import "../../css/LabelCustom.css";
+import "../../css/Header.css";
+import img from "../../images/random-icon.png";
 import React, {useState, useEffect} from "react";
 import styled from 'styled-components';
-import {addLabels, deteleLabel} from "../api/LabelApi";
+import {addLabels, deteleLabel} from "../../api/LabelApi";
 
 const LabelCustom = ({openNewLabel}) => {
     const [newLabelInfo, setNewLabelInfo] = useState({

@@ -1,21 +1,23 @@
-import "../css/LabelItem.css";
+import "../../css/LabelItem.css";
 import { useState, useEffect } from 'react';
-import {fetchLabels, deteleLabel} from "../api/LabelApi";
+import {fetchLabels, deteleLabel} from "../../api/LabelApi";
 
-function LabelItem({labels}) {
+function LabelItem({labels, deleteLabel}) {
     const onClickDelete = async ({currentTarget}) => {
         const id = currentTarget.closest("li.label-item").getAttribute("data-id");
 
-        await deteleLabel('http://localhost:3001/labels', id);
-        await getLabels();
+        deleteLabel('http://localhost:3001/labels', id);
+
+        // await deteleLabel('http://localhost:3001/labels', id);
+        // await getLabels();
     }
 
-    const getLabels = () => {
-        fetchLabels("http://localhost:3001/labels")
-        .then((data) => {
-            labels = data;
-        })
-    }
+    // const getLabels = () => {
+    //     fetchLabels("http://localhost:3001/labels")
+    //     .then((data) => {
+    //         labels = data;
+    //     })
+    // }
 
     let items = labels.map( ({ id, name, desc, color }) => {
         return (

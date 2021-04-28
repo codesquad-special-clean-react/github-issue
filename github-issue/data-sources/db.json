@@ -7,33 +7,27 @@
       "id": 1
     },
     {
-      "name": "feature",
-      "desc": "New",
-      "color": "#7339e4",
-      "id": 2
-    },
-    {
-      "name": "invalid",
-      "desc": "invalid item",
-      "color": "#35c7d6",
+      "name": "test",
+      "desc": "test desc",
+      "color": "#e79b12",
       "id": 3
     },
     {
-      "name": "test1",
-      "desc": "s",
-      "color": "#bfd4f2",
+      "name": "test4",
+      "desc": "desc",
+      "color": "#80b045",
       "id": 4
     },
     {
-      "name": "test2",
-      "desc": "s",
-      "color": "#611c5b",
+      "name": "test4",
+      "desc": "desc",
+      "color": "#18d6ee",
       "id": 5
     },
     {
-      "name": "test3",
-      "desc": "test3 desc",
-      "color": "#11146e",
+      "name": "asd",
+      "desc": "",
+      "color": "#8615ce",
       "id": 6
     }
   ]

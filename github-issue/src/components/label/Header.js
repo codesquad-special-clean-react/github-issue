@@ -1,7 +1,7 @@
-import "../css/Header.css";
-import "../css/button.css";
+import "../../css/Header.css";
+import "../../css/button.css";
 import React, {useState} from 'react';
-import LabelCustom from "../components/LabelCustom"
+import LabelCustom from "../label/LabelCustom"
 import styled from 'styled-components'
 
 function Header() {
