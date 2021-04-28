@@ -1,9 +1,9 @@
 import React, { useContext, useState } from "react";
 import styled from "styled-components";
 
-import { LabelsContext, updateLabel } from "@reducer/labelReducer";
-import labelFetcher from "@src/service/LabelFetch";
+import labelFetcher from "@service/LabelFetch";
 import { getRandomColor } from "@utils/utils";
+import { LabelsContext, updateLabel } from "@reducer/labelReducer";
 
 const UpdateLabelForm = ({ visible, label, setLabel, cancelUpdateMode }) => {
   const [originLabel] = useState(label);

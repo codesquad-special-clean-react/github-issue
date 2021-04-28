@@ -1,11 +1,10 @@
 import styled from "styled-components";
 import { useReducer, useState } from "react";
 
-import Header from "@components/Header/Header";
-import Menu from "@components/Menu/Menu";
-import Labels from "@components/Labels/Labels";
-import Milestones from "@components/Milestones/Milestones";
-import AddLabelForm from "@components/AddLabelForm/AddLabelForm";
+import Header from "@header/Header";
+import Menu from "@menu/Menu";
+import Labels from "@labels/Labels";
+import Milestones from "@milestones/Milestones";
 
 import labelsReducer, {
   LabelsContext,
@@ -26,16 +25,11 @@ function App() {
       <Header />
       <MainWrapper>
         <Menu menu={menu} setMenu={setMenu} openLabelForm={openLabelForm} />
+
         {menu === "labels" ? (
-          <>
-            <LabelsContext.Provider value={{ labels, labelsDispatch }}>
-              <AddLabelForm
-                visible={isNewForm}
-                hiddenLabelForm={hiddenLabelForm}
-              />
-              <Labels />
-            </LabelsContext.Provider>
-          </>
+          <LabelsContext.Provider value={{ labels, labelsDispatch }}>
+            <Labels isNewForm={isNewForm} hiddenLabelForm={hiddenLabelForm} />
+          </LabelsContext.Provider>
         ) : (
           <Milestones />
         )}

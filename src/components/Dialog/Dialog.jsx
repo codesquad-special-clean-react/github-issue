@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import styled from "styled-components";
 
 import { LabelsContext, deleteLabel } from "@reducer/labelReducer";
-import labelFetcher from "@src/service/LabelFetch";
+import labelFetcher from "@service/LabelFetch";
 
 function Dialog({ label, isDialog, setIsDialog }) {
   const { labelsDispatch } = useContext(LabelsContext);

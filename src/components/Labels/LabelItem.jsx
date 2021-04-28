@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 
-import Dialog from "@components/Dialog/Dialog";
-import UpdateLabelForm from "@components/UpdateLabelForm/UpdateLabelForm";
+import Dialog from "@dialog/Dialog";
+import UpdateLabelForm from "@labels/UpdateLabelForm";
 
 const LabelItem = ({ labelData }) => {
   const [isDialog, setIsDialog] = useState(false);
