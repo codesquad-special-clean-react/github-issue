@@ -3,19 +3,19 @@ import React from "react";
 // 액션 타입 만들기
 const SET_LABLES = "SET_LABELS";
 const CREATE_LABEL = "CREATE_LABEL";
-const READ_LABELS = "READ_LABELS";
 const UPDATE_LABEL = "UPDATE_LABEL";
 const DELETE_LABEL = "DELETE_LABEL";
+// const READ_LABELS = "READ_LABELS";
 
 // 액션 생성 함수 만들기
 export const setLabels = (labels) => ({ type: SET_LABLES, labels });
 export const createLabel = (label) => ({ type: CREATE_LABEL, label });
-export const readLabels = () => ({ type: READ_LABELS });
-export const updateLabel = () => ({ type: UPDATE_LABEL });
+export const updateLabel = (id, label) => ({ type: UPDATE_LABEL, id, label });
 export const deleteLabel = (id) => ({ type: DELETE_LABEL, id });
+// export const readLabels = () => ({ type: READ_LABELS });
 
 // 초기 상태 선언
-const initialLabels = [];
+export const initialLabels = [];
 
 // 리듀서
 export default function labelsReducer(state = initialLabels, action) {
@@ -24,12 +24,15 @@ export default function labelsReducer(state = initialLabels, action) {
       return action.labels;
     case CREATE_LABEL:
       return state.concat(action.label);
-    case READ_LABELS:
-      break;
     case UPDATE_LABEL:
-      break;
+      return state.map((label) =>
+        label.id === action.id ? action.label : label
+      );
     case DELETE_LABEL:
       return state.filter((label) => label.id !== action.id);
+    // case READ_LABELS: // debugging 용
+    //   console.log("read", state);
+    //   return state;
     default:
       throw new Error();
   }

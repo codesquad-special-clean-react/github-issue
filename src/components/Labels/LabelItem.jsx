@@ -4,13 +4,11 @@ import styled from "styled-components";
 import Dialog from "@components/Dialog/Dialog";
 import UpdateLabelForm from "@components/UpdateLabelForm/UpdateLabelForm";
 
-const LabelItem = ({ label, updateLabel }) => {
+const LabelItem = ({ labelData }) => {
   const [isDialog, setIsDialog] = useState(false);
   const [isUpdateMode, setIsUpdateMode] = useState(false);
 
-  const [name, setName] = useState(label.name);
-  const [color, setColor] = useState(label.color);
-  const [description, setDescription] = useState(label.description);
+  const [label, setLabel] = useState(labelData);
 
   const cancelUpdateMode = () => {
     setIsUpdateMode(false);
@@ -28,8 +26,8 @@ const LabelItem = ({ label, updateLabel }) => {
     <Item>
       <LabelWrapper>
         <LabelInfo>
-          <Label color={color}>
-            <span>{name}</span>
+          <Label color={label.color}>
+            <span>{label.name}</span>
           </Label>
           {!isUpdateMode && <Description>{label.description}</Description>}
         </LabelInfo>
@@ -42,14 +40,9 @@ const LabelItem = ({ label, updateLabel }) => {
         <UpdateLabelForm
           visible={isUpdateMode}
           label={label}
+          setLabel={setLabel}
           cancelUpdateMode={cancelUpdateMode}
-          name={name}
-          setName={setName}
-          color={color}
-          setColor={setColor}
-          description={description}
-          setDescription={setDescription}
-          updateLabel={updateLabel}
+          changeUpdateMode={changeUpdateMode}
         />
       )}
 

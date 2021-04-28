@@ -1,39 +1,44 @@
-import React from "react";
+import React, { useContext, useState } from "react";
 import styled from "styled-components";
 
+import { LabelsContext, updateLabel } from "@reducer/labelReducer";
+import labelFetcher from "@src/service/LabelFetch";
 import { getRandomColor } from "@utils/utils";
 
-const UpdateLabelForm = ({
-  label,
-  visible,
-  cancelUpdateMode,
-  name,
-  setName,
-  color,
-  setColor,
-  description,
-  setDescription,
-  updateLabel,
-}) => {
+const UpdateLabelForm = ({ visible, label, setLabel, cancelUpdateMode }) => {
+  const [originLabel] = useState(label);
+  const { labelsDispatch } = useContext(LabelsContext);
+
   if (!visible) return null;
 
-  const onChangeColor = () => setColor(getRandomColor());
+  const onChangeColor = () => setLabel({ ...label, color: getRandomColor() });
   const onCancel = () => {
-    setName(label.name);
-    setColor(label.color);
-    setDescription(label.description);
+    setLabel(originLabel);
     cancelUpdateMode();
   };
+
   const onSaveChange = async () => {
     const updatedLabel = {
       id: label.id,
-      name,
-      description,
-      color,
+      name: label.name,
+      description: label.description,
+      color: label.color,
     };
 
-    await updateLabel(updatedLabel);
-    cancelUpdateMode();
+    try {
+      const result = await labelFetcher.update(updatedLabel.id, updatedLabel);
+      if (result.ok) {
+        labelsDispatch(updateLabel(label.id, updatedLabel));
+      }
+    } catch (error) {
+      console.error(`Update Label Error: ${error}`);
+    } finally {
+      cancelUpdateMode();
+    }
+  };
+
+  const onSetLabelProperty = (target, key) => {
+    setLabel({ ...label, [key]: target.value });
   };
 
   return (
@@ -44,8 +49,8 @@ const UpdateLabelForm = ({
           <Input
             id="name"
             placeholder="Label name"
-            onChange={(event) => setName(event.target.value)}
-            value={name}
+            onChange={({ target }) => onSetLabelProperty(target, "name")}
+            value={label.name}
           />
         </SubFormBox>
         <SubFormBox>
@@ -54,17 +59,17 @@ const UpdateLabelForm = ({
             id="description"
             style={{ width: "600px" }}
             placeholder="Description (optoinal)"
-            onChange={(event) => setDescription(event.target.value)}
-            value={description}
+            onChange={({ target }) => onSetLabelProperty(target, "description")}
+            value={label.description}
           />
         </SubFormBox>
         <SubFormBox>
           <label htmlFor="color">color</label>
           <div>
-            <RefreshBtn color={color} onClick={onChangeColor}>
+            <RefreshBtn color={label.color} onClick={onChangeColor}>
               ↻
             </RefreshBtn>
-            <Input value={color} readOnly />
+            <Input value={label.color} readOnly />
           </div>
         </SubFormBox>
       </FormBox>

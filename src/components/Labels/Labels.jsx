@@ -19,12 +19,7 @@ const Labels = () => {
   }, [labelsDispatch]);
 
   const labelList = labels.map((label) => (
-    <LabelItem
-      key={label.id}
-      label={label}
-      // updateLabel={updateLabel}
-      // deleteLabel={deleteLabel}
-    />
+    <LabelItem key={label.id} labelData={label} />
   ));
 
   return (

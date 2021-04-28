@@ -7,7 +7,10 @@ import Labels from "@components/Labels/Labels";
 import Milestones from "@components/Milestones/Milestones";
 import AddLabelForm from "@components/AddLabelForm/AddLabelForm";
 
-import labelsReducer, { LabelsContext } from "@reducer/labelReducer";
+import labelsReducer, {
+  LabelsContext,
+  initialLabels,
+} from "@reducer/labelReducer";
 
 function App() {
   const [menu, setMenu] = useState("labels");
@@ -16,22 +19,7 @@ function App() {
   const hiddenLabelForm = () => setIsNewForm(false);
   const openLabelForm = () => setIsNewForm(true);
 
-  const [labels, labelsDispatch] = useReducer(labelsReducer, []);
-
-  const updateLabel = async (updatedLabel) => {
-    // try {
-    //   const result = await LabelFetch.update(updatedLabel.id, updatedLabel);
-    //   if (result.ok) {
-    //     setLabels(
-    //       labels.map((label) =>
-    //         label.id === updatedLabel.id ? updatedLabel : label
-    //       )
-    //     );
-    //   }
-    // } catch (error) {
-    //   console.error(`Update Label Error: ${error}`);
-    // }
-  };
+  const [labels, labelsDispatch] = useReducer(labelsReducer, initialLabels);
 
   return (
     <>
@@ -45,7 +33,7 @@ function App() {
                 visible={isNewForm}
                 hiddenLabelForm={hiddenLabelForm}
               />
-              <Labels updateLabel={updateLabel} />
+              <Labels />
             </LabelsContext.Provider>
           </>
         ) : (
