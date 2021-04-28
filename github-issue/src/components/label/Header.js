@@ -12,8 +12,8 @@ function Header() {
     return (
         <>
             <div className="header-container">
-                <LeftTab className="tab-button active">Labels</LeftTab>
-                <RightTab className="tab-button">Milestones</RightTab>
+                <TabButton type="left" className="tab-button active">Labels</TabButton>
+                <TabButton type="right" className="tab-button">Milestones</TabButton>
 
                 <NewLabel className="button-style green" onClick={openNewLabel}>New label</NewLabel>
             </div>
@@ -24,6 +24,14 @@ function Header() {
 }
 
 export default Header;
+
+const TabButton = styled.button`
+  height: 36px;
+  padding: 0 20px;
+  border: 1px solid #e4e7ea;
+  cursor: pointer;
+  border-radius: ${props => (props.type === "left") ? "5px 0 0 5px" : "0 5px 5px 0" };
+`;
 
 const LeftTab = styled.button`
     border-radius: 5px 0 0 5px;
