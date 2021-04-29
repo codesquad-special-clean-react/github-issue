@@ -1,8 +1,6 @@
-import { useState } from "react";
-
 // internal
-import Button from "../components/Button";
-import Label from "../components/Label";
+import Button from '../components/Button';
+import Label from '../components/Label';
 
 const LabelRows = ({ labelData, edit, setEdit, onDelete }) => {
   return (
@@ -18,19 +16,10 @@ const LabelRows = ({ labelData, edit, setEdit, onDelete }) => {
               </td>
               <td>{labels.text}</td>
               <td>
-                <Button
-                  backgroundColor="white"
-                  color="black"
-                  style={{ marginRight: "10px" }}
-                  onClick={() => setEdit(true)}
-                >
+                <Button backgroundColor="white" color="black" style={{ marginRight: '10px' }} onClick={() => setEdit(true)}>
                   Edit
                 </Button>
-                <Button
-                  backgroundColor="white"
-                  color="black"
-                  onClick={() => onDelete(labels.id)}
-                >
+                <Button backgroundColor="white" color="black" onClick={() => onDelete(labels.id)}>
                   Delete
                 </Button>
               </td>

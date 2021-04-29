@@ -1,9 +1,19 @@
-export const reducer = (state, action) => {
-  console.log("reducer", action.type);
+export const initialCreateInfo = {
+  createInput: {
+    labelName: '',
+    desc: '',
+  },
+  randomColor: '#ffffff',
+};
 
+export const reducer = (state, action) => {
   switch (action.type) {
-    case "CREATEINFO":
-      return { labelName: state.labelName, desc: state.desc };
+    case 'CREATEINFO':
+      return {
+        ...state,
+        createInput: { ...state.createInput, [action.labelName]: action.desc },
+        randomColor: action.randomColor,
+      };
     default:
       throw new Error();
   }
