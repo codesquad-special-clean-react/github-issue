@@ -1,5 +1,5 @@
 const URL = {
-  labels: "http://localhost:4000/labels",
+  labels: 'http://localhost:4000/labels',
 };
 
 export const fetchLabelData = async () => {
@@ -10,16 +10,19 @@ export const fetchLabelData = async () => {
 };
 
 export const postLabelData = async (state) => {
+  const { labelName, desc } = state.createInput;
+  const { randomColor } = state;
+
   const res = await fetch(`${URL.labels}`, {
-    method: "POST",
+    method: 'POST',
     headers: {
-      "Content-Type": "application/json",
+      'Content-Type': 'application/json',
     },
     body: JSON.stringify({
-      label: state.inputs.labelName,
-      text: state.inputs.desc,
-      bgColor: state.randomColor,
-      color: "white",
+      label: labelName,
+      text: desc,
+      bgColor: randomColor,
+      color: 'white',
     }),
   });
 
@@ -29,6 +32,6 @@ export const postLabelData = async (state) => {
 
 export const deleteLabelData = async (id) => {
   await fetch(`${URL.labels}/${id}`, {
-    method: "DELETE",
+    method: 'DELETE',
   });
 };
