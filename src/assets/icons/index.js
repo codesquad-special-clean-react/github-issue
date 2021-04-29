@@ -8,6 +8,7 @@ const BookIcon = () => (
     width="28"
     height="28"
     viewBox="0 0 24 24"
+    strokeWidth="1.5"
     stroke={white}
     fill="none"
   >
@@ -25,6 +26,7 @@ const LabelIcon = ({ isSelected = false }) => (
     width="28"
     height="28"
     viewBox="0 0 24 24"
+    strokeWidth="1.5"
     stroke={isSelected ? white : grey}
     fill="none"
   >
@@ -41,6 +43,7 @@ const MilestonesIcon = ({ isSelected = false }) => (
     width="28"
     height="28"
     viewBox="0 0 24 24"
+    strokeWidth="1.5"
     stroke={isSelected ? white : grey}
     fill="none"
   >
@@ -53,4 +56,23 @@ const MilestonesIcon = ({ isSelected = false }) => (
   </svg>
 );
 
-export { LabelIcon, MilestonesIcon, BookIcon };
+const RefreshIcon = ({ color }) => {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      className="icon icon-tabler icon-tabler-refresh"
+      width="28"
+      height="28"
+      viewBox="0 0 24 24"
+      strokeWidth="1.5"
+      stroke={color}
+      fill="none"
+    >
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M20 11a8.1 8.1 0 0 0 -15.5 -2m-.5 -4v4h4" />
+      <path d="M4 13a8.1 8.1 0 0 0 15.5 2m.5 4v-4h-4" />
+    </svg>
+  );
+};
+
+export { LabelIcon, MilestonesIcon, BookIcon, RefreshIcon };

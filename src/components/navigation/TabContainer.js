@@ -12,7 +12,11 @@ const TabContainer = () => {
   return (
     <div className={container}>
       {tabNames.map((tabName) => (
-        <Tab tabName={tabName} isSelected={tabName === selectedTab} />
+        <Tab
+          key={tabName}
+          tabName={tabName}
+          isSelected={tabName === selectedTab}
+        />
       ))}
     </div>
   );

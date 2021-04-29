@@ -1,34 +1,48 @@
 import { createContext, useEffect, useReducer } from 'react';
 import { requestLabels } from '../utils/api';
 
-function reducer(labels, { type, payload }) {
+function reducer(state, { type, payload }) {
+  const { labels } = state;
   switch (type) {
     case 'ADD_LABEL':
       const { newLabel } = payload;
-      return [...labels, newLabel];
+      return { ...state, labels: [...labels, newLabel] };
+    case 'REMOVE_LABEL':
+      const { id } = payload;
+      return {
+        ...state,
+        labels: labels.filter(({ id: labelId }) => id !== labelId),
+      };
     case 'UPDATE_LABELS':
       const { newLabels } = payload;
-      return [...newLabels];
+      return { ...state, labels: [...newLabels] };
+    case 'OPEN_LABEL_FORM':
+      return { ...state, isLabelFormOpen: true };
+    case 'CLOSE_LABEL_FORM':
+      return { ...state, isLabelFormOpen: false };
     default:
       throw new Error('No action is matched');
   }
 }
 
-const initialLabels = [];
+const initialState = {
+  labels: [],
+  isLabelFormOpen: false,
+};
 const LabelContext = createContext();
 
 function LabelContextProvider(props) {
-  const [labels, dispatchLabelContext] = useReducer(reducer, initialLabels);
+  const [labelState, dispatch] = useReducer(reducer, initialState);
 
   useEffect(() => {
     (async function getLabels() {
       const newLabels = await requestLabels();
-      dispatchLabelContext({ type: 'UPDATE_LABELS', payload: { newLabels } });
+      dispatch({ type: 'UPDATE_LABELS', payload: { newLabels } });
     })();
   }, []);
 
   return (
-    <LabelContext.Provider value={{ labels, dispatchLabelContext }}>
+    <LabelContext.Provider value={{ labelState, dispatch }}>
       {props.children}
     </LabelContext.Provider>
   );

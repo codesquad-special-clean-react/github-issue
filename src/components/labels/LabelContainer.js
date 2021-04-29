@@ -1,13 +1,18 @@
 import React from 'react';
 import { LabelContextProvider } from '../../context/LabelContext';
-import LabelForm from './LabelForm';
+import * as Styled from './LabelContainer.style';
 import LabelListContainer from './LabelListContainer';
+import NewLabelButton from './NewLabelButton';
+import NewLabelFormContainer from './NewLabelFormContainer';
 
-const LabelContainer = ({ isLabelFormOpen }) => {
+const LabelContainer = () => {
   return (
     <LabelContextProvider>
-      <LabelForm isLabelFormOpen={isLabelFormOpen} />
-      <LabelListContainer />
+      <Styled.Container>
+        <NewLabelButton />
+        <NewLabelFormContainer />
+        <LabelListContainer />
+      </Styled.Container>
     </LabelContextProvider>
   );
 };

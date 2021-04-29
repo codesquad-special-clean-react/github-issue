@@ -1,19 +1,21 @@
 import React, { useContext } from 'react';
-import { table, total } from './LabelListContainer.module.scss';
 import LabelItem from './LabelItem';
 import { LabelContext } from '../../context/LabelContext';
+import * as Styled from './LabelListContainer.style';
 
 const LabelListContainer = () => {
-  const { labels } = useContext(LabelContext);
+  const { labelState } = useContext(LabelContext);
+  const { labels } = labelState;
 
   return (
-    <table className={table}>
+    <Styled.Table>
       <thead>
-        <tr className={total}>{labels.length} labels</tr>
+        <Styled.TableHeaderRow>{labels.length} labels</Styled.TableHeaderRow>
       </thead>
       <tbody>
         {labels.map(({ id, name, description, color }) => (
           <LabelItem
+            key={id}
             id={id}
             name={name}
             description={description}
@@ -21,7 +23,7 @@ const LabelListContainer = () => {
           />
         ))}
       </tbody>
-    </table>
+    </Styled.Table>
   );
 };
 

@@ -7,10 +7,6 @@ function reducer(state, { type }) {
       return { ...state, selectedTab: tabs.label };
     case 'SELECT_MILESTONE_TAB':
       return { ...state, selectedTab: tabs.milestones };
-    case 'OPEN_LABEL_FORM':
-      return { ...state, isLabelFormOpen: true };
-    case 'CLOSE_LABEL_FORM':
-      return { ...state, isLabelFormOpen: false };
     default:
       throw new Error('No action is matched');
   }
@@ -18,15 +14,14 @@ function reducer(state, { type }) {
 
 const initialState = {
   selectedTab: tabs.label,
-  isLabelFormOpen: false,
 };
 const AppContext = createContext();
 
 function AppContextProvider(props) {
-  const [appState, dispatchAppContext] = useReducer(reducer, initialState);
+  const [appState, disptach] = useReducer(reducer, initialState);
 
   return (
-    <AppContext.Provider value={{ appState, dispatchAppContext }}>
+    <AppContext.Provider value={{ appState, disptach }}>
       {props.children}
     </AppContext.Provider>
   );

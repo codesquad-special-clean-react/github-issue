@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react';
+import { useContext } from 'react';
 import Header from './components/header/Header';
 import Navigation from './components/navigation/Navigation';
 import { TAB_LABEL, TAB_MILESTONES } from './utils/constant';
