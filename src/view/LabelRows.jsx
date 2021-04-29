@@ -4,7 +4,7 @@ import { useState } from "react";
 import Button from "../components/Button";
 import Label from "../components/Label";
 
-const LabelRows = ({ labelData, setEdit, onDelete }) => {
+const LabelRows = ({ labelData, edit, setEdit, onDelete }) => {
   return (
     <>
       {labelData &&

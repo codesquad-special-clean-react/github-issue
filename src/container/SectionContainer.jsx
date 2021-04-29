@@ -32,6 +32,7 @@ const SectionContainer = () => {
         <tbody>
           <LabelRows
             labelData={labelData}
+            edit={edit}
             setEdit={setEdit}
             onDelete={onDelete}
           />
