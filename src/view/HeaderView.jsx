@@ -1,13 +1,14 @@
 //external
-import styled from "styled-components";
+import React from 'react';
+import styled from 'styled-components';
 
-const HeaderView = () => {
+const HeaderView = React.memo(() => {
   return (
     <Header>
       <h1>ISSUES</h1>
     </Header>
   );
-};
+});
 
 export default HeaderView;
 

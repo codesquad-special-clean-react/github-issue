@@ -1,8 +1,9 @@
 // internal
+import React from 'react';
 import Button from '../components/Button';
 import Label from '../components/Label';
 
-const LabelRows = ({ labelData, edit, setEdit, onDelete }) => {
+const LabelRows = React.memo(({ labelData, edit, setEdit, onDelete }) => {
   return (
     <>
       {labelData &&
@@ -28,6 +29,6 @@ const LabelRows = ({ labelData, edit, setEdit, onDelete }) => {
         })}
     </>
   );
-};
+});
 
 export default LabelRows;
