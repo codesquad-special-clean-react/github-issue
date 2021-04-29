@@ -1,41 +1,34 @@
-class LabelFetch {
-  async create(body) {
-    const option = {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(body),
-    };
+import { api } from "@utils/utils";
+import { LABEL_URL } from "@utils/constant";
 
-    const response = await fetch("http://localhost:3001/labels", option);
-    return response.json();
-  }
+const labelFetcher = {
+  async create(body) {
+    try {
+      const response = await api.post(`${LABEL_URL}`, body);
+      if (response.ok) {
+        return response.json();
+      }
+    } catch (error) {
+      console.error(`Label Fetcher Create Error: ${error}`);
+    }
+  },
 
   async read() {
-    const response = await fetch("http://localhost:3001/labels");
-    return response.json();
-  }
-
-  async delete(id) {
-    const option = {
-      method: "DELETE",
-    };
-    const response = await fetch(`http://localhost:3001/labels/${id}`, option);
-    return response.json();
-  }
+    try {
+      const response = await api.get(`${LABEL_URL}`);
+      return response.json();
+    } catch (error) {
+      console.error(`Label Fetcher Read Error: ${error}`);
+    }
+  },
 
   async update(id, body) {
-    const option = {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(body),
-    };
-    const response = await fetch(`http://localhost:3001/labels/${id}`, option);
-    return response.json();
-  }
-}
+    return api.put(`${LABEL_URL}/${id}`, body);
+  },
 
-export default new LabelFetch();
+  delete(id) {
+    return api.delete(`${LABEL_URL}/${id}`);
+  },
+};
+
+export default labelFetcher;

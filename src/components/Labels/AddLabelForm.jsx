@@ -1,16 +1,32 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import styled from "styled-components";
 
-import { getRandomColor } from "../../service/randomColor";
+import { LabelsContext, createLabel } from "@reducer/labelReducer";
+import labelFetcher from "@service/LabelFetch";
+import { getRandomColor } from "@utils/utils";
 
-const AddLabelForm = ({ visible, hiddenLabelForm, createLabel }) => {
-  const [name, setName] = useState("Label preview");
-  const [description, setDescription] = useState("");
-  const [color, setColor] = useState(getRandomColor());
+const lableInitial = {
+  name: "Label preview",
+  description: "",
+  color: getRandomColor(),
+};
+
+const AddLabelForm = ({ visible, hiddenLabelForm }) => {
+  const { labelsDispatch } = useContext(LabelsContext);
+  const [label, setLabel] = useState(lableInitial);
+  const { name, description, color } = label;
 
   if (!visible) return null;
 
-  const onChangeColor = () => setColor(getRandomColor());
+  const onSetLabelProperty = (target, key) => {
+    if (key === "color") {
+      setLabel({ ...label, color: getRandomColor() });
+      return;
+    }
+
+    setLabel({ ...label, [key]: target.value });
+  };
+
   const onCreateLabel = async () => {
     if (!name) {
       console.log("Label name 은 필수 값입니다!!");
@@ -24,28 +40,33 @@ const AddLabelForm = ({ visible, hiddenLabelForm, createLabel }) => {
       color,
     };
 
-    createLabel(body);
-    hiddenLabelForm();
-    setName("");
-    setDescription("");
-    onChangeColor();
+    try {
+      const label = await labelFetcher.create(body);
+      if (label) {
+        labelsDispatch(createLabel(body));
+        hiddenLabelForm();
+        setLabel(lableInitial);
+      }
+    } catch (error) {
+      console.error(`Create Label Error: ${error}`);
+    }
   };
 
   return (
     <FormWrapper>
-      <div>
+      <Preview>
         <Label color={color}>
           <span>{name !== "" ? name : "Label preview"}</span>
         </Label>
-      </div>
-      <div style={{ display: "flex", justifyContent: "space-between" }}>
+      </Preview>
+      <AddFormWrapper>
         <FormBox>
           <SubFormBox>
             <label htmlFor="name">Label name</label>
             <Input
               id="name"
               placeholder="Label name"
-              onChange={(event) => setName(event.target.value)}
+              onChange={({ target }) => onSetLabelProperty(target, "name")}
             />
           </SubFormBox>
           <SubFormBox>
@@ -54,24 +75,29 @@ const AddLabelForm = ({ visible, hiddenLabelForm, createLabel }) => {
               id="description"
               style={{ width: "600px" }}
               placeholder="Description (optoinal)"
-              onChange={(event) => setDescription(event.target.value)}
+              onChange={({ target }) =>
+                onSetLabelProperty(target, "description")
+              }
             />
           </SubFormBox>
           <SubFormBox>
             <label htmlFor="color">color</label>
-            <div style={{ display: "flex" }}>
-              <RefreshBtn color={color} onClick={onChangeColor}>
+            <div>
+              <RefreshBtn
+                color={color}
+                onClick={() => onSetLabelProperty(null, "color")}
+              >
                 ↻
               </RefreshBtn>
               <Input value={color} readOnly />
             </div>
           </SubFormBox>
         </FormBox>
-        <div style={{ display: "flex", marginTop: "30px" }}>
+        <ButtonGroup>
           <CancelBtn onClick={hiddenLabelForm}> Cancel </CancelBtn>
           <CreateBtn onClick={onCreateLabel}>Create label</CreateBtn>
-        </div>
-      </div>
+        </ButtonGroup>
+      </AddFormWrapper>
     </FormWrapper>
   );
 };
@@ -81,6 +107,13 @@ const FormWrapper = styled.div`
   border: 2px solid #f1f3f5;
   background-color: #f8f9fa;
   padding: 1em;
+`;
+
+const Preview = styled.div``;
+
+const AddFormWrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
 `;
 
 const Label = styled.div`
@@ -108,6 +141,10 @@ const SubFormBox = styled.div`
   & > label {
     font-weight: bold;
   }
+
+  & > div {
+    display: flex;
+  }
 `;
 
 const Input = styled.input`
@@ -120,6 +157,10 @@ const RefreshBtn = styled.button`
   background-color: ${(props) => (props.color ? props.color : "white")};
 `;
 
+const ButtonGroup = styled.div`
+  display: flex;
+  margin-top: 2em;
+`;
 const CancelBtn = styled.button`
   border: 1px solid #acacac;
   margin-right: 20px;

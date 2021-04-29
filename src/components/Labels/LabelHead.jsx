@@ -10,4 +10,5 @@ const Head = styled.div`
   padding: 1em;
   font-weight: bold;
 `;
+
 export default LabelHead;

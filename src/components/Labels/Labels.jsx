@@ -1,39 +1,15 @@
-import React, { useEffect } from "react";
-import styled from "styled-components";
+import React from "react";
 
-import LabelHead from "./LabelHead";
-import LabelItem from "./LabelItem";
-import LabelFetch from "../../service/LabelFetch.js";
+import AddLabelForm from "@labels/AddLabelForm";
+import LabelList from "@labels/LabelList";
 
-const Labels = ({ labels, setLabels, updateLabel, deleteLabel }) => {
-  useEffect(() => {
-    const fetchData = async () => {
-      const datas = await LabelFetch.read();
-      setLabels(datas);
-    };
-    fetchData();
-  }, [setLabels]);
-
-  const labelList = labels.map((label) => (
-    <LabelItem
-      key={label.id}
-      label={label}
-      updateLabel={updateLabel}
-      deleteLabel={deleteLabel}
-    />
-  ));
-
+const Labels = ({ isNewForm, hiddenLabelForm }) => {
   return (
-    <LabelsWrapper>
-      <LabelHead labels={labels} />
-      <ul>{labelList}</ul>
-    </LabelsWrapper>
+    <>
+      <AddLabelForm visible={isNewForm} hiddenLabelForm={hiddenLabelForm} />
+      <LabelList />
+    </>
   );
 };
-
-const LabelsWrapper = styled.div`
-  margin-top: 1em;
-  border: 2px solid #f1f3f5;
-`;
 
 export default Labels;
