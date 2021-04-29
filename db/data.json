@@ -1,3 +1,32 @@
 {
-  "labels": []
+  "labels": [
+    {
+      "label": "asdfasfasf",
+      "text": "asdfsafsafsafasfasfasfsa",
+      "bgColor": "#756932",
+      "color": "white",
+      "id": 1
+    },
+    {
+      "label": "aasdfsafasfdsa",
+      "text": "4235325435535",
+      "bgColor": "#a97536",
+      "color": "white",
+      "id": 2
+    },
+    {
+      "label": "asdf3543454",
+      "text": "asdsadfsdf",
+      "bgColor": "#16d751",
+      "color": "white",
+      "id": 3
+    },
+    {
+      "label": "ㅁㄴㅇㄹㄴㅁㄹㄴ",
+      "text": "23434243232",
+      "bgColor": "#9632f3",
+      "color": "white",
+      "id": 4
+    }
+  ]
 }
