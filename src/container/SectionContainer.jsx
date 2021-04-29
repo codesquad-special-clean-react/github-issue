@@ -1,10 +1,12 @@
 // external
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import styled from "styled-components";
 
 //internal
 import LabelRows from "../view/LabelRows";
 import { fetchLabelData, deleteLabelData } from "../api/LabelApi";
+
+import { CreateInfoState } from "../Main";
 
 const SectionContainer = () => {
   const [labelData, setLabelData] = useState();
@@ -21,11 +23,23 @@ const SectionContainer = () => {
     deleteLabelData(id);
   };
 
+  const dispatch = useContext(CreateInfoState);
+
   return (
     <SectionWrapper>
       <table border="1" width="1000px" align="center">
         <thead>
-          <th colSpan="3" align="left">
+          <th
+            colSpan="3"
+            align="left"
+            onClick={() =>
+              dispatch({
+                type: "CREATEINFO",
+                labelName: "변경",
+                desc: "변경1",
+              })
+            }
+          >
             {labelData?.length} labels
           </th>
         </thead>
