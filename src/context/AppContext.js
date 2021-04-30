@@ -18,10 +18,10 @@ const initialState = {
 const AppContext = createContext();
 
 function AppContextProvider(props) {
-  const [appState, disptach] = useReducer(reducer, initialState);
+  const [appState, dispatch] = useReducer(reducer, initialState);
 
   return (
-    <AppContext.Provider value={{ appState, disptach }}>
+    <AppContext.Provider value={{ appState, dispatch }}>
       {props.children}
     </AppContext.Provider>
   );

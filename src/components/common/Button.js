@@ -1,7 +1,7 @@
 import React from 'react';
 import * as Styled from './Button.style';
 
-const Button = ({ text, isPrimary = false, isDisabled = false }) => {
+const Button = ({ buttonTitle, isPrimary = false, isDisabled = false }) => {
   return (
     <Styled.Button
       type="button"
@@ -9,7 +9,7 @@ const Button = ({ text, isPrimary = false, isDisabled = false }) => {
       isDisabled={isDisabled}
       disabled={isDisabled}
     >
-      {text}
+      {buttonTitle}
     </Styled.Button>
   );
 };

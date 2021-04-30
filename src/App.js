@@ -4,8 +4,10 @@ import Navigation from './components/navigation/Navigation';
 import { TAB_LABEL, TAB_MILESTONES } from './utils/constant';
 import { body } from './App.module.scss';
 import LabelContainer from './components/labels/LabelContainer';
-import MilestonesContainer from './components/milestones/MilestonesContainer';
+import MilestonesContainer from './components/milestones/MilestoneContainer';
 import { AppContext } from './context/AppContext';
+import { LabelContextProvider } from './context/LabelContext';
+import { MilestoneContextProvider } from './context/MilestoneContext';
 
 function App() {
   const { appState } = useContext(AppContext);
@@ -14,9 +16,17 @@ function App() {
   const SelectedContainer = (() => {
     switch (selectedTab) {
       case TAB_LABEL:
-        return <LabelContainer />;
+        return (
+          <LabelContextProvider>
+            <LabelContainer />
+          </LabelContextProvider>
+        );
       case TAB_MILESTONES:
-        return <MilestonesContainer />;
+        return (
+          <MilestoneContextProvider>
+            <MilestonesContainer />
+          </MilestoneContextProvider>
+        );
       default:
         throw new Error('Any tab is selected.');
     }

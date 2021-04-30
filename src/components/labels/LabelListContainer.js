@@ -1,29 +1,25 @@
 import React, { useContext } from 'react';
 import LabelItem from './LabelItem';
 import { LabelContext } from '../../context/LabelContext';
-import * as Styled from './LabelListContainer.style';
+import TableContainer from '../common/TableContainer';
 
 const LabelListContainer = () => {
   const { labelState } = useContext(LabelContext);
   const { labels } = labelState;
 
   return (
-    <Styled.Table>
+    <TableContainer>
       <thead>
-        <Styled.TableHeaderRow>{labels.length} labels</Styled.TableHeaderRow>
+        <tr>
+          <th>{labels.length} labels</th>
+        </tr>
       </thead>
       <tbody>
-        {labels.map(({ id, name, description, color }) => (
-          <LabelItem
-            key={id}
-            id={id}
-            name={name}
-            description={description}
-            color={color}
-          />
+        {labels.map((label) => (
+          <LabelItem key={label.id} label={label} />
         ))}
       </tbody>
-    </Styled.Table>
+    </TableContainer>
   );
 };
 

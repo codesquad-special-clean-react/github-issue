@@ -1,34 +1,59 @@
 {
-    "labels": [
-      {
-        "id": 1,
-        "name": "bug",
-        "description": "자바초보 입니다. 자바를 배우려고 하면 객체지향 프로그래밍 언어부터 알아야 한다고 합니다. 이부분이 잘 어렵네요.",
-        "color": "#EC407A"
-      },
-      {
-        "id": 2,
-        "name": "feature",
-        "description": "스크립트 언어라고 알고 있는데요. OOP, FP방식 중 어떤 것이 더 어울리고, 실제 구현 가능할까요?",
-        "color": "#FFCA28"
-      },
-      {
-        "name": "good first issue",
-        "description": "제가 무엇을 모르는지 저도 잘 모르겠답니다...\n알려주세요",
-        "color": "#7CB342",
-        "id": 3
-      },
-      {
-        "name": "help wanted",
-        "description": "2234234234",
-        "color": "#7986CB",
-        "id": 4
-      },
-      {
-        "name": "invalid",
-        "description": "234234234234234234",
-        "color": "#42A5F5",
-        "id": 5
-      }
-    ]
-  }
+  "labels": [
+    {
+      "id": 2,
+      "name": "feature",
+      "description": "스크립트 언어라고 알고 있는데요. OOP, FP방식 중 어떤 것이 더 어울리고, 실제 구현 가능할까요?",
+      "color": "#FFCA28"
+    },
+    {
+      "name": "good first issue",
+      "description": "제가 무엇을 모르는지 저도 잘 모르겠답니다...\n알려주세요",
+      "color": "#7CB342",
+      "id": 3
+    },
+    {
+      "name": "help wanted",
+      "description": "2234234234",
+      "color": "#7986CB",
+      "id": 4
+    },
+    {
+      "name": "invalid",
+      "description": "234234234234234234",
+      "color": "#42A5F5",
+      "id": 5
+    },
+    {
+      "name": "test",
+      "description": "test",
+      "color": "#f53fb6",
+      "id": 1398963
+    },
+    {
+      "name": "hotfix",
+      "description": "hotfix",
+      "color": "#3722d5",
+      "id": 1640349
+    }
+  ],
+  "milestones": [
+    {
+      "id": 1,
+      "title": "스프린트2",
+      "description": "설명1",
+      "isOpen": true,
+      "totalCount": 3,
+      "doneCount": 1
+    },
+    {
+      "id": 2,
+      "title": "스프린트3",
+      "date": "June 05, 2021",
+      "description": "설명2",
+      "isOpen": true,
+      "totalCount": 0,
+      "doneCount": 0
+    }
+  ]
+}

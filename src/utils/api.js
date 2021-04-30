@@ -1,3 +1,5 @@
+const SERVER_URL = 'http://localhost:3001';
+
 async function request(method, url, body, headers) {
   const response = await fetch(url, { method, body, headers });
   const { status } = response;
@@ -39,27 +41,32 @@ async function deleteRequest(url) {
 }
 
 async function requestLabels() {
-  const url = `http://localhost:3000/labels`;
+  const url = `${SERVER_URL}/labels`;
   return await getRequest(url);
 }
 
 async function requestAddLabel(id, name, description, color) {
-  const url = `http://localhost:3000/labels`;
+  const url = `${SERVER_URL}/labels`;
   const params = { name, description, color, id };
   const body = JSON.stringify(params);
   return await postRequest(url, body);
 }
 
 async function requestUpdateLabel(id, name, description, color) {
-  const url = `http://localhost:3000/labels/${id}`;
+  const url = `${SERVER_URL}/labels/${id}`;
   const params = { name, description, color };
   const body = JSON.stringify(params);
   return await putRequest(url, body);
 }
 
 async function requestDeleteLabel(id) {
-  const url = `http://localhost:3000/labels/${id}`;
+  const url = `${SERVER_URL}/labels/${id}`;
   return await deleteRequest(url);
+}
+
+async function requestMilestones(id) {
+  const url = `${SERVER_URL}/milestones`;
+  return await getRequest(url);
 }
 
 export {
@@ -67,4 +74,5 @@ export {
   requestAddLabel,
   requestUpdateLabel,
   requestDeleteLabel,
+  requestMilestones,
 };

@@ -4,18 +4,15 @@ import { requestLabels } from '../utils/api';
 function reducer(state, { type, payload }) {
   const { labels } = state;
   switch (type) {
-    case 'ADD_LABEL':
-      const { newLabel } = payload;
-      return { ...state, labels: [...labels, newLabel] };
+    case 'UPDATE_LABELS':
+      const { newLabels } = payload;
+      return { ...state, labels: [...newLabels] };
     case 'REMOVE_LABEL':
       const { id } = payload;
       return {
         ...state,
         labels: labels.filter(({ id: labelId }) => id !== labelId),
       };
-    case 'UPDATE_LABELS':
-      const { newLabels } = payload;
-      return { ...state, labels: [...newLabels] };
     case 'OPEN_LABEL_FORM':
       return { ...state, isLabelFormOpen: true };
     case 'CLOSE_LABEL_FORM':

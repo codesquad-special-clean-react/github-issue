@@ -8,6 +8,8 @@ const color = {
   lightGreyBackground: '#F6F8FA',
   skyBlue: '#BFD4F2',
   green: '#2AB049',
+  red: '#D1414D',
+  blue: '#1066D6',
 };
 
 export default color;

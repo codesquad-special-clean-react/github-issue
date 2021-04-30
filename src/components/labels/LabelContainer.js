@@ -1,19 +1,18 @@
-import React from 'react';
-import { LabelContextProvider } from '../../context/LabelContext';
-import * as Styled from './LabelContainer.style';
+import React, { useContext } from 'react';
+import { LabelContext } from '../../context/LabelContext';
 import LabelListContainer from './LabelListContainer';
-import NewLabelButton from './NewLabelButton';
 import NewLabelFormContainer from './NewLabelFormContainer';
+import Container from '../common/Container';
 
 const LabelContainer = () => {
+  const { dispatch } = useContext(LabelContext);
+  const handleNewLabelButtonClick = () => dispatch({ type: 'OPEN_LABEL_FORM' });
+
   return (
-    <LabelContextProvider>
-      <Styled.Container>
-        <NewLabelButton />
-        <NewLabelFormContainer />
-        <LabelListContainer />
-      </Styled.Container>
-    </LabelContextProvider>
+    <Container buttonTitle="New Label" handleClick={handleNewLabelButtonClick}>
+      <NewLabelFormContainer />
+      <LabelListContainer />
+    </Container>
   );
 };
 

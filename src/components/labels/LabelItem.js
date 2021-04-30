@@ -4,15 +4,12 @@ import { requestDeleteLabel, requestUpdateLabel } from '../../utils/api';
 import * as Styled from './LabelItem.style';
 import { LabelContext } from '../../context/LabelContext';
 
-const LabelItem = ({ id, name, description, color }) => {
+const LabelItem = ({ label }) => {
+  const { id, name, description, color } = label;
   const { dispatch } = useContext(LabelContext);
   const [isOpen, setOpen] = useState(false);
 
-  const handleEditButton = () => {
-    setOpen(true);
-
-    console.log(id, name, description, color);
-  };
+  const handleEditButton = () => setOpen(true);
 
   const handleRemoveLabelForm = () => setOpen(false);
 

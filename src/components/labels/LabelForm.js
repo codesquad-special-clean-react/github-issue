@@ -87,11 +87,11 @@ const LabelForm = ({
       </Styled.InputContainer>
       <Styled.ButtonContainer>
         <div className="cancel_button button" onClick={handleCancel}>
-          <Button text="Cancel" />
+          <Button buttonTitle="Cancel" />
         </div>
         <div className="create_button button" onClick={handleSubmitForm}>
           <Button
-            text={buttonTitle}
+            buttonTitle={buttonTitle}
             isPrimary={true}
             isDisabled={!labelName.length}
           />
