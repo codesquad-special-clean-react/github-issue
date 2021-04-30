@@ -18,7 +18,6 @@ const initialCreateInfo = {
 
 const Main = () => {
   const [createInfoState, dispatch] = useReducer(reducer, initialCreateInfo);
-  console.log(createInfoState);
   return (
     <CreateInfoState.Provider value={(createInfoState, dispatch)}>
       <ThemeProvider theme={{}}>
