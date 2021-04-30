@@ -1,5 +1,5 @@
 const URL = {
-  labels: "http://localhost:4000/labels",
+  labels: 'http://localhost:4000/labels',
 };
 
 export const fetchLabelData = async () => {
