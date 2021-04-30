@@ -10,28 +10,35 @@ export const fetchLabelData = async () => {
 };
 
 export const postLabelData = async (state) => {
-  const { labelName, desc } = state.createInput;
-  const { randomColor } = state;
+  try {
+    const res = await fetch(`${URL.labels}`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        label: state.inputs.labelName,
+        text: state.inputs.desc,
+        bgColor: state.randomColor,
+        color: "white",
+      }),
+    });
 
-  const res = await fetch(`${URL.labels}`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-      label: labelName,
-      text: desc,
-      bgColor: randomColor,
-      color: 'white',
-    }),
-  });
-
-  const result = await res.json();
-  return result;
+    const result = await res.json();
+    return result;
+  } catch (err) {
+    throw new Error('post error');
+  }
 };
 
 export const deleteLabelData = async (id) => {
-  await fetch(`${URL.labels}/${id}`, {
-    method: 'DELETE',
-  });
+  try {
+    await fetch(`${URL.labels}/${id}`, {
+      method: "DELETE",
+    });
+  }
+  catch(err) {
+    throw new Error('delete error');
+  }
+  
 };

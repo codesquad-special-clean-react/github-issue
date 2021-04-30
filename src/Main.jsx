@@ -14,8 +14,6 @@ export const CreateInfoDispatch = createContext(null);
 
 const Main = () => {
   const [createInfoState, dispatch] = useReducer(reducer, initialCreateInfo);
-
-  console.log(createInfoState);
   return (
     <CreateInfoState.Provider value={createInfoState}>
       <CreateInfoDispatch.Provider value={dispatch}>
