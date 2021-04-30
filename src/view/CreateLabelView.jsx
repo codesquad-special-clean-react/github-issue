@@ -1,4 +1,5 @@
 // external
+import React from 'react';
 import styled from 'styled-components';
 
 // internal
@@ -6,7 +7,7 @@ import Button from '../components/Button';
 import Label from '../components/Label';
 import Input from '../components/Input';
 
-const CreateLabelView = ({ createInfoState, setLabelOpen, setRandomColor, onChange, onSubmit }) => {
+const CreateLabelView = React.memo(({ createInfoState, setLabelOpen, setRandomColor, onChange, onSubmit }) => {
   const { labelName, desc } = createInfoState.createInput;
   const { randomColor } = createInfoState;
 
@@ -66,7 +67,7 @@ const CreateLabelView = ({ createInfoState, setLabelOpen, setRandomColor, onChan
       </div>
     </>
   );
-};
+});
 
 export default CreateLabelView;
 

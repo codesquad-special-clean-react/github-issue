@@ -3,7 +3,7 @@ export const initialCreateInfo = {
     labelName: '',
     desc: '',
   },
-  randomColor: '#ffffff',
+  randomColor: 'color 선택',
 };
 
 export const reducer = (state, action) => {

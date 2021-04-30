@@ -31,7 +31,7 @@ const NavContainer = () => {
     });
   }, []);
 
-  const onSubmit = (e) => {
+  const onSubmit = () => {
     postLabelData(createInfoState);
   };
 
