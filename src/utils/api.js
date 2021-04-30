@@ -64,9 +64,14 @@ async function requestDeleteLabel(id) {
   return await deleteRequest(url);
 }
 
-async function requestMilestones(id) {
+async function requestMilestones() {
   const url = `${SERVER_URL}/milestones`;
   return await getRequest(url);
+}
+
+async function requestDeleteMilestone(id) {
+  const url = `${SERVER_URL}/milestones/${id}`;
+  return await deleteRequest(url);
 }
 
 export {
@@ -75,4 +80,5 @@ export {
   requestUpdateLabel,
   requestDeleteLabel,
   requestMilestones,
+  requestDeleteMilestone,
 };

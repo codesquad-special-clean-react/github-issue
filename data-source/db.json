@@ -39,16 +39,16 @@
   ],
   "milestones": [
     {
-      "id": 1,
-      "title": "스프린트2",
+      "id": 3,
+      "title": "스프린트3",
       "description": "설명1",
       "isOpen": true,
       "totalCount": 3,
       "doneCount": 1
     },
     {
-      "id": 2,
-      "title": "스프린트3",
+      "id": 4,
+      "title": "스프린트4",
       "date": "June 05, 2021",
       "description": "설명2",
       "isOpen": true,

@@ -1,22 +1,22 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { CalendarIcon } from '../../assets/icons';
 import Progressbar from '../common/Progressbar';
 import * as Styled from './MilestoneItem.style';
 import color from '../../utils/color';
+import { requestDeleteMilestone } from '../../utils/api';
+import { MilestoneContext } from '../../context/MilestoneContext';
 
 const MilestoneItem = ({ milestone }) => {
-  const {
-    id,
-    title,
-    date,
-    description,
-    isOpen,
-    totalCount,
-    doneCount,
-  } = milestone;
+  const { id, title, date, description, totalCount, doneCount } = milestone;
+  const { dispatch } = useContext(MilestoneContext);
 
   const getPercentage = () =>
     !totalCount ? 0 : Math.round((doneCount / totalCount) * 100);
+
+  const handleDeleteMilestone = async () => {
+    await requestDeleteMilestone(id);
+    dispatch({ type: 'REMOVE_MILESTONE', payload: { id } });
+  };
 
   return (
     <tr>
@@ -38,7 +38,9 @@ const MilestoneItem = ({ milestone }) => {
         <div>
           <Styled.Button color={color.blue}>Edit</Styled.Button>
           <Styled.Button color={color.blue}>Cancel</Styled.Button>
-          <Styled.Button color={color.red}>Remove</Styled.Button>
+          <Styled.Button color={color.red} onClick={handleDeleteMilestone}>
+            Remove
+          </Styled.Button>
         </div>
       </Styled.Td>
     </tr>
