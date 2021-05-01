@@ -1,7 +1,7 @@
 import "../../css/LabelList.css";
 import React, {useState, useEffect} from "react";
 import LabelItem from "./LabelItem";
-import {fetchLabels, deteleLabel} from "../../api/LabelApi";
+import {fetchLabels, addLabels,  deteleLabel} from "../../api/LabelApi";
 import Header from "./Header";
 import styled from "styled-components";
 
@@ -17,8 +17,8 @@ function LabelList() {
             })
     }
 
-    const addabelAPI = (url, id) => {
-        deteleLabel(url, id)
+    const addLabelAPI = (url, id) => {
+        addLabels(url, id)
             .then((data) => {
                 getLabels();
             })
@@ -37,14 +37,14 @@ function LabelList() {
 
     return (
         <LabelListContainer>
-            <Header/>
+            <Header addLabelAPI={addLabelAPI}/>
             <ListUl className="label-list">
                 <ListLi>
                     <div>
                         <b>{labelsLength} labels</b>
                     </div>
                 </ListLi>
-                <LabelItem labels={labels} addabelAPI={addabelAPI} deleteLabel={deleteLabelAPI}/>
+                <LabelItem labels={labels} addLabelAPI={addLabelAPI} deleteLabel={deleteLabelAPI}/>
             </ListUl>
         </LabelListContainer>
     );

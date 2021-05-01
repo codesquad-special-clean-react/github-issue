@@ -1,10 +1,10 @@
 import "../../css/Header.css";
 import "../../css/button.css";
 import React, {useState} from 'react';
-import LabelCustom from "../label/LabelCustom"
+import NewLabel from "./NewLabel"
 import styled from 'styled-components'
 
-function Header() {
+function Header({addLabelAPI}) {
     const [labelInputShow, setLabelInputShow] = useState(false);
 
     const openNewLabel = () => setLabelInputShow(!labelInputShow);
@@ -12,13 +12,13 @@ function Header() {
     return (
         <>
             <div className="header-container">
-                <TabButton type="left" className="tab-button active">Labels</TabButton>
-                <TabButton type="right" className="tab-button">Milestones</TabButton>
+                <TabButton type="left" className="active">Labels</TabButton>
+                <TabButton type="right" className="">Milestones</TabButton>
 
-                <NewLabel className="button-style green" onClick={openNewLabel}>New label</NewLabel>
+                <NewLabelButton className="button-style green" onClick={openNewLabel}>New label</NewLabelButton>
             </div>
 
-            {labelInputShow && <LabelCustom openNewLabel={openNewLabel}/>}
+            {labelInputShow && <NewLabel openNewLabel={openNewLabel} addLabelAPI={addLabelAPI}/>}
         </>
     );
 }
@@ -41,7 +41,7 @@ const RightTab = styled.button`
     border-radius: 0 5px 5px 0;
 `;
 
-const NewLabel = styled.button`
+const NewLabelButton = styled.button`
     height: 36px;
     float: right;
  `;

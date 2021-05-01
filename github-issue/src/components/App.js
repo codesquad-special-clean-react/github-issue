@@ -1,11 +1,11 @@
 import '../css/App.css';
-import Title from '../components/Title'
+import PageTitle from './PageTitle'
 import LabelList from './label/LabelList'
 
 function App() {
   return (
     <>
-        <Title/>
+        <PageTitle/>
         <LabelList/>
     </>
   );

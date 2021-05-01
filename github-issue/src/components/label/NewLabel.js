@@ -6,9 +6,8 @@ import "../../css/Header.css";
 import img from "../../images/random-icon.png";
 import React, {useState, useEffect} from "react";
 import styled from 'styled-components';
-import {addLabels, deteleLabel} from "../../api/LabelApi";
 
-const LabelCustom = ({openNewLabel}) => {
+const NewLabel = ({openNewLabel, addLabelAPI}) => {
     const [newLabelInfo, setNewLabelInfo] = useState({
         name: "",
         desc: "",
@@ -62,8 +61,7 @@ const LabelCustom = ({openNewLabel}) => {
             "color": newLabelInfo.color,
         };
 
-        addLabels('http://localhost:3001/labels', param);
-
+        addLabelAPI('http://localhost:3001/labels', param);
     }
 
     const disabledNewLabelBtn = () => {
@@ -115,14 +113,13 @@ const LabelCustom = ({openNewLabel}) => {
     );
 };
 
-export default LabelCustom;
+export default NewLabel;
 
 const ErrorMessage = styled.span`
     font-size: 16px;
     font-weight: bold;
     color: #d85656;
 `;
-
 
 const Button = styled.button`
     margin-right: 10px;
