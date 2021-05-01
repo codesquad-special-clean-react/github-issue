@@ -9,12 +9,27 @@
   }
 }
 
-@mixin issue-table-tr {
+@mixin table {
+  border: 1px solid lightgray;
+  width: 100%;
+}
+
+@mixin thead {
+  text-align: left;
+  font-weight: 600;
+  background-color: #f6f8fa;
+}
+
+@mixin table-tr {
   padding-left: 1rem;
   border: 1px solid lightgray;
   display: flex;
   align-items: center;
   min-height: 4rem;
+}
+
+@mixin issue-table-tr {
+  @include table-tr;
 
   td {
     display: flex;

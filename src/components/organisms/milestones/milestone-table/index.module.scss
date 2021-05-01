@@ -1,0 +1,20 @@
+@import "../../../../styles";
+
+.table {
+  @include table;
+}
+
+.thead {
+  @include thead;
+}
+
+.tr {
+  @include table-tr;
+
+  td {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    height: 100%;
+  }
+}
