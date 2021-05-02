@@ -5,6 +5,10 @@ import { PATHS } from "../../../constants/paths";
 const Toolbar = ({ setOpenNewLabel }) => {
   const history = useHistory();
   const { pathname } = useLocation();
+  const eventMap = {
+    [PATHS.MILESTONES_PATH]: () => history.push(PATHS.NEW_MILESTONE_PATH),
+    [PATHS.LABELS_PATH]: () => setOpenNewLabel(true),
+  };
   const buttonTextMap = {
     [PATHS.LABELS_PATH]: "New label",
     [PATHS.MILESTONES_PATH]: "New milestones",
@@ -38,7 +42,7 @@ const Toolbar = ({ setOpenNewLabel }) => {
 
       <button
         className={styles["new-label"]}
-        onClick={() => setOpenNewLabel(true)}
+        onClick={() => eventMap[pathname]()}
       >
         {buttonTextMap[pathname]}
       </button>
