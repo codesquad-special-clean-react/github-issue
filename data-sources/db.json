@@ -54,6 +54,63 @@
       "backgroundColor": "#26459F",
       "color": "#fff",
       "id": 16
+    },
+    {
+      "name": "213",
+      "description": "123",
+      "backgroundColor": "#A495ED",
+      "color": "#fff",
+      "id": 17
+    }
+  ],
+  "milestones": [
+    {
+      "title": "test123",
+      "dueDate": "",
+      "description": "est123asdsad",
+      "closedIssueCount": 6,
+      "openedIssueCount": 6,
+      "id": 1
+    },
+    {
+      "title": "test",
+      "dueDate": "",
+      "description": "213",
+      "closedIssueCount": 0,
+      "openedIssueCount": 2,
+      "id": 5
+    },
+    {
+      "title": "test123",
+      "dueDate": "",
+      "description": "123123asd",
+      "closedIssueCount": 9,
+      "openedIssueCount": 9,
+      "id": 6
+    },
+    {
+      "title": "test12345923111",
+      "dueDate": "2021-05-21",
+      "description": "test124354",
+      "closedIssueCount": 3,
+      "openedIssueCount": 2,
+      "id": 7
+    },
+    {
+      "title": "tes123",
+      "dueDate": "2021-05-19",
+      "description": "test123sadasdsazxczxc",
+      "closedIssueCount": 8,
+      "openedIssueCount": 7,
+      "id": 8
+    },
+    {
+      "title": "zz123",
+      "dueDate": "",
+      "description": "123",
+      "closedIssueCount": 8,
+      "openedIssueCount": 3,
+      "id": 9
     }
   ]
 }
