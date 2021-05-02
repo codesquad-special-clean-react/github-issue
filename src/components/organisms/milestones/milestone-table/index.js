@@ -2,7 +2,7 @@ import styles from "./index.module.scss";
 import { useContext } from "react";
 import { MilestonesContext } from "../../../pages/milestones/context";
 import { deleteMilestone } from "../../../../apis/milestones";
-import { setMilestones } from "../../../../reducers/milestones";
+import { removeMilestone } from "../../../../reducers/milestones";
 import { useHistory } from "react-router-dom";
 import { PATHS } from "../../../../constants/paths";
 
@@ -22,7 +22,7 @@ const MilestoneTable = () => {
   const handleClickDelButton = (id) => () => {
     deleteMilestone(id)
       .then(() => {
-        dispatch(setMilestones(milestones.filter((m) => m.id !== id)));
+        dispatch(removeMilestone(id));
       })
       .catch((e) => {
         alert(e.message);
