@@ -6,13 +6,15 @@ import Toolbar from "../../organisms/toolbar";
 import { PATHS } from "../../../constants/paths";
 import { Switch, Route, Redirect, useLocation } from "react-router-dom";
 import { ROUTES } from "../../../routes";
+import { MILESTONE_EDIT_URL_PATTERN } from "../../../utils/regex";
 
 const Index = () => {
   const [openNewLabel, setOpenNewLabel] = useState(false);
   const { pathname } = useLocation();
-  const isToolbar = [PATHS.LABELS_PATH, PATHS.MILESTONES_PATH].includes(
-    pathname
-  );
+
+  const isToolbar =
+    [PATHS.LABELS_PATH, PATHS.MILESTONES_PATH].includes(pathname) ||
+    MILESTONE_EDIT_URL_PATTERN.test(pathname);
 
   return (
     <main className={styles.index}>
