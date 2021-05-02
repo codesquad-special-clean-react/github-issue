@@ -1,4 +1,3 @@
-import "../../css/button.css";
 import img from "../../images/random-icon.png";
 import React, {useState, useEffect} from "react";
 import styled from 'styled-components';
@@ -163,6 +162,11 @@ const Button = styled.button`
 
     &: last-child {
         margin-right: 0;
+    }
+    
+    &.disabled {
+		background-color: #94d3a2;
+		color: #ffffff;
     }
 
     ${props => {

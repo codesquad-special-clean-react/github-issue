@@ -1,4 +1,3 @@
-import "../../css/button.css";
 import React, {useState} from 'react';
 import NewLabel from "./NewLabel"
 import styled from 'styled-components'
@@ -10,12 +9,9 @@ function Header({addLabelAPI}) {
 
 	return (
 		<>
-			<div className="header-container">
-				<TabButton type="left" className="active">Labels</TabButton>
-				<TabButton type="right" className="">Milestones</TabButton>
-
-				<NewLabelButton className="button-style green" onClick={openNewLabel}>New label</NewLabelButton>
-			</div>
+			<TabButton type="left" className="active">Labels</TabButton>
+			<TabButton type="right" className="">Milestones</TabButton>
+			<NewLabelButton color="green" onClick={openNewLabel}>New label</NewLabelButton>
 
 			{labelInputShow && <NewLabel insertType="new" openNewLabel={openNewLabel} addLabelAPI={addLabelAPI}/>}
 		</>
@@ -50,11 +46,20 @@ const NewLabelButton = styled.button`
     height: 36px;
     float: right;
     
-    &.green {
-		background-color: #31c553;
-		color: #ffffff;
-		font-weight: bold;
-		float: right;
-    }
+    padding: 0 20px;
+    border-radius: 5px;
+    border: 1px solid #e4e7ea;
+    cursor: pointer;
+    
+    ${ props => {
+		if (props.color === "green") {
+			return `
+				background-color: #31c553;
+				color: #ffffff;
+				font-weight: bold;
+				float: right;
+			`
+		}
+	}}
  `;
 
