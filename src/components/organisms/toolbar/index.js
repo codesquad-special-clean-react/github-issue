@@ -6,7 +6,8 @@ const Toolbar = ({ setOpenNewLabel }) => {
   const history = useHistory();
   const { pathname } = useLocation();
   const eventMap = {
-    [PATHS.MILESTONES_PATH]: () => history.push(PATHS.NEW_MILESTONE_PATH),
+    [PATHS.MILESTONES_PATH]: () =>
+      history.push(`${PATHS.MILESTONES_PATH}${PATHS.NEW_MILESTONE_PATH}`),
     [PATHS.LABELS_PATH]: () => setOpenNewLabel(true),
   };
   const buttonTextMap = {

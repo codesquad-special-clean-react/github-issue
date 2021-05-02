@@ -3,6 +3,8 @@ import { useContext } from "react";
 import { MilestonesContext } from "../../../pages/milestones/context";
 import { deleteMilestone } from "../../../../apis/milestones";
 import { setMilestones } from "../../../../reducers/milestones";
+import { useHistory } from "react-router-dom";
+import { PATHS } from "../../../../constants/paths";
 
 const MilestoneTable = () => {
   const {
@@ -14,6 +16,7 @@ const MilestoneTable = () => {
       return acc + milestone[key];
     }, 0);
   };
+  const history = useHistory();
   const openedIssueCount = getIssueCount("openedIssueCount");
   const closedIssueCount = getIssueCount("closedIssueCount");
   const handleClickDelButton = (id) => () => {
@@ -24,6 +27,9 @@ const MilestoneTable = () => {
       .catch((e) => {
         alert(e.message);
       });
+  };
+  const handleClickEditButton = (id) => () => {
+    history.push(`${PATHS.MILESTONES_PATH}/${id}/edit`);
   };
   return (
     <table className={styles.table}>
@@ -75,7 +81,12 @@ const MilestoneTable = () => {
                       <span>{closedIssueCount} closed</span>
                     </div>
                     <div className={styles["button-group"]}>
-                      <button className={styles.edit}>Edit</button>
+                      <button
+                        className={styles.edit}
+                        onClick={handleClickEditButton(id)}
+                      >
+                        Edit
+                      </button>
                       <button className={styles.edit}>Close</button>
                       <button
                         className={styles.delete}

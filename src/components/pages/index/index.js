@@ -20,11 +20,16 @@ const Index = () => {
       <Main>
         {isToolbar && <Toolbar setOpenNewLabel={setOpenNewLabel} />}
         <Switch>
-          {ROUTES.map(({ path, component: Component }) => {
+          {ROUTES.map(({ path, component: Component, childRoutes }) => {
             return (
               <Route
                 path={path}
-                render={() => <Component openNewLabel={openNewLabel} />}
+                render={() => (
+                  <Component
+                    openNewLabel={openNewLabel}
+                    childRoutes={childRoutes}
+                  />
+                )}
                 key={path}
               />
             );

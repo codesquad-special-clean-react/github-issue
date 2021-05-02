@@ -5,7 +5,15 @@ import MilestoneForm from "../components/organisms/milestones/milestone-form";
 
 export const ROUTES = [
   { path: PATHS.LABELS_PATH, component: Labels },
-  { path: PATHS.NEW_MILESTONE_PATH, component: MilestoneForm },
-  { path: PATHS.EDIT_MILESTONE_PATH, component: MilestoneForm },
-  { path: PATHS.MILESTONES_PATH, component: Milestones },
+  {
+    path: PATHS.MILESTONES_PATH,
+    component: Milestones,
+    childRoutes: [
+      { path: PATHS.EDIT_MILESTONE_PATH, component: MilestoneForm },
+      {
+        path: PATHS.NEW_MILESTONE_PATH,
+        component: MilestoneForm,
+      },
+    ],
+  },
 ];

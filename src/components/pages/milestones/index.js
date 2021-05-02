@@ -5,11 +5,12 @@ import { useEffect, useReducer } from "react";
 import { reducer, setMilestones } from "../../../reducers/milestones";
 import { initialState } from "../../../store";
 import { MilestonesContextWrapper } from "./context";
+import { Route, Switch, useRouteMatch } from "react-router-dom";
 
-const Milestones = () => {
+const Milestones = ({ childRoutes }) => {
   const { data, error, loading } = useFetch({ request: fetchMileStones });
   const [state, dispatch] = useReducer(reducer, initialState);
-
+  const { url } = useRouteMatch();
   useEffect(() => {
     if (!error && data) {
       dispatch(setMilestones(data));
@@ -18,7 +19,18 @@ const Milestones = () => {
 
   return (
     <MilestonesContextWrapper value={{ state, dispatch }}>
-      {loading ? <div>Loading...</div> : <MilestoneTable />}
+      {loading ? (
+        <div>Loading...</div>
+      ) : (
+        <Switch>
+          <Route exact path={url} component={MilestoneTable} />
+          {childRoutes.map(({ path, component: Component }) => {
+            return (
+              <Route key={path} path={`${url}${path}`} component={Component} />
+            );
+          })}
+        </Switch>
+      )}
     </MilestonesContextWrapper>
   );
 };
