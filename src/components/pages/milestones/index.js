@@ -19,7 +19,7 @@ const Milestones = ({ childRoutes }) => {
 
   return (
     <MilestonesContextWrapper value={{ state, dispatch }}>
-      {loading ? (
+      {loading || !data ? (
         <div>Loading...</div>
       ) : (
         <Switch>
