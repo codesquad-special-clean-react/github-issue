@@ -4,17 +4,21 @@ import Header from "../../layouts/header";
 import Main from "../../layouts/main";
 import Toolbar from "../../organisms/toolbar";
 import { PATHS } from "../../../constants/paths";
-import { Switch, Route, Redirect } from "react-router-dom";
+import { Switch, Route, Redirect, useLocation } from "react-router-dom";
 import { ROUTES } from "../../../routes";
 
 const Index = () => {
   const [openNewLabel, setOpenNewLabel] = useState(false);
+  const { pathname } = useLocation();
+  const isToolbar = [PATHS.LABELS_PATH, PATHS.MILESTONES_PATH].includes(
+    pathname
+  );
 
   return (
     <main className={styles.index}>
       <Header />
       <Main>
-        <Toolbar setOpenNewLabel={setOpenNewLabel} />
+        {isToolbar && <Toolbar setOpenNewLabel={setOpenNewLabel} />}
         <Switch>
           {ROUTES.map(({ path, component: Component }) => {
             return (
