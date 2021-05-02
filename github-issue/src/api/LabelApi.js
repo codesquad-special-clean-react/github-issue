@@ -1,3 +1,14 @@
+export const getLabel = async (url) => {
+    try {
+        const response = await fetch(url);
+        const data = response.json();
+
+        return data;
+    } catch (e) {
+        alert(e);
+    }
+};
+
 export const deteleLabel = async (url, labelId) => {
     try {
         await fetch(`${url}/${labelId}`, {
@@ -8,12 +19,15 @@ export const deteleLabel = async (url, labelId) => {
     }
 };
 
-export const fetchLabels = async (url) => {
+export const editLabel = async (url, labelId, params) => {
     try {
-        const response = await fetch(url);
-        const data = response.json();
-
-        return data;
+        await fetch(`${url}/${labelId}`, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(params)
+        });
     } catch (e) {
         alert(e);
     }

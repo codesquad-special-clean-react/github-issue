@@ -2,11 +2,10 @@ import React, {useState} from "react";
 import NewLabel from "./NewLabel";
 import styled from "styled-components";
 
-function LabelItem({labels, addLabelAPI, deleteLabel}) {
+function LabelItem({labels, editLabelAPI, deleteLabel}) {
     const [editId, setEditId] = useState(null);
 
     const onClickDelete = async ({currentTarget}) => {
-        // const id = currentTarget.closest("li.label-item").getAttribute("data-id");
         const id = currentTarget.getAttribute("data-id");
 
         deleteLabel('http://localhost:3001/labels', id);
@@ -18,12 +17,15 @@ function LabelItem({labels, addLabelAPI, deleteLabel}) {
         }
         else {
             const targetId = target.getAttribute("data-id");
-
             setEditId(targetId);
         }
     }
 
-    let items = labels.map( ({ id, name, desc, color }) => {
+    const cb = () => {
+        setEditId(null);
+    }
+
+        let items = labels.map( ({ id, name, desc, color }) => {
         return (
             <>
                 <LabelItemContainer key={id} data-id={id}>
@@ -38,7 +40,7 @@ function LabelItem({labels, addLabelAPI, deleteLabel}) {
                             <Button onClick={onClickDelete} data-id={id}>Delete</Button>
                         </LabelButtons>
                     </LabelInfoForm>
-                    { Number(editId) === id && <NewLabel insertType="edit"/>}
+                    { Number(editId) === id && <NewLabel insertType="edit" callBack={cb} editLabelAPI={editLabelAPI} param={{ id, name, desc, color }}/>}
                 </LabelItemContainer>
              </>
         )

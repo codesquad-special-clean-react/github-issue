@@ -2,14 +2,23 @@ import img from "../../images/random-icon.png";
 import React, {useState, useEffect} from "react";
 import styled from 'styled-components';
 
-const NewLabel = ({openNewLabel, addLabelAPI, insertType}) => {
-	const [newLabelInfo, setNewLabelInfo] = useState({
-		name: "",
-		desc: "",
-		color: "#bfd4f2",
-		disabledYn: false,
-		errorMessage: "",
-	});
+const NewLabel = ({callBack, addLabelAPI, editLabelAPI, insertType, param}) => {
+	// const NewLabel = ({openNewLabel, addLabelAPI, editLabelAPI, insertType, param}) => {
+	const initNewLabelInfo = (insertType === "new")
+		? {
+			name: "",
+			desc: "",
+			color: "#bfd4f2",
+			disabledYn: false,
+			errorMessage: "",
+		}
+		: {
+			...param,
+			disabledYn: true,
+			errorMessage: "",
+		}
+
+	const [newLabelInfo, setNewLabelInfo] = useState(initNewLabelInfo);
 
 	const onChangeName = ({target: {value: newLabelName}}) => {
 		setNewLabelInfo({
@@ -50,30 +59,28 @@ const NewLabel = ({openNewLabel, addLabelAPI, insertType}) => {
 		if (!newLabelInfo.name) chkValidation.push("이름")
 		if (!newLabelInfo.color) chkValidation.push("색상")
 
-		if (chkValidation.length > 0) return setNewLabelInfo({ ...newLabelInfo,
+		if (chkValidation.length > 0) return setNewLabelInfo({
+			...newLabelInfo,
 			errorMessage: `${chkValidation.join(" / ")} 정보를 입력해 주세요`
 		});
 
-		const param = {
+		const paramObj = {
 			"name": newLabelInfo.name,
 			"desc": newLabelInfo.desc,
 			"color": newLabelInfo.color,
 		};
 
-		addLabelAPI('http://localhost:3001/labels', param);
+		if (insertType === "new")
+			addLabelAPI('http://localhost:3001/labels', paramObj);
+		else if (insertType === "edit")
+			editLabelAPI('http://localhost:3001/labels', newLabelInfo.id, paramObj);
 	}
 
-	const disabledNewLabelBtn = () => {
-		const $newLabelBtn = document.querySelector("#createLabelBtn");
 
-		(newLabelInfo.disabledYn)
-			? $newLabelBtn.classList.remove("disabled")
-			: $newLabelBtn.classList.add("disabled");
+	const onClickCancel = () => {
+		if (insertType === "new") return callBack();
+		else if (insertType === "edit") return callBack();
 	}
-
-	useEffect(() => {
-		disabledNewLabelBtn();
-	}, [newLabelInfo.disabledYn, newLabelInfo.color, newLabelInfo.errorMessage])
 
 	return (
 		<>
@@ -86,12 +93,14 @@ const NewLabel = ({openNewLabel, addLabelAPI, insertType}) => {
 				<NewLabelInfo className="label-info">
 					<TitleInput className="name">
 						<label>Label Name</label>
-						<input type="text" placeholder="Label name" maxLength={20} onChange={onChangeName}/>
+						<input type="text" placeholder="Label name" maxLength={20} onChange={onChangeName}
+							   value={newLabelInfo.name}/>
 					</TitleInput>
 
 					<TitleInput className="desc">
 						<label>Description</label>
-						<input type="text" placeholder="Description (optional)" onChange={onChangeDesc}/>
+						<input type="text" placeholder="Description (optional)" onChange={onChangeDesc}
+							   value={newLabelInfo.desc}/>
 					</TitleInput>
 
 					<TitleInput className="color">
@@ -102,10 +111,12 @@ const NewLabel = ({openNewLabel, addLabelAPI, insertType}) => {
 						</div>
 					</TitleInput>
 
-					<Button onClick={openNewLabel}>Cancel</Button>
-					<Button type={"green"} disabledYn={newLabelInfo.disabledYn} id="createLabelBtn"
+					<Button onClick={onClickCancel}>Cancel</Button>
+					<Button type={"green"}
+							disabled={newLabelInfo.disabledYn.length == 0}
+							disabledYn={newLabelInfo.disabledYn}
 							onClick={onClickCreateLabel}>
-						Create Label
+						{insertType === "new" ? "Create Label" : "Save changes"}
 					</Button>
 				</NewLabelInfo>
 				{newLabelInfo.errorMessage && <ErrorMessage>* {newLabelInfo.errorMessage}</ErrorMessage>}
@@ -164,12 +175,13 @@ const Button = styled.button`
         margin-right: 0;
     }
     
-    &.disabled {
-		background-color: #94d3a2;
-		color: #ffffff;
-    }
-
     ${props => {
+	if (props.disabled) {
+		return `
+					background-color: #94d3a2;
+					color: #ffffff;`
+	}
+
 	if (props.type === "green") {
 		return `
                     background-color: ${props.disabledYn ? "#31c553" : "#94d3a2"};

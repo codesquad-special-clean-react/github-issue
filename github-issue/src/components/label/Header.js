@@ -13,7 +13,7 @@ function Header({addLabelAPI}) {
 			<TabButton type="right" className="">Milestones</TabButton>
 			<NewLabelButton color="green" onClick={openNewLabel}>New label</NewLabelButton>
 
-			{labelInputShow && <NewLabel insertType="new" openNewLabel={openNewLabel} addLabelAPI={addLabelAPI}/>}
+			{labelInputShow && <NewLabel insertType="new" callBack={openNewLabel} addLabelAPI={addLabelAPI}/>}
 		</>
 	);
 }
@@ -32,14 +32,6 @@ const TabButton = styled.button`
 		color: #ffffff;
 		font-weight: bold;
 	}
-`;
-
-const LeftTab = styled.button`
-    border-radius: 5px 0 0 5px;
-`;
-
-const RightTab = styled.button`
-    border-radius: 0 5px 5px 0;
 `;
 
 const NewLabelButton = styled.button`
