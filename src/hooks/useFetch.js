@@ -8,6 +8,9 @@ const useFetch = ({ request }) => {
     setLoading(true);
     request()
       .then((res) => {
+        if (!res.ok) {
+          throw new Error(res.statusText);
+        }
         return res.json();
       })
       .then((resData) => {
