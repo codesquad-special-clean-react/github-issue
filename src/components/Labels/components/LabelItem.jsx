@@ -3,9 +3,9 @@ import styled from "styled-components";
 export default function LabelItem({ labelList }) {
   return (
     <>
-      {labelList.map(({ name, theme, desc }) => {
+      {labelList.map(({ id, name, theme, desc }) => {
         return (
-          <LabelItemWrapper key={name}>
+          <LabelItemWrapper key={id}>
             <PreViewLabel>
               <Label color={theme}>{name}</Label>
             </PreViewLabel>
@@ -30,7 +30,7 @@ const LabelItemWrapper = styled.dd`
 const Label = styled.span`
   padding: 4px 10px;
   border-radius: 20px;
-  background: #de4d4d;
+  background: ${({ color }) => color || "#ccc"};
   font-size: 14px;
 `;
 

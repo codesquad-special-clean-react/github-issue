@@ -2,10 +2,25 @@ import styled from "styled-components";
 import LabelItem from "./components/LabelItem";
 import LabelCreate from "./components/LabelCreate";
 
-export default function LabelList({ labelList }) {
+export default function LabelList(props) {
+  const {
+    labelList,
+    isLabelCreateOpen,
+    newLabelInfo,
+    createLabelInputHandler,
+    createLabelSubmit,
+  } = props;
+
   return (
     <>
-      <LabelCreate />
+      {isLabelCreateOpen && (
+        <LabelCreate
+          newLabelInfo={newLabelInfo}
+          createLabelInputHandler={createLabelInputHandler}
+          createLabelSubmit={createLabelSubmit}
+        />
+      )}
+
       <LabelListWrapper>
         <LabelTitle>{labelList.length} labels</LabelTitle>
         <LabelItem labelList={labelList} />
@@ -15,6 +30,7 @@ export default function LabelList({ labelList }) {
 }
 
 const LabelListWrapper = styled.dl`
+  margin-bottom: 80px;
   border: 1px solid ${({ theme }) => theme.colors.grey};
   border-radius: 3px;
   overflow: hidden;

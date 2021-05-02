@@ -1,29 +1,8 @@
-import { useState } from "react";
 import styled from "styled-components";
-import { createLabelData } from "api";
 
-export default function LabelCreate() {
-  const [labelInputInfo, setLabelInputInfo] = useState({
-    id: 3,
-    name: "",
-    desc: "",
-    theme: "",
-  });
-
-  const { name, desc, theme } = labelInputInfo;
-
-  const createLabelInputHandler = (e) => {
-    const { value, name } = e.target;
-
-    setLabelInputInfo({
-      ...labelInputInfo,
-      [name]: value,
-    });
-  };
-
-  const createLabelSubmit = () => {
-    createLabelData(labelInputInfo);
-  };
+export default function LabelCreate(props) {
+  const { newLabelInfo, createLabelInputHandler, createLabelSubmit } = props;
+  const { name, desc, theme } = newLabelInfo;
 
   return (
     <LabelCreateWrap>

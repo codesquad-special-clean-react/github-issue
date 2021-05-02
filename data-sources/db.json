@@ -1,31 +1,22 @@
 {
   "labels": [
     {
+      "id": 0,
       "name": "label1",
       "theme": "#de4d4d",
       "desc": "첫번째 라벨"
     },
     {
+      "id": 1,
       "name": "label2",
       "theme": "#a1e86a",
       "desc": "두번째 라벨"
     },
     {
+      "id": 2,
       "name": "label3",
       "theme": "#0f6ae0",
       "desc": "세번째 라벨"
-    },
-    {
-      "id": 3,
-      "name": "test",
-      "theme": "#dc69b3",
-      "desc": "test"
-    },
-    {
-      "id": 4,
-      "name": "test2",
-      "theme": "#dc69b3",
-      "desc": "test2"
     }
   ]
 }
