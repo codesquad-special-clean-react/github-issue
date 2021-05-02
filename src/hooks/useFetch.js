@@ -11,7 +11,6 @@ const useFetch = ({ request }) => {
         return res.json();
       })
       .then((resData) => {
-        console.log(resData);
         setData(resData);
       })
       .catch((err) => {
