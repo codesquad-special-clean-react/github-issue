@@ -3,7 +3,7 @@ import LabelItem from './LabelItem';
 import { LabelContext } from '../../context/LabelContext';
 import TableContainer from '../common/TableContainer';
 
-const LabelListContainer = () => {
+const LabelList = () => {
   const { labelState } = useContext(LabelContext);
   const { labels } = labelState;
 
@@ -23,4 +23,4 @@ const LabelListContainer = () => {
   );
 };
 
-export default LabelListContainer;
+export default LabelList;

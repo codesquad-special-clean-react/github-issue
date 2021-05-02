@@ -1,47 +1,33 @@
-import React, { useContext, useState } from 'react';
 import { RefreshIcon } from '../../assets/icons';
-import { LabelContext } from '../../context/LabelContext';
-import { requestLabels } from '../../utils/api';
+import useLabelForm from '../../hooks/useLabelForm';
 import { getRandomColor, getRandomId, getTextColor } from '../../utils/utils';
 import Button from '../common/Button';
 import * as Styled from './LabelForm.style';
 
 const LabelForm = ({
+  initId = getRandomId(),
   initLabelName = '',
   initDescription = '',
   initLabelColor = getRandomColor(),
-  initId = getRandomId(),
   handleCancel,
   handleSubmit,
 }) => {
-  const [labelName, setLabelName] = useState(initLabelName);
-  const [description, setDescription] = useState(initDescription);
-  const [labelColor, setLabelColor] = useState(initLabelColor);
-  const { dispatch } = useContext(LabelContext);
-
-  const buttonTitle = initLabelName ? 'Save changes' : 'Create label';
-
-  const handleInputChange = (setState) => ({ target }) =>
-    setState(target.value);
-
-  const handleLabelNameInputChange = handleInputChange(setLabelName);
-  const handleDescriptionInputChange = handleInputChange(setDescription);
-  const handleColorInputChange = handleInputChange(setLabelColor);
-
-  const handlRandomizeLabelColor = () => setLabelColor(getRandomColor());
-
-  const initForm = () => {
-    setLabelName('');
-    setDescription('');
-    setLabelColor(getRandomColor());
-  };
-
-  const handleSubmitForm = async () => {
-    await handleSubmit(initId, labelName, description, labelColor);
-    initForm();
-    const newLabels = await requestLabels();
-    dispatch({ type: 'UPDATE_LABELS', payload: { newLabels } });
-  };
+  const [
+    labelName,
+    description,
+    labelColor,
+    handleLabelNameInputChange,
+    handleDescriptionInputChange,
+    handleColorInputChange,
+    handleRandomizeLabelColor,
+    handleSubmitForm,
+  ] = useLabelForm(
+    initId,
+    initLabelName,
+    initDescription,
+    initLabelColor,
+    handleSubmit
+  );
 
   return (
     <Styled.Form>
@@ -73,7 +59,7 @@ const LabelForm = ({
           <Styled.ColorContainer>
             <Styled.ColorButton
               backgroundColor={labelColor}
-              onClick={handlRandomizeLabelColor}
+              onClick={handleRandomizeLabelColor}
             >
               <RefreshIcon color={getTextColor(labelColor)} />
             </Styled.ColorButton>
@@ -91,7 +77,7 @@ const LabelForm = ({
         </div>
         <div className="create_button button" onClick={handleSubmitForm}>
           <Button
-            buttonTitle={buttonTitle}
+            buttonTitle={initLabelName ? 'Save changes' : 'Create label'}
             isPrimary={true}
             isDisabled={!labelName.length}
           />

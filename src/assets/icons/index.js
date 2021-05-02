@@ -79,7 +79,7 @@ const CalendarIcon = () => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      class="icon icon-tabler icon-tabler-calendar-event"
+      className="icon icon-tabler icon-tabler-calendar-event"
       width="20"
       height="20"
       viewBox="0 0 24 24"

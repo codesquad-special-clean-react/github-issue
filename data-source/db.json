@@ -35,6 +35,12 @@
       "description": "hotfix",
       "color": "#3722d5",
       "id": 1640349
+    },
+    {
+      "name": "testdddd",
+      "description": "testddddddddd",
+      "color": "#10ffc3",
+      "id": 8457905
     }
   ],
   "milestones": [

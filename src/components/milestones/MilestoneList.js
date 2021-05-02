@@ -1,10 +1,10 @@
 import React, { useContext } from 'react';
-import * as Styled from './MilestoneListContainer.style';
+import * as Styled from './MilestoneList.style';
 import { MilestoneContext } from '../../context/MilestoneContext';
 import TableContainer from '../common/TableContainer';
 import MilestoneItem from './MilestoneItem';
 
-const MilestoneContainer = () => {
+const Milestone = () => {
   const { milestones } = useContext(MilestoneContext);
   const milestonesLength = milestones.length;
   const openMilestoneLenght = milestones.filter(({ isOpen }) => isOpen).length;
@@ -26,4 +26,4 @@ const MilestoneContainer = () => {
   );
 };
 
-export default MilestoneContainer;
+export default Milestone;

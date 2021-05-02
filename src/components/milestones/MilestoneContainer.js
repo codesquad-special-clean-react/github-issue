@@ -1,5 +1,5 @@
 import React from 'react';
-import MilestoneListContainer from './MilestoneListContainer';
+import MilestoneList from './MilestoneList';
 import Container from '../common/Container';
 
 const MilestonesContainer = () => {
@@ -10,7 +10,7 @@ const MilestonesContainer = () => {
       buttonTitle="New milestone"
       handleClick={handleNewMilestoneButtonClick}
     >
-      <MilestoneListContainer />
+      <MilestoneList />
     </Container>
   );
 };

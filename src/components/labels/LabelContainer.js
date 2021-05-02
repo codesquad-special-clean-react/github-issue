@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { LabelContext } from '../../context/LabelContext';
-import LabelListContainer from './LabelListContainer';
+import LabelList from './LabelList';
 import NewLabelFormContainer from './NewLabelFormContainer';
 import Container from '../common/Container';
 
@@ -11,7 +11,7 @@ const LabelContainer = () => {
   return (
     <Container buttonTitle="New Label" handleClick={handleNewLabelButtonClick}>
       <NewLabelFormContainer />
-      <LabelListContainer />
+      <LabelList />
     </Container>
   );
 };
