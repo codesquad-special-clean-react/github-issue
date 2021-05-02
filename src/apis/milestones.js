@@ -12,3 +12,9 @@ export const postMilestone = ({ params }) => {
     ...setMutationOption({ params }),
   });
 };
+
+export const deleteMilestone = (milestoneId) => {
+  return fetch(`${MILESTONES_URL}/${milestoneId}`, {
+    method: "DELETE",
+  });
+};

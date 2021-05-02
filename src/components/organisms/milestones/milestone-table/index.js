@@ -1,10 +1,13 @@
 import styles from "./index.module.scss";
 import { useContext } from "react";
 import { MilestonesContext } from "../../../pages/milestones/context";
+import { deleteMilestone } from "../../../../apis/milestones";
+import { setMilestones } from "../../../../reducers/milestones";
 
 const MilestoneTable = () => {
   const {
     state: { milestones },
+    dispatch,
   } = useContext(MilestonesContext);
   const getIssueCount = (key) => {
     return milestones.reduce((acc, milestone) => {
@@ -13,6 +16,15 @@ const MilestoneTable = () => {
   };
   const openedIssueCount = getIssueCount("openedIssueCount");
   const closedIssueCount = getIssueCount("closedIssueCount");
+  const handleClickDelButton = (id) => () => {
+    deleteMilestone(id)
+      .then(() => {
+        dispatch(setMilestones(milestones.filter((m) => m.id !== id)));
+      })
+      .catch((e) => {
+        alert(e.message);
+      });
+  };
   return (
     <table className={styles.table}>
       <thead className={styles.thead}>
@@ -65,7 +77,12 @@ const MilestoneTable = () => {
                     <div className={styles["button-group"]}>
                       <button className={styles.edit}>Edit</button>
                       <button className={styles.edit}>Close</button>
-                      <button className={styles.delete}>Delete</button>
+                      <button
+                        className={styles.delete}
+                        onClick={handleClickDelButton(id)}
+                      >
+                        Delete
+                      </button>
                     </div>
                   </div>
                 </td>
