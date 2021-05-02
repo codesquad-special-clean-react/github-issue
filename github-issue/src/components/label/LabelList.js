@@ -1,4 +1,3 @@
-import "../../css/LabelList.css";
 import React, {useState, useEffect} from "react";
 import LabelItem from "./LabelItem";
 import {fetchLabels, addLabels,  deteleLabel} from "../../api/LabelApi";
@@ -38,7 +37,7 @@ function LabelList() {
     return (
         <LabelListContainer>
             <Header addLabelAPI={addLabelAPI}/>
-            <ListUl className="label-list">
+            <ListUl>
                 <ListLi>
                     <div>
                         <b>{labelsLength} labels</b>

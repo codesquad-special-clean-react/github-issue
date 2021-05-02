@@ -1,36 +1,41 @@
-import "../../css/Header.css";
 import "../../css/button.css";
 import React, {useState} from 'react';
 import NewLabel from "./NewLabel"
 import styled from 'styled-components'
 
 function Header({addLabelAPI}) {
-    const [labelInputShow, setLabelInputShow] = useState(false);
+	const [labelInputShow, setLabelInputShow] = useState(false);
 
-    const openNewLabel = () => setLabelInputShow(!labelInputShow);
+	const openNewLabel = () => setLabelInputShow(!labelInputShow);
 
-    return (
-        <>
-            <div className="header-container">
-                <TabButton type="left" className="active">Labels</TabButton>
-                <TabButton type="right" className="">Milestones</TabButton>
+	return (
+		<>
+			<div className="header-container">
+				<TabButton type="left" className="active">Labels</TabButton>
+				<TabButton type="right" className="">Milestones</TabButton>
 
-                <NewLabelButton className="button-style green" onClick={openNewLabel}>New label</NewLabelButton>
-            </div>
+				<NewLabelButton className="button-style green" onClick={openNewLabel}>New label</NewLabelButton>
+			</div>
 
-            {labelInputShow && <NewLabel openNewLabel={openNewLabel} addLabelAPI={addLabelAPI}/>}
-        </>
-    );
+			{labelInputShow && <NewLabel insertType="new" openNewLabel={openNewLabel} addLabelAPI={addLabelAPI}/>}
+		</>
+	);
 }
 
 export default Header;
 
 const TabButton = styled.button`
-  height: 36px;
-  padding: 0 20px;
-  border: 1px solid #e4e7ea;
-  cursor: pointer;
-  border-radius: ${props => (props.type === "left") ? "5px 0 0 5px" : "0 5px 5px 0" };
+	height: 36px;
+	padding: 0 20px;
+	border: 1px solid #e4e7ea;
+	cursor: pointer;
+	border-radius: ${props => (props.type === "left") ? "5px 0 0 5px" : "0 5px 5px 0"};
+	
+	&.active {
+		background-color: #1066d6;
+		color: #ffffff;
+		font-weight: bold;
+	}
 `;
 
 const LeftTab = styled.button`
@@ -44,5 +49,12 @@ const RightTab = styled.button`
 const NewLabelButton = styled.button`
     height: 36px;
     float: right;
+    
+    &.green {
+		background-color: #31c553;
+		color: #ffffff;
+		font-weight: bold;
+		float: right;
+    }
  `;
 
