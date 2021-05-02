@@ -7,7 +7,7 @@ import { initialState } from "../../../store";
 import { MilestonesContextWrapper } from "./context";
 
 const Milestones = () => {
-  const { data, error } = useFetch({ request: fetchMileStones });
+  const { data, error, loading } = useFetch({ request: fetchMileStones });
   const [state, dispatch] = useReducer(reducer, initialState);
 
   useEffect(() => {
@@ -18,7 +18,7 @@ const Milestones = () => {
 
   return (
     <MilestonesContextWrapper value={{ state, dispatch }}>
-      <MilestoneTable />
+      {loading ? <div>Loading...</div> : <MilestoneTable />}
     </MilestonesContextWrapper>
   );
 };
