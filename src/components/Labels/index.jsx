@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import LabelItem from "./components/LabelItem";
-import LabelCreate from "./components/LabelCreate";
+import LabelEdit from "./components/LabelEdit";
 
 export default function LabelList(props) {
   const {
@@ -14,10 +14,11 @@ export default function LabelList(props) {
   return (
     <>
       {isLabelCreateOpen && (
-        <LabelCreate
-          newLabelInfo={newLabelInfo}
-          createLabelInputHandler={createLabelInputHandler}
-          createLabelSubmit={createLabelSubmit}
+        <LabelEdit
+          type="create"
+          labelInfo={newLabelInfo}
+          labelInputHandler={createLabelInputHandler}
+          labelSubmit={createLabelSubmit}
         />
       )}
 

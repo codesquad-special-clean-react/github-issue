@@ -1,12 +1,21 @@
 import styled from "styled-components";
 
 export default function LabelCreate(props) {
-  const { newLabelInfo, createLabelInputHandler, createLabelSubmit } = props;
-  const { name, desc, theme } = newLabelInfo;
+  const {
+    type,
+    labelInfo: { name, desc, theme },
+    labelInputHandler,
+    labelSubmit,
+  } = props;
 
   return (
     <LabelCreateWrap>
-      <LabelPreviewWrap>Label Preview</LabelPreviewWrap>
+      {type === "create" && (
+        <LabelPreviewWrap>
+          <LabelPreview color={theme}>{name}</LabelPreview>
+        </LabelPreviewWrap>
+      )}
+
       <CreateInfo>
         <CreateInfoItem>
           <Label>Label name</Label>
@@ -14,7 +23,7 @@ export default function LabelCreate(props) {
             placeholder="Label name"
             name="name"
             value={name}
-            onChange={createLabelInputHandler}
+            onChange={labelInputHandler}
           />
         </CreateInfoItem>
         <CreateInfoItem>
@@ -23,7 +32,7 @@ export default function LabelCreate(props) {
             placeholder="Description (optional)"
             name="desc"
             value={desc}
-            onChange={createLabelInputHandler}
+            onChange={labelInputHandler}
           />
         </CreateInfoItem>
         <CreateInfoItem>
@@ -32,12 +41,14 @@ export default function LabelCreate(props) {
             placeholder="hex color"
             name="theme"
             value={theme}
-            onChange={createLabelInputHandler}
+            onChange={labelInputHandler}
           />
         </CreateInfoItem>
         <CreateInfoItem>
           <CancelBtn>Cancel</CancelBtn>
-          <CreateBtn onClick={createLabelSubmit}>Create Label</CreateBtn>
+          <CreateBtn onClick={labelSubmit}>
+            {type === "create" ? "Create Label" : "Save Change"}
+          </CreateBtn>
         </CreateInfoItem>
       </CreateInfo>
     </LabelCreateWrap>
@@ -45,6 +56,7 @@ export default function LabelCreate(props) {
 }
 
 const LabelCreateWrap = styled.div`
+  width: 100%;
   margin-bottom: 25px;
   padding: 15px;
   background: ${({ theme }) => theme.colors.lightGrey};
@@ -54,6 +66,13 @@ const LabelCreateWrap = styled.div`
 
 const LabelPreviewWrap = styled.div`
   margin-bottom: 15px;
+`;
+
+const LabelPreview = styled.span`
+  padding: 4px 10px;
+  border-radius: 20px;
+  background: ${({ color }) => color || "#ccc"};
+  font-size: 14px;
 `;
 
 const Input = styled.input`
