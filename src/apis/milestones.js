@@ -18,3 +18,10 @@ export const deleteMilestone = (milestoneId) => {
     method: "DELETE",
   });
 };
+
+export const putMilestone = async ({ milestoneId, params }) => {
+  return fetch(`${MILESTONES_URL}/${milestoneId}`, {
+    method: "PUT",
+    ...setMutationOption({ params }),
+  });
+};
