@@ -1,8 +1,17 @@
 import React from 'react';
-import { button } from './Button.module.scss';
+import * as Styled from './Button.style';
 
-const Button = ({ text }) => {
-  return <button className={button}>{text}</button>;
+const Button = ({ buttonTitle, isPrimary = false, isDisabled = false }) => {
+  return (
+    <Styled.Button
+      type="button"
+      isPrimary={isPrimary}
+      isDisabled={isDisabled}
+      disabled={isDisabled}
+    >
+      {buttonTitle}
+    </Styled.Button>
+  );
 };
 
 export default Button;

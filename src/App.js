@@ -1,36 +1,43 @@
-import { useEffect, useState } from 'react';
+import { useContext } from 'react';
 import Header from './components/header/Header';
 import Navigation from './components/navigation/Navigation';
-import { tabs, TAB_LABEL } from './utils/constant';
+import { TAB_LABEL, TAB_MILESTONES } from './utils/constant';
 import { body } from './App.module.scss';
 import LabelContainer from './components/labels/LabelContainer';
-import MilestonesContainer from './components/milestones/MilestonesContainer';
-import { requestLabels } from './utils/api';
+import MilestonesContainer from './components/milestones/MilestoneContainer';
+import { AppContext } from './context/AppContext';
+import { LabelContextProvider } from './context/LabelContext';
+import { MilestoneContextProvider } from './context/MilestoneContext';
 
 function App() {
-  const [selectedTab, selectTab] = useState(tabs.label);
-  const [labels, setLabels] = useState([]);
+  const { appState } = useContext(AppContext);
+  const { selectedTab } = appState;
 
-  useEffect(() => {
-    async function getLabels() {
-      const labels = await requestLabels();
-      setLabels(() => labels);
+  const SelectedContainer = (() => {
+    switch (selectedTab) {
+      case TAB_LABEL:
+        return (
+          <LabelContextProvider>
+            <LabelContainer />
+          </LabelContextProvider>
+        );
+      case TAB_MILESTONES:
+        return (
+          <MilestoneContextProvider>
+            <MilestonesContainer />
+          </MilestoneContextProvider>
+        );
+      default:
+        throw new Error('Any tab is selected.');
     }
-    getLabels();
-  }, []);
-
-  useEffect(() => {}, [labels]);
+  })();
 
   return (
     <div>
       <Header />
       <div className={body}>
-        <Navigation selectedTab={selectedTab} />
-        {selectedTab === TAB_LABEL ? (
-          <LabelContainer labels={labels} />
-        ) : (
-          <MilestonesContainer />
-        )}
+        <Navigation />
+        {SelectedContainer}
       </div>
     </div>
   );

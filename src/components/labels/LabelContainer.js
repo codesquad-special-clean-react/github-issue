@@ -1,24 +1,18 @@
-import React from 'react';
-import { table, total } from './LabelContainer.module.scss';
-import LabelItem from './LabelItem';
+import React, { useContext } from 'react';
+import { LabelContext } from '../../context/LabelContext';
+import LabelList from './LabelList';
+import NewLabelFormContainer from './NewLabelFormContainer';
+import Container from '../common/Container';
 
-const LabelContainer = ({ labels }) => {
+const LabelContainer = () => {
+  const { dispatch } = useContext(LabelContext);
+  const handleNewLabelButtonClick = () => dispatch({ type: 'OPEN_LABEL_FORM' });
+
   return (
-    <table className={table}>
-      <thead>
-        <tr className={total}>{labels.length} labels</tr>
-      </thead>
-      <tbody>
-        {labels.map(({ id, name, description, color }) => (
-          <LabelItem
-            id={id}
-            name={name}
-            description={description}
-            color={color}
-          />
-        ))}
-      </tbody>
-    </table>
+    <Container buttonTitle="New Label" handleClick={handleNewLabelButtonClick}>
+      <NewLabelFormContainer />
+      <LabelList />
+    </Container>
   );
 };
 

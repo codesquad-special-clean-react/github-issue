@@ -8,6 +8,7 @@ const BookIcon = () => (
     width="28"
     height="28"
     viewBox="0 0 24 24"
+    strokeWidth="1.5"
     stroke={white}
     fill="none"
   >
@@ -25,6 +26,7 @@ const LabelIcon = ({ isSelected = false }) => (
     width="28"
     height="28"
     viewBox="0 0 24 24"
+    strokeWidth="1.5"
     stroke={isSelected ? white : grey}
     fill="none"
   >
@@ -41,6 +43,7 @@ const MilestonesIcon = ({ isSelected = false }) => (
     width="28"
     height="28"
     viewBox="0 0 24 24"
+    strokeWidth="1.5"
     stroke={isSelected ? white : grey}
     fill="none"
   >
@@ -53,4 +56,47 @@ const MilestonesIcon = ({ isSelected = false }) => (
   </svg>
 );
 
-export { LabelIcon, MilestonesIcon, BookIcon };
+const RefreshIcon = ({ color }) => {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      className="icon icon-tabler icon-tabler-refresh"
+      width="28"
+      height="28"
+      viewBox="0 0 24 24"
+      strokeWidth="1.5"
+      stroke={color}
+      fill="none"
+    >
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M20 11a8.1 8.1 0 0 0 -15.5 -2m-.5 -4v4h4" />
+      <path d="M4 13a8.1 8.1 0 0 0 15.5 2m.5 4v-4h-4" />
+    </svg>
+  );
+};
+
+const CalendarIcon = () => {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      className="icon icon-tabler icon-tabler-calendar-event"
+      width="20"
+      height="20"
+      viewBox="0 0 24 24"
+      strokeWidth="1.5"
+      stroke={color.grey}
+      fill="none"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <rect x="4" y="5" width="16" height="16" rx="2" />
+      <line x1="16" y1="3" x2="16" y2="7" />
+      <line x1="8" y1="3" x2="8" y2="7" />
+      <line x1="4" y1="11" x2="20" y2="11" />
+      <rect x="8" y="15" width="2" height="2" />
+    </svg>
+  );
+};
+
+export { LabelIcon, MilestonesIcon, BookIcon, RefreshIcon, CalendarIcon };

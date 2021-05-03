@@ -5,7 +5,7 @@ import { container } from './NewLabelButton.module.scss';
 const NewLabelButton = () => {
   return (
     <div className={container}>
-      <Button text="New Label" />
+      <Button buttonTitle="New Label" />
     </div>
   );
 };
