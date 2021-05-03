@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "baseUrl": "./src",
+    "paths": {
+      "@root": ["./"],
+      "@utils": ["./utils/"],
+      "@store": ["./store/modules/"],
+      "@hooks": ["./hooks/"],
+      "@contexts": ["./contexts/"]
+
+    }
+  }
+}

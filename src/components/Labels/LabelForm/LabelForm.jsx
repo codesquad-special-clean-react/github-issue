@@ -9,9 +9,9 @@ import {
   RanDomBtn
 } from './LabelForm.style'
 import { LabelName } from '../LabelTable/Body/LabelRow.style'
-import { makeRandomColor } from '../../utils/util'
-import { postLabel, putLabel } from '../../utils/api'
-import { BTN_LABEL, FORM_LABEL } from '../../utils/constant'
+import { makeRandomColor } from '@utils/util'
+import { LabelAPI } from '@utils/api'
+import { BTN_LABEL, FORM_LABEL } from '@utils/constant'
 
 const LabelForm = ({
   id = null,
@@ -19,7 +19,7 @@ const LabelForm = ({
   desc = '',
   color = '#35946F',
   onClose,
-  updateData = null
+  updateData
 }) => {
   const [labelData, setLabelData] = useState({
     id,
@@ -40,26 +40,27 @@ const LabelForm = ({
 
   const handleUpdateLabel = async (id, labelData) => {
     if (id) {
-      return putLabel(labelData)
+      return LabelAPI.putLabel(labelData)
     }
 
-    return postLabel(labelData)
+    return LabelAPI.postLabel(labelData)
   }
-
 
   const handleSubmit = async (e) => {
     e.preventDefault()
     try {
       const response = await handleUpdateLabel(id, labelData)
-      if (response.ok) {
-        setLabelData(() => ({
-          labelName: '',
-          desc: '',
-          color: '#35946F'
-        }))
-        onClose()
-        updateData && updateData();
+      if (response.ok === false) {
+        throw response.status
       }
+      setLabelData(() => ({
+        labelName: '',
+        desc: '',
+        color: '#35946F'
+      }))
+      onClose()
+      updateData && updateData()
+
     } catch (err) {
       console.error(err)
     }
@@ -73,7 +74,8 @@ const LabelForm = ({
   return (
     <>
       <LabelNameWrap>
-        <LabelName color={labelData.color}>{labelData.labelName ? labelData.labelName : 'Label preview'}</LabelName>
+        <LabelName
+          color={labelData.color}>{labelData.labelName ? labelData.labelName : 'Label preview'}</LabelName>
         <DeleteBtn id={labelData.id}>{BTN_LABEL.DELETE}</DeleteBtn>
       </LabelNameWrap>
       <LabelFormWrap onSubmit={handleSubmit}>

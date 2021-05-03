@@ -1,4 +1,7 @@
-export const SERVER_URL = 'http://localhost:3001/issues/';
+export const SERVER_URL = {
+  ISSUES : 'http://localhost:3001/issues/',
+  MILESTONES : 'http://localhost:3001/milestones/'
+};
 
 export const FORM_LABEL = {
   NAME: 'Label Name',
@@ -10,9 +13,14 @@ export const BTN_LABEL = {
   RANDOM: 'R',
   CANCEL: 'Cancel',
   SAVE: 'Save Change',
-  NEW: 'New Label',
+  NEW_LABEL: 'New Label',
+  NEW_MILESTONE: 'New Milestone',
+  CLOSE_MILESTONE: 'Close Milestone',
+  SAVE_MILESTONE: 'Save Milestone',
+  CREATE_MILESTONE: 'Create Milestone',
   EDIT: 'Edit',
-  DELETE: 'Delete'
+  DELETE: 'Delete',
+  CLOSE: 'Close'
 }
 
 export const LABEL = {
@@ -28,3 +36,9 @@ export const NAV_TITLE = {
 export const ALERT_MESSAGE = {
   DELETE : '정말 이 레이블을 삭제하시겠습니까?'
 }
+
+export const NEW_BTN_LABEL = {
+  'label': BTN_LABEL.NEW_LABEL,
+  'milestone': BTN_LABEL.NEW_MILESTONE
+}
+

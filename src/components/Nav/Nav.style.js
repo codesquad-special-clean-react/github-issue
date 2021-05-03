@@ -20,3 +20,10 @@ export const NavWrap = styled.div`
 
 
 `
+
+export const NavBtn = styled.button`
+  background : ${({name, navTitle}) => name ===  navTitle ? '#0366D6' : '#ffffff'};
+  color:  ${({name, navTitle}) => name ===  navTitle ? '#ffffff' : '#000000'};
+  border : 1px solid #000000;
+  pointer: cursor;
+`

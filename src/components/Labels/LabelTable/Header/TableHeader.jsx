@@ -1,5 +1,5 @@
 import { BoxHeader } from './TableHeader.style'
-import { LABEL } from '../../../utils/constant'
+import { LABEL } from '@utils/constant'
 
 const TableHeader = ({totalCount = 0}) => {
   return (

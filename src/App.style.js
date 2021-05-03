@@ -14,7 +14,6 @@ export const HeaderWrap = styled.header`
 export const MainWrap = styled.main`
   display: flex;
   padding: 32px;
-  justify-content: center;
   align-items: center;
   flex-direction: column;
   font-size: 16px;
