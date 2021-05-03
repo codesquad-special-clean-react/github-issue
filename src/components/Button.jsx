@@ -1,4 +1,4 @@
-import styled, {css} from 'styled-components';
+import styled, { css } from "styled-components";
 
 const Button = styled.button`
   display: inline-flex;
@@ -10,12 +10,7 @@ const Button = styled.button`
   padding: 0 1em;
   vertical-align: top;
 
-  ${props => {
-    const backgroundColor = props.backgroundColor;
-    const size = props.size;
-    const width = props.width;
-    const height = props.height;
-    const color = props.color;
+  ${({ backgroundColor, size, width, height, color }) => {
     return css`
       background: ${backgroundColor};
       font-size: ${size};
@@ -26,7 +21,7 @@ const Button = styled.button`
   }}
 `;
 
-const ButtonComponent = ({children, ...rest}) => {
+const ButtonComponent = ({ children, ...rest }) => {
   return <Button {...rest}>{children}</Button>;
 };
 

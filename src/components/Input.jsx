@@ -1,18 +1,17 @@
-import styled, {css} from 'styled-components';
+import styled, { css } from "styled-components";
 
 const Input = styled.input`
   margin: 0.5em 0.5em;
   /* display: inline-flex; */
 
-  ${props => {
-    const width = props.width;
+  ${({ width }) => {
     return css`
       width: ${width};
     `;
   }}
 `;
 
-const InputComponent = ({children, ...rest}) => {
+const InputComponent = ({ children, ...rest }) => {
   return <Input {...rest}>{children}</Input>;
 };
 

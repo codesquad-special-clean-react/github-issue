@@ -1,39 +1,31 @@
 // external
-import React, {useState} from 'react';
-import styled, {ThemeProvider} from 'styled-components';
+import { createContext, useReducer } from 'react';
+import styled, { ThemeProvider } from 'styled-components';
 
 // internal
-import LabelsContainer from './container/LabelsContainer';
-import CreateLabelView from './view/CreateLabelView';
-import Button from './components/Button';
+import { reducer, initialCreateInfo } from './store/Reducer';
+
+import Header from './view/HeaderView';
+import Nav from './container/NavContainer';
+import SectionContainer from './container/SectionContainer';
+
+export const CreateInfoState = createContext(null);
+export const CreateInfoDispatch = createContext(null);
 
 const Main = () => {
-  const [labelOpen, setLabelOpen] = useState(false);
+  const [createInfoState, dispatch] = useReducer(reducer, initialCreateInfo);
   return (
-    <ThemeProvider theme={{}}>
-      <Wrapper>
-        <Header>
-          <h1>ISSUES</h1>
-        </Header>
-        <SectionWrapper>
-          <Nav>
-            <Button backgroundColor="skyblue" size="19px" width="150px" color="black">
-              Labels
-            </Button>
-            <Button backgroundColor="white" size="19px" width="150px" color="black">
-              Milestones
-            </Button>
-            <CreateLabel>
-              <Button backgroundColor="green" size="19px" width="150px" color="white" onClick={() => setLabelOpen(!labelOpen)}>
-                New Labels
-              </Button>
-            </CreateLabel>
-          </Nav>
-          {labelOpen && <CreateLabelView setLabelOpen={setLabelOpen} />}
-          <LabelsContainer />
-        </SectionWrapper>
-      </Wrapper>
-    </ThemeProvider>
+    <CreateInfoState.Provider value={createInfoState}>
+      <CreateInfoDispatch.Provider value={dispatch}>
+        <ThemeProvider theme={{}}>
+          <Header />
+          <Wrapper>
+            <Nav />
+            <SectionContainer />
+          </Wrapper>
+        </ThemeProvider>
+      </CreateInfoDispatch.Provider>
+    </CreateInfoState.Provider>
   );
 };
 
@@ -43,28 +35,4 @@ const Wrapper = styled.div`
   width: 1200px;
   margin: 0 auto;
   border: 1px red solid;
-`;
-
-const Header = styled.div`
-  background-color: grey;
-
-  h1 {
-    color: #ffff;
-    text-align: center;
-    padding: 10px 0;
-  }
-`;
-
-const SectionWrapper = styled.div`
-  width: 1000px;
-  margin: 20px auto;
-  border: 1px blue dashed;
-`;
-
-const Nav = styled.div`
-  margin: 0 0 30px 0;
-`;
-
-const CreateLabel = styled.div`
-  float: right;
 `;
