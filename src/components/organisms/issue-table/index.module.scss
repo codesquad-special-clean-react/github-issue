@@ -1,14 +1,11 @@
 @import "../../../styles";
 
 .table {
-  border: 1px solid lightgray;
-  width: 100%;
+  @include table;
 }
 
 .thead {
-  text-align: left;
-  font-weight: 600;
-  background-color: #f6f8fa;
+  @include thead;
 }
 
 .tr {

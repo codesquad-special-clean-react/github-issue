@@ -3,35 +3,41 @@ import styles from "./index.module.css";
 import Header from "../../layouts/header";
 import Main from "../../layouts/main";
 import Toolbar from "../../organisms/toolbar";
-import { TABS } from "../../../constants/common";
-import Labels from "../labels";
-import Milestones from "../milestones";
-
-const renderPage = ({ tab, props }) => {
-  const Component = { [TABS.LABELS]: Labels, [TABS.MILESTONES]: Milestones }[
-    tab
-  ];
-
-  return <Component {...props} />;
-};
+import { PATHS } from "../../../constants/paths";
+import { Switch, Route, Redirect, useLocation } from "react-router-dom";
+import { ROUTES } from "../../../routes";
+import { MILESTONE_EDIT_URL_PATTERN } from "../../../utils/regex";
 
 const Index = () => {
-  const [activeTab, setActiveTab] = useState(TABS.LABELS);
   const [openNewLabel, setOpenNewLabel] = useState(false);
+  const { pathname } = useLocation();
+
+  const isToolbar =
+    [PATHS.LABELS_PATH, PATHS.MILESTONES_PATH].includes(pathname) ||
+    MILESTONE_EDIT_URL_PATTERN.test(pathname);
 
   return (
     <main className={styles.index}>
       <Header />
       <Main>
-        <Toolbar
-          activeTab={activeTab}
-          setActiveTab={setActiveTab}
-          setOpenNewLabel={setOpenNewLabel}
-        />
-        {renderPage({
-          tab: activeTab,
-          props: { setOpenNewLabel, openNewLabel },
-        })}
+        {isToolbar && <Toolbar setOpenNewLabel={setOpenNewLabel} />}
+        <Switch>
+          {ROUTES.map(({ path, component: Component, childRoutes }) => {
+            return (
+              <Route
+                path={path}
+                render={() => (
+                  <Component
+                    openNewLabel={openNewLabel}
+                    childRoutes={childRoutes}
+                  />
+                )}
+                key={path}
+              />
+            );
+          })}
+          <Redirect path="*" to={PATHS.LABELS_PATH} />
+        </Switch>
       </Main>
     </main>
   );

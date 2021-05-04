@@ -1,0 +1,77 @@
+@import "../../../../styles";
+
+.table {
+  @include table;
+}
+
+.thead {
+  @include thead;
+}
+
+.tr {
+  @include table-tr;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+
+  span {
+    margin-right: 1rem;
+    &:last-child {
+      font-weight: 400;
+    }
+  }
+
+  td {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    height: 100%;
+    color: $gray;
+
+    div {
+      margin-bottom: 0.5rem;
+
+      &:last-child {
+        margin-bottom: inherit;
+      }
+    }
+
+    .button-group {
+      .edit {
+        color: $info;
+      }
+
+      .delete {
+        color: $danger;
+      }
+
+      button {
+        margin-right: 0.5rem;
+        background: none;
+        border: none;
+        font-size: 1.2rem;
+        cursor: pointer;
+
+        &:hover {
+          opacity: 0.7;
+        }
+      }
+    }
+  }
+
+  .title {
+    font-size: 1.5rem;
+    color: $light-black;
+  }
+
+  .progress-bar {
+    background-color: lightgray;
+    .progress {
+      height: 1rem;
+      background-color: $success;
+    }
+  }
+
+  .container {
+    width: 100%;
+  }
+}
