@@ -1,10 +1,12 @@
-import React, {useState, useEffect} from "react";
-import LabelItem from "./LabelItem";
-import {getLabel, addLabels, editLabel, deteleLabel} from "../../api/LabelApi";
 import Header from "./Header";
-import styled from "styled-components";
+import LabelContainer from "../label/LabelContainer";
+import MilestoneContainer from "../milestone/milestoneContainer";
+import {getLabel, addLabels, editLabel, deleteLabel} from "../../api/LabelApi";
+import {LabelListContainer} from "../common/common"
+import React, {useState, useEffect} from "react";
 
-function LabelList() {
+const LabelList = () => {
+	const [pageType, setPageType] = useState("label");
 	const [labels, setLabels] = useState([]);
 	const [labelsLength, setLabelsLength] = useState(0);
 
@@ -35,33 +37,27 @@ function LabelList() {
 		getLabels();
 	}, []);
 
+	const labelPageParam = {
+		labels: {labels},
+		labelsLength: {labelsLength},
+		getLabels: {getLabels},
+		addLabelAPI: {addLabelAPI},
+		editLabelAPI: {editLabelAPI},
+		deleteLabelAPI: {deleteLabelAPI},
+	}
+
 	return (
 		<LabelListContainer>
-			<Header addLabelAPI={addLabelAPI}/>
-			<List>
-				<ListTitle>{labelsLength} labels</ListTitle>
-				<LabelItem labels={labels} addLabelAPI={addLabelAPI} editLabelAPI={editLabelAPI} deleteLabel={deleteLabelAPI}/>
-			</List>
+			<Header addLabelAPI={addLabelAPI} setPageType={setPageType}/>
+
+			{pageType === "label"
+				? <LabelContainer param={labelPageParam} />
+				: <MilestoneContainer/>
+			}
+
 		</LabelListContainer>
 	);
 }
 
 export default LabelList;
 
-const LabelListContainer = styled.div`
-    padding: 3em 10% 0 10%;
-`
-
-const List = styled.ul`
-    padding: 0px;
-    list-style:none;
-    border: 1px solid #e4e7ea;
-    border-radius: 5px;
-`
-
-const ListTitle = styled.li`
-    padding: 20px 20px;
-    background-color: #f6f8fa;
-    border-bottom: 1px solid #e3e6e9;
-    font-weight: bold;
-`

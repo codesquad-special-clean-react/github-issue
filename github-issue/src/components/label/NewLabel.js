@@ -3,7 +3,7 @@ import React, {useState, useEffect} from "react";
 import styled from 'styled-components';
 
 const NewLabel = ({callBack, addLabelAPI, editLabelAPI, insertType, param}) => {
-	// const NewLabel = ({openNewLabel, addLabelAPI, editLabelAPI, insertType, param}) => {
+
 	const initNewLabelInfo = (insertType === "new")
 		? {
 			name: "",

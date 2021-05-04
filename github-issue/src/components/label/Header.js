@@ -1,17 +1,28 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import NewLabel from "./NewLabel"
 import styled from 'styled-components'
 
-function Header({addLabelAPI}) {
+function Header({addLabelAPI, setPageType}) {
 	const [labelInputShow, setLabelInputShow] = useState(false);
+	const [tabType, setTabType] = useState("label");
 
 	const openNewLabel = () => setLabelInputShow(!labelInputShow);
 
+	const onClickTab = ({target}) => setTabType(target.getAttribute("type"));
+
+	useEffect(() => {
+		setPageType(tabType);
+	}, [tabType])
+
 	return (
 		<>
-			<TabButton type="left" className="active">Labels</TabButton>
-			<TabButton type="right" className="">Milestones</TabButton>
-			<NewLabelButton color="green" onClick={openNewLabel}>New label</NewLabelButton>
+			<TabButton type="label" tabType={tabType} onClick={onClickTab}>Labels</TabButton>
+			<TabButton type="milestone" tabType={tabType} onClick={onClickTab}>Milestones</TabButton>
+
+			{(tabType === "label")
+				? <NewLabelButton color="green" onClick={openNewLabel}>New label</NewLabelButton>
+				: <NewLabelButton color="green" onClick={openNewLabel}>New milestone</NewLabelButton>
+			}
 
 			{labelInputShow && <NewLabel insertType="new" callBack={openNewLabel} addLabelAPI={addLabelAPI}/>}
 		</>
@@ -25,32 +36,34 @@ const TabButton = styled.button`
 	padding: 0 20px;
 	border: 1px solid #e4e7ea;
 	cursor: pointer;
-	border-radius: ${props => (props.type === "left") ? "5px 0 0 5px" : "0 5px 5px 0"};
-	
-	&.active {
-		background-color: #1066d6;
-		color: #ffffff;
-		font-weight: bold;
+	border-radius: ${props => (props.type === "label") ? "5px 0 0 5px" : "0 5px 5px 0"};
+
+	${props => {
+	if (props.tabType === props.type) {
+		return `background-color: #1066d6;
+				color: #ffffff;
+				font-weight: bold;`
 	}
+}}
 `;
 
 const NewLabelButton = styled.button`
-    height: 36px;
-    float: right;
-    
-    padding: 0 20px;
-    border-radius: 5px;
-    border: 1px solid #e4e7ea;
-    cursor: pointer;
-    
-    ${ props => {
+	height: 36px;
+	float: right;
+	
+	padding: 0 20px;
+	border-radius: 5px;
+	border: 1px solid #e4e7ea;
+	cursor: pointer;
+	
+	${props => {
 		if (props.color === "green") {
 			return `
-				background-color: #31c553;
-				color: #ffffff;
-				font-weight: bold;
-				float: right;
-			`
+					background-color: #31c553;
+					color: #ffffff;
+					font-weight: bold;
+					float: right;
+				`
 		}
 	}}
  `;
