@@ -1,14 +1,11 @@
 import '../css/App.css';
-import Title from '../components/Title'
-import Header from '../components/Header'
-import LabelCustom from "../components/LabelCustom";
-import LabelList from '../components/LabelList'
+import PageTitle from './PageTitle'
+import LabelList from './label/LabelList'
 
 function App() {
   return (
     <>
-        <Title/>
-        <Header/>
+        <PageTitle/>
         <LabelList/>
     </>
   );
