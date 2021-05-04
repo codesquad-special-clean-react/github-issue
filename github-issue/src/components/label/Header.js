@@ -24,7 +24,7 @@ function Header({addLabelAPI, setPageType}) {
 				: <NewLabelButton color="green" onClick={openNewLabel}>New milestone</NewLabelButton>
 			}
 
-			{labelInputShow && <NewLabel insertType="new" callBack={openNewLabel} addLabelAPI={addLabelAPI}/>}
+			{labelInputShow && <NewLabel insertType="NEW_LABEL" callBack={openNewLabel} addLabelAPI={addLabelAPI}/>}
 		</>
 	);
 }

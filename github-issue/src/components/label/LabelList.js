@@ -29,7 +29,7 @@ const LabelList = () => {
 	}
 
 	const deleteLabelAPI = (url, id) => {
-		deteleLabel(url, id)
+		deleteLabel(url, id)
 			.then((data) => getLabels())
 	}
 

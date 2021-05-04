@@ -9,7 +9,7 @@ export const getLabel = async (url) => {
     }
 };
 
-export const deteleLabel = async (url, labelId) => {
+export const deleteLabel = async (url, labelId) => {
     try {
         await fetch(`${url}/${labelId}`, {
             method: "DELETE",

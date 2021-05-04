@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 const NewLabel = ({callBack, addLabelAPI, editLabelAPI, insertType, param}) => {
 
-	const initNewLabelInfo = (insertType === "new")
+	const initNewLabelInfo = (insertType === "NEW_LABEL")
 		? {
 			name: "",
 			desc: "",
@@ -70,16 +70,14 @@ const NewLabel = ({callBack, addLabelAPI, editLabelAPI, insertType, param}) => {
 			"color": newLabelInfo.color,
 		};
 
-		if (insertType === "new")
+		if (insertType === "NEW_LABEL")
 			addLabelAPI('http://localhost:3001/labels', paramObj);
-		else if (insertType === "edit")
+		else if (insertType === "EDIT_LABEL")
 			editLabelAPI('http://localhost:3001/labels', newLabelInfo.id, paramObj);
 	}
 
-
 	const onClickCancel = () => {
-		if (insertType === "new") return callBack();
-		else if (insertType === "edit") return callBack();
+		if (insertType === "NEW_LABEL" || insertType === "EDIT_LABEL") return callBack();
 	}
 
 	return (
@@ -94,13 +92,13 @@ const NewLabel = ({callBack, addLabelAPI, editLabelAPI, insertType, param}) => {
 					<TitleInput className="name">
 						<label>Label Name</label>
 						<input type="text" placeholder="Label name" maxLength={20} onChange={onChangeName}
-							   value={newLabelInfo.name}/>
+						       value={newLabelInfo.name}/>
 					</TitleInput>
 
 					<TitleInput className="desc">
 						<label>Description</label>
 						<input type="text" placeholder="Description (optional)" onChange={onChangeDesc}
-							   value={newLabelInfo.desc}/>
+						       value={newLabelInfo.desc}/>
 					</TitleInput>
 
 					<TitleInput className="color">
@@ -113,10 +111,10 @@ const NewLabel = ({callBack, addLabelAPI, editLabelAPI, insertType, param}) => {
 
 					<Button onClick={onClickCancel}>Cancel</Button>
 					<Button type={"green"}
-							disabled={newLabelInfo.disabledYn.length == 0}
-							disabledYn={newLabelInfo.disabledYn}
-							onClick={onClickCreateLabel}>
-						{insertType === "new" ? "Create Label" : "Save changes"}
+					        disabled={newLabelInfo.disabledYn.length == 0}
+					        disabledYn={newLabelInfo.disabledYn}
+					        onClick={onClickCreateLabel}>
+						{insertType === "NEW_LABEL" ? "Create Label" : "Save changes"}
 					</Button>
 				</NewLabelInfo>
 				{newLabelInfo.errorMessage && <ErrorMessage>* {newLabelInfo.errorMessage}</ErrorMessage>}
@@ -130,14 +128,14 @@ export default NewLabel;
 const NewLabelContainer = styled.div`
     margin-top: 1.5em;
     ${props => {
-	if (props.type === "new") {
+	if (props.type === "NEW_LABEL") {
 		return `
             padding: 1.5em;
             background-color: #f6f8fa;
             border: 1px solid #d9dce0;
             border-radius: 5px;
         `
-	} else if (props.type === "edit") {
+	} else if (props.type === "EDIT_LABEL") {
 		return `
             background-color: #fff
             border: none;
