@@ -1,9 +1,9 @@
 import { css } from "styled-components";
 
 const colors = {
-  white: "#ffffff",
+  white: "#fff",
   black: "#111111",
-  grey: "#cccccc",
+  grey: "#ccc",
   lightGrey: "#f9f9f9",
   blue: "#1a73e8",
   green: "#60d805",

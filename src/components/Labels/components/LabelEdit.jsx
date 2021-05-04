@@ -1,33 +1,21 @@
-import { useState } from "react";
 import styled from "styled-components";
-import { createLabelData } from "api";
 
-export default function LabelCreate() {
-  const [labelInputInfo, setLabelInputInfo] = useState({
-    id: 3,
-    name: "",
-    desc: "",
-    theme: "",
-  });
-
-  const { name, desc, theme } = labelInputInfo;
-
-  const createLabelInputHandler = (e) => {
-    const { value, name } = e.target;
-
-    setLabelInputInfo({
-      ...labelInputInfo,
-      [name]: value,
-    });
-  };
-
-  const createLabelSubmit = () => {
-    createLabelData(labelInputInfo);
-  };
+export default function LabelCreate(props) {
+  const {
+    type,
+    labelInfo: { name, desc, theme },
+    labelInputHandler,
+    labelSubmit,
+  } = props;
 
   return (
     <LabelCreateWrap>
-      <LabelPreviewWrap>Label Preview</LabelPreviewWrap>
+      {type === "create" && (
+        <LabelPreviewWrap>
+          <LabelPreview color={theme}>{name}</LabelPreview>
+        </LabelPreviewWrap>
+      )}
+
       <CreateInfo>
         <CreateInfoItem>
           <Label>Label name</Label>
@@ -35,7 +23,7 @@ export default function LabelCreate() {
             placeholder="Label name"
             name="name"
             value={name}
-            onChange={createLabelInputHandler}
+            onChange={labelInputHandler}
           />
         </CreateInfoItem>
         <CreateInfoItem>
@@ -44,7 +32,7 @@ export default function LabelCreate() {
             placeholder="Description (optional)"
             name="desc"
             value={desc}
-            onChange={createLabelInputHandler}
+            onChange={labelInputHandler}
           />
         </CreateInfoItem>
         <CreateInfoItem>
@@ -53,12 +41,14 @@ export default function LabelCreate() {
             placeholder="hex color"
             name="theme"
             value={theme}
-            onChange={createLabelInputHandler}
+            onChange={labelInputHandler}
           />
         </CreateInfoItem>
         <CreateInfoItem>
           <CancelBtn>Cancel</CancelBtn>
-          <CreateBtn onClick={createLabelSubmit}>Create Label</CreateBtn>
+          <CreateBtn onClick={labelSubmit}>
+            {type === "create" ? "Create Label" : "Save Change"}
+          </CreateBtn>
         </CreateInfoItem>
       </CreateInfo>
     </LabelCreateWrap>
@@ -66,6 +56,7 @@ export default function LabelCreate() {
 }
 
 const LabelCreateWrap = styled.div`
+  width: 100%;
   margin-bottom: 25px;
   padding: 15px;
   background: ${({ theme }) => theme.colors.lightGrey};
@@ -75,6 +66,13 @@ const LabelCreateWrap = styled.div`
 
 const LabelPreviewWrap = styled.div`
   margin-bottom: 15px;
+`;
+
+const LabelPreview = styled.span`
+  padding: 4px 10px;
+  border-radius: 20px;
+  background: ${({ color }) => color || "#ccc"};
+  font-size: 14px;
 `;
 
 const Input = styled.input`

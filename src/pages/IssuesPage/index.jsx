@@ -3,28 +3,51 @@ import styled from "styled-components";
 import IssuesTab from "components/IssuesTab";
 import Labels from "components/Labels";
 import Milestones from "components/Milestones";
-import { getLabelData } from "api";
+import { getLabelData, createLabelData } from "api";
+import { createHex } from "utils";
 
 export default function IssuesPage() {
   const [currentMenu, setCurrentMenu] = useState(0);
+  const [isLabelCreateOpen, setIsLabelCreateOpen] = useState(false);
   const [labelList, setLabelList] = useState([]);
-  const [newLabelInfo, setNewLabelInfo] = useState({});
+  const [newLabelInfo, setNewLabelInfo] = useState({
+    name: "",
+    desc: "",
+    theme: createHex().hexColor,
+  });
 
-  const MENU_TAB = {
-    0: <Labels labelList={labelList} />,
-    1: <Milestones />,
+  const menuTabHandler = (id) => setCurrentMenu(id);
+  const openLabelForm = () => setIsLabelCreateOpen(!isLabelCreateOpen);
+
+  const createLabelInputHandler = ({ target: { value, name } }) => {
+    setNewLabelInfo({
+      ...newLabelInfo,
+      [name]: value,
+    });
   };
 
-  const menuTabHandler = (id) => {
-    setCurrentMenu(id);
+  const createLabelSubmit = () => {
+    createLabelData(newLabelInfo).then(() => {
+      setLabelList([...labelList, { id: labelList.length, ...newLabelInfo }]);
+      setNewLabelInfo({ ...newLabelInfo, theme: createHex().hexColor });
+    });
   };
 
-  const createLabel = () => {
-    console.log("라벨 생성 버튼");
-  };
+  const MENU_TAB = [
+    <Labels
+      labelList={labelList}
+      isLabelCreateOpen={isLabelCreateOpen}
+      newLabelInfo={newLabelInfo}
+      createLabelInputHandler={createLabelInputHandler}
+      createLabelSubmit={createLabelSubmit}
+    />,
+    <Milestones />,
+  ];
 
   useEffect(() => {
-    getLabelData().then((res) => setLabelList(res));
+    getLabelData().then((res) => {
+      setLabelList(res);
+    });
   }, []);
 
   return (
@@ -32,7 +55,7 @@ export default function IssuesPage() {
       <IssuesTab
         currentMenu={currentMenu}
         menuTabHandler={menuTabHandler}
-        createLabel={createLabel}
+        openLabelForm={openLabelForm}
       />
 
       {MENU_TAB[currentMenu]}

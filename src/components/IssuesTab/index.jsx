@@ -6,7 +6,7 @@ const TAB_ITEMS = [
 ];
 
 export default function IssuesTab(props) {
-  const { currentMenu, menuTabHandler, createLabel } = props;
+  const { currentMenu, menuTabHandler, openLabelForm } = props;
 
   return (
     <IssuesTabWrapper>
@@ -26,7 +26,7 @@ export default function IssuesTab(props) {
         })}
       </IssuesTabMenu>
 
-      <CreateLabel onClick={createLabel}>New Label</CreateLabel>
+      <CreateLabel onClick={openLabelForm}>New Label</CreateLabel>
     </IssuesTabWrapper>
   );
 }
