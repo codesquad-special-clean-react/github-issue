@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import styled from "styled-components";
 import {List, ListTitle} from "../common/common"
+import MilestonelItem from "./MilestonelItem";
 
 const MilestoneContainer = () => {
 	const [mileStoneTitleActive, setMileStoneTitleActive] = useState("open");
@@ -13,12 +14,13 @@ const MilestoneContainer = () => {
 				<MilestoneTitleButton type="open" activeYn={mileStoneTitleActive} onClick={onClickMileStoneTitle}>open</MilestoneTitleButton>
 				<MilestoneTitleButton type="closed" activeYn={mileStoneTitleActive} onClick={onClickMileStoneTitle}>closed</MilestoneTitleButton>
 			</ListTitle>
+
+			<MilestonelItem milestones={milestones} />
 		</List>
 	);
 };
 
 export default MilestoneContainer;
-
 
 const MilestoneTitleButton = styled.div`
 	margin-right: 10px;

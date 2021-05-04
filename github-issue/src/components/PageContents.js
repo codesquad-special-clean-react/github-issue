@@ -1,11 +1,11 @@
-import Header from "./Header";
-import LabelContainer from "../label/LabelContainer";
-import MilestoneContainer from "../milestone/milestoneContainer";
-import {getLabel, addLabels, editLabel, deleteLabel} from "../../api/LabelApi";
-import {LabelListContainer} from "../common/common"
+import Header from "./label/Header";
+import LabelContainer from "./label/LabelContainer";
+import MilestoneContainer from "./milestone/MilestoneContainer";
+import {getLabel, addLabels, editLabel, deleteLabel} from "../api/LabelApi";
+import {LabelListContainer} from "./common/common"
 import React, {useState, useEffect} from "react";
 
-const LabelList = () => {
+const PageContents = () => {
 	const [pageType, setPageType] = useState("label");
 	const [labels, setLabels] = useState([]);
 	const [labelsLength, setLabelsLength] = useState(0);
@@ -59,5 +59,5 @@ const LabelList = () => {
 	);
 }
 
-export default LabelList;
+export default PageContents;
 
