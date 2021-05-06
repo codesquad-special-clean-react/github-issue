@@ -51,7 +51,7 @@ const PageContents = () => {
 			<Header addLabelAPI={addLabelAPI} setPageType={setPageType}/>
 
 			{pageType === "label"
-				? <LabelContainer param={labelPageParam} />
+				? <LabelContainer param={labelPageParam}/>
 				: <MilestoneContainer/>
 			}
 
