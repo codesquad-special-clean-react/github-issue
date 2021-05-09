@@ -1,36 +1,38 @@
 import Header from "./label/Header";
+import NewMilestone from "./milestone/NewMilestone";
 import LabelContainer from "./label/LabelContainer";
 import MilestoneContainer from "./milestone/MilestoneContainer";
+
 import {getLabel, addLabels, editLabel, deleteLabel} from "../api/LabelApi";
-import {LabelListContainer} from "./common/common"
+import {LabelListContainer} from "../components/templates/Common"
+
 import React, {useState, useEffect} from "react";
 
-const PageContents = () => {
+const Main = () => {
 	const [pageType, setPageType] = useState("label");
 	const [labels, setLabels] = useState([]);
 	const [labelsLength, setLabelsLength] = useState(0);
 
-	const getLabels = () => {
-		getLabel("http://localhost:3001/labels")
-			.then((data) => {
-				setLabels(data);
-				setLabelsLength(data.length);
-			})
+	const getLabels = async () => {
+		const data = await getLabel("http://localhost:3001/labels");
+
+		setLabels(data);
+		setLabelsLength(data.length);
 	}
 
 	const addLabelAPI = (url, id) => {
-		addLabels(url, id)
-			.then((data) => getLabels())
+		addLabels(url, id);
+		getLabels();
 	}
 
-	const editLabelAPI = (url, id, param) => {
-		editLabel(url, id, param)
-			.then((data) => getLabels())
+	const editLabelAPI = async (url, id, param) => {
+		await editLabel(url, id, param);
+		getLabels();
 	}
 
-	const deleteLabelAPI = (url, id) => {
-		deleteLabel(url, id)
-			.then((data) => getLabels())
+	const deleteLabelAPI = async (url, id) => {
+		await deleteLabel(url, id);
+		getLabels();
 	}
 
 	useEffect(() => {
@@ -47,17 +49,16 @@ const PageContents = () => {
 	}
 
 	return (
-		<LabelListContainer>
+		<>
 			<Header addLabelAPI={addLabelAPI} setPageType={setPageType}/>
 
 			{pageType === "label"
 				? <LabelContainer param={labelPageParam}/>
 				: <MilestoneContainer/>
 			}
-
-		</LabelListContainer>
+		</>
 	);
 }
 
-export default PageContents;
+export default Main;
 

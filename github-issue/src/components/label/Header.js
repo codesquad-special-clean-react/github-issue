@@ -1,12 +1,14 @@
 import React, {useEffect, useState} from 'react';
 import NewLabel from "./NewLabel"
 import styled from 'styled-components'
+import {Link} from "react-router-dom";
 
 function Header({addLabelAPI, setPageType}) {
 	const [labelInputShow, setLabelInputShow] = useState(false);
 	const [tabType, setTabType] = useState("label");
 
 	const openNewLabel = () => setLabelInputShow(!labelInputShow);
+	const openNewMilestone = () => {};
 
 	const onClickTab = ({target}) => setTabType(target.getAttribute("type"));
 
@@ -21,7 +23,7 @@ function Header({addLabelAPI, setPageType}) {
 
 			{(tabType === "label")
 				? <NewLabelButton color="green" onClick={openNewLabel}>New label</NewLabelButton>
-				: <NewLabelButton color="green" onClick={openNewLabel}>New milestone</NewLabelButton>
+				: <Link to="/new"><NewLabelButton color="green" onClick={openNewMilestone}>New milestone</NewLabelButton></Link>
 			}
 
 			{labelInputShow && <NewLabel insertType="NEW_LABEL" callBack={openNewLabel} addLabelAPI={addLabelAPI}/>}

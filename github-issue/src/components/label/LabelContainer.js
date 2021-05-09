@@ -1,6 +1,6 @@
 import LabelItem from "./LabelItem";
 import React from 'react';
-import {List, ListTitle} from "../common/common"
+import {List, ListTitle} from "../templates/Common"
 
 const LabelContainer = ({param: {labels, labelsLength, editLabelAPI, deleteLabelAPI}}) => {
 

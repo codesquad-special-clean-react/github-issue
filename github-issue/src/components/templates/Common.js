@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 
-export const LabelListContainer = styled.div`
+export const PageBody = styled.div`
     padding: 3em 10% 0 10%;
 `
 

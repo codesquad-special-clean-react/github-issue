@@ -31,17 +31,23 @@
       "id": 6
     }
   ],
-  "milestones" : [
+  "milestones": [
     {
       "title": "스프린트 1",
       "dueDate": "2021-05-01",
       "desc": "다음 배포를 위한 스프린트",
+      "activeType": "open",
+      "issueCnt": 2,
+      "closedIssueCnt": 0,
       "id": 1
     },
     {
       "title": "스프린트 2",
       "dueDate": "2021-05-06",
       "desc": "이번 배포를 위한 스프린트",
+      "activeType": "closed",
+      "issueCnt": 3,
+      "closedIssueCnt": 1,
       "id": 2
     }
   ]

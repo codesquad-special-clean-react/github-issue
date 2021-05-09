@@ -1,5 +1,5 @@
 import img from "../../images/random-icon.png";
-import React, {useState, useEffect} from "react";
+import React, {useState} from "react";
 import styled from 'styled-components';
 
 const NewLabel = ({callBack, addLabelAPI, editLabelAPI, insertType, param}) => {
@@ -20,6 +20,7 @@ const NewLabel = ({callBack, addLabelAPI, editLabelAPI, insertType, param}) => {
 
 	const [newLabelInfo, setNewLabelInfo] = useState(initNewLabelInfo);
 
+	// todo : useReducer
 	const onChangeName = ({target: {value: newLabelName}}) => {
 		setNewLabelInfo({
 			...newLabelInfo,
@@ -111,7 +112,7 @@ const NewLabel = ({callBack, addLabelAPI, editLabelAPI, insertType, param}) => {
 
 					<Button onClick={onClickCancel}>Cancel</Button>
 					<Button type={"green"}
-					        disabled={newLabelInfo.disabledYn.length == 0}
+					        disabled={newLabelInfo.disabledYn.length === 0}
 					        disabledYn={newLabelInfo.disabledYn}
 					        onClick={onClickCreateLabel}>
 						{insertType === "NEW_LABEL" ? "Create Label" : "Save changes"}
@@ -208,14 +209,12 @@ const NewLabelInfo = styled.div`
 
 
 const TitleInput = styled.div`
-    margin: 0 10px 0 0;
+  margin: 0 10px 0 0;
 	display: flex;
 	flex-flow: column;
 	
 	&.name { flex: 1; }
-
 	&.desc { flex: 3; }
-	
 	&.color {
 		flex: 1;
 		margin-right: 20px;
@@ -235,12 +234,12 @@ const TitleInput = styled.div`
 				border-radius: 5px;
 			}
 		}
-    }
+	}
     
-    & > label {
-		font-weight: bold;
-		margin-bottom: 5px;
-    }
+	& > label {
+	font-weight: bold;
+	margin-bottom: 5px;
+	}
     
 	& input {
 		height: 15px;
@@ -254,5 +253,4 @@ const TitleInput = styled.div`
 			outline: none;
 		}
 	}
-	
 `;
