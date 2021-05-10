@@ -5,15 +5,16 @@ import Button from "../templates/Button";
 import React, {useState} from 'react';
 import styled from 'styled-components';
 import {addLabels} from "../../api/LabelApi";
+import {Link} from "react-router-dom";
 
 const NewMilestone = () => {
-	const {newMilestoneInfo, setNewMilestoneInfo} = useState({
-		"title": "",
-		"dueDate": "",
-		"desc": "",
-		"activeType": "open",
-		"issueCnt": 0,
-		"closedIssueCnt": 0,
+	const [newMilestoneInfo, setNewMilestoneInfo] = useState({
+		title: "",
+		dueDate: "",
+		desc: "",
+		activeType: "open",
+		issueCnt: 0,
+		closedIssueCnt: 0,
 	});
 
 	const onClickCreate = () => {
@@ -22,11 +23,10 @@ const NewMilestone = () => {
 		addLabels(url, newMilestoneInfo);
 	};
 
-	const onChangeTitle = ({target: {value: newMilestoneTitle}}) => setNewMilestoneInfo({...newMilestoneInfo, title: newMilestoneTitle});
+	const onChangeTitle = ({target: {value: newMilestoneTitle}}) => setNewMilestoneInfo({...newMilestoneInfo, title: newMilestoneTitle });
 	const onChangeDueDate = ({target: {value: newMilestoneDueDate}}) => setNewMilestoneInfo({...newMilestoneInfo, dueDate: newMilestoneDueDate});
 	const onChangeDesc = ({target: {value: newMilestoneDesc}}) => setNewMilestoneInfo({...newMilestoneInfo, desc: newMilestoneDesc});
 
-	const a = () => {console.log("sss")}
 	return (
 		<>
 			<CommentTitle/>
@@ -35,7 +35,7 @@ const NewMilestone = () => {
 				<TitleInput label="Due date (optional)" placehlder="연도. 월. 일" onChange={onChangeDueDate}/>
 				<TitleTextarea label="Description (optional)" onChange={onChangeDesc}/>
 			</Contents>
-			<Button type="green" onClick={onClickCreate}>Create milestone</Button>
+			<Link to="/"><Button type="green" onClick={onClickCreate}>Create milestone</Button></Link>
 		</>
 	);
 };
