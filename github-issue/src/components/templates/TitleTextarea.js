@@ -1,24 +1,19 @@
 import React from 'react';
 import styled from "styled-components";
 
-const TitleInput = ({label, placehlder, onChange}) => {
+const TitleTextarea = ({label, placehlder, onChange}) => {
 	return (
 		<InputTemplate InputTemplate2>
 			<label>{label}</label>
-			<input type="text" placeholder={placehlder} maxLength={20} onChange={onChange}/>
-			<reset>
-			</reset>
+			<textarea placeholder={placehlder} maxLength={200} onChange={onChange}/>
 		</InputTemplate>
 	);
 };
 
-export default TitleInput;
-const InputTemplate2 = styled.div`
-	resize: none;
-`;
+export default TitleTextarea;
 
 const InputTemplate = styled.div`
-  margin-bottom: 20px;
+	margin-bottom: 20px;
 	display: flex;
 	flex-flow: column;
 	margin-right: 20px;
@@ -40,16 +35,17 @@ const InputTemplate = styled.div`
 	}
     
 	& > label {
-	font-weight: bold;
-	margin-bottom: 5px;
+		font-weight: bold;
+		margin-bottom: 5px;
 	}
     
-	& input {
-		height: 15px;
+	& textarea {
+		height: 100px;
 		padding: 10px;
 		border: 1px #d7dbdf solid;
 		border-radius: 5px;
 		background-color: #fafbfc;
+		resize: none;
 		
 		&:focus {
 			box-shadow: 0px 0px 3px 2px #6cbbf7;

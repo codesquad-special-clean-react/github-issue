@@ -71,10 +71,8 @@ const NewLabel = ({callBack, addLabelAPI, editLabelAPI, insertType, param}) => {
 			"color": newLabelInfo.color,
 		};
 
-		if (insertType === "NEW_LABEL")
-			addLabelAPI('http://localhost:3001/labels', paramObj);
-		else if (insertType === "EDIT_LABEL")
-			editLabelAPI('http://localhost:3001/labels', newLabelInfo.id, paramObj);
+		if (insertType === "NEW_LABEL") addLabelAPI('http://localhost:3001/labels', paramObj);
+		else if (insertType === "EDIT_LABEL") editLabelAPI('http://localhost:3001/labels', newLabelInfo.id, paramObj);
 	}
 
 	const onClickCancel = () => {
@@ -105,13 +103,13 @@ const NewLabel = ({callBack, addLabelAPI, editLabelAPI, insertType, param}) => {
 					<TitleInput className="color">
 						<label>Color</label>
 						<div>
-							<Button type={"randomColor"} bgColor={newLabelInfo.color} onClick={makeRandomColor}/>
+							<Button type="randomColor" bgColor={newLabelInfo.color} onClick={makeRandomColor}/>
 							<input type="text" onChange={onChangeColor} value={newLabelInfo.color}/>
 						</div>
 					</TitleInput>
 
 					<Button onClick={onClickCancel}>Cancel</Button>
-					<Button type={"green"}
+					<Button type="green"
 					        disabled={newLabelInfo.disabledYn.length === 0}
 					        disabledYn={newLabelInfo.disabledYn}
 					        onClick={onClickCreateLabel}>
@@ -128,19 +126,20 @@ export default NewLabel;
 
 const NewLabelContainer = styled.div`
     margin-top: 1.5em;
+    
     ${props => {
 	if (props.type === "NEW_LABEL") {
 		return `
-            padding: 1.5em;
-            background-color: #f6f8fa;
-            border: 1px solid #d9dce0;
-            border-radius: 5px;
-        `
+	            padding: 1.5em;
+	            background-color: #f6f8fa;
+	            border: 1px solid #d9dce0;
+	            border-radius: 5px;
+	        `
 	} else if (props.type === "EDIT_LABEL") {
 		return `
-            background-color: #fff
-            border: none;
-        `
+	            background-color: #fff
+	            border: none;
+	        `
 	}
 }}
 `;
@@ -173,33 +172,33 @@ const Button = styled.button`
     &: last-child {
         margin-right: 0;
     }
-    
-    ${props => {
-	if (props.disabled) {
-		return `
-					background-color: #94d3a2;
-					color: #ffffff;`
-	}
 
-	if (props.type === "green") {
-		return `
-                    background-color: ${props.disabledYn ? "#31c553" : "#94d3a2"};
-                    color: #ffffff;
-                    font-weight: bold;
-                    float: right;
-                `
-	} else if (props.type === "randomColor") {
-		return `
-                    width: 35px;
-                    height: 100%;
-                    background: url("${img}") no-repeat;
-                    background-size: 40%;
-                    background-position: 50%;
-                    background-color: ${props.bgColor};
-                    border: none;
-                `
-	}
-}}
+    ${props => {
+		if (props.disabled) {
+			return `
+				background-color: #94d3a2;
+				color: #ffffff;`
+		}
+	
+		if (props.type === "green") {
+			return `
+	            background-color: ${props.disabledYn ? "#31c553" : "#94d3a2"};
+	            color: #ffffff;
+	            font-weight: bold;
+	            float: right;
+	        `
+		} else if (props.type === "randomColor") {
+			return `
+	            width: 35px;
+	            height: 100%;
+	            background: url("${img}") no-repeat;
+	            background-size: 40%;
+	            background-position: 50%;
+	            background-color: ${props.bgColor};
+	            border: none;
+	        `
+		}
+	}}
 `;
 
 const NewLabelInfo = styled.div`
@@ -209,7 +208,7 @@ const NewLabelInfo = styled.div`
 
 
 const TitleInput = styled.div`
-  margin: 0 10px 0 0;
+	margin: 0 10px 0 0;
 	display: flex;
 	flex-flow: column;
 	
@@ -237,8 +236,8 @@ const TitleInput = styled.div`
 	}
     
 	& > label {
-	font-weight: bold;
-	margin-bottom: 5px;
+		font-weight: bold;
+		margin-bottom: 5px;
 	}
     
 	& input {

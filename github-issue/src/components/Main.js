@@ -20,8 +20,8 @@ const Main = () => {
 		setLabelsLength(data.length);
 	}
 
-	const addLabelAPI = (url, id) => {
-		addLabels(url, id);
+	const addLabelAPI = (url, params) => {
+		addLabels(url, params);
 		getLabels();
 	}
 

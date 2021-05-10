@@ -3,7 +3,7 @@ import PageTitle from './PageTitle'
 import Main from './Main'
 import NewMilestone from "./milestone/NewMilestone";
 import {PageBody} from "../components/templates/Common";
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 function App() {
   return (
