@@ -30,7 +30,7 @@ const MilestoneContainer = () => {
 		<List>
 			<ListTitle>
 				<MilestoneTitleButton type="open" activeYn={mileStoneActive}
-															onClick={onClickMileStoneTitle}>open</MilestoneTitleButton>
+																			onClick={onClickMileStoneTitle}>open</MilestoneTitleButton>
 				<MilestoneTitleButton type="closed" activeYn={mileStoneActive}
 															onClick={onClickMileStoneTitle}>closed</MilestoneTitleButton>
 			</ListTitle>
