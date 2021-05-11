@@ -1,0 +1,61 @@
+{
+  "labels": [
+    {
+      "id": 1,
+      "name": "bug",
+      "description": "Something isn't working",
+      "color": "#e30d0d"
+    },
+    {
+      "id": 2,
+      "name": "feature",
+      "description": "New feature or request",
+      "color": "#b5addc"
+    },
+    {
+      "id": 3,
+      "name": "good first issue",
+      "description": "Good for newcomers",
+      "color": "#2014c8"
+    },
+    {
+      "id": 4,
+      "name": "help wanted",
+      "description": "Extra attention is needed",
+      "color": "#25d039"
+    },
+    {
+      "id": 5,
+      "name": "invalid",
+      "description": "This doesn't seem right",
+      "color": "#ed0707"
+    }
+  ],
+  "mileStones": [
+    {
+      "name": "bugM",
+      "description": "Something isn't working",
+      "color": "red"
+    },
+    {
+      "name": "featureM",
+      "description": "New feature or request",
+      "color": "SkyBlue"
+    },
+    {
+      "name": "good first issueM",
+      "description": "Good for newcomers",
+      "color": "blue"
+    },
+    {
+      "name": "help wantedM",
+      "description": "Extra attention is needed",
+      "color": "green"
+    },
+    {
+      "name": "invalidM",
+      "description": "This doesn't seem right",
+      "color": "yellow"
+    }
+  ]
+}
