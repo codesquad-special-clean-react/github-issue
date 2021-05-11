@@ -1,43 +1,31 @@
 {
   "labels": [
-    { "name": "bug", "description": "Something isn't working", "color": "red" },
     {
+      "id": 1,
+      "name": "bug",
+      "description": "Something isn't working",
+      "color": "red"
+    },
+    {
+      "id": 2,
       "name": "feature",
       "description": "New feature or request",
       "color": "SkyBlue"
     },
     {
+      "id": 3,
       "name": "good first issue",
       "description": "Good for newcomers",
       "color": "blue"
     },
     {
+      "id": 4,
       "name": "help wanted",
       "description": "Extra attention is needed",
       "color": "green"
     },
     {
-      "name": "invalid",
-      "description": "This doesn't seem right",
-      "color": "yellow"
-    },
-    { "name": "bug", "description": "Something isn't working", "color": "red" },
-    {
-      "name": "feature",
-      "description": "New feature or request",
-      "color": "SkyBlue"
-    },
-    {
-      "name": "good first issue",
-      "description": "Good for newcomers",
-      "color": "blue"
-    },
-    {
-      "name": "help wanted",
-      "description": "Extra attention is needed",
-      "color": "green"
-    },
-    {
+      "id": 5,
       "name": "invalid",
       "description": "This doesn't seem right",
       "color": "yellow"

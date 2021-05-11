@@ -11,7 +11,12 @@ const ScreenChanger = styled.div`
   display: flex;
 `;
 
-const Controller = ({ onClick, itemName }) => {
+const Controller = ({ itemName, onClick, onNewBtnClick }) => {
+  const onBtnClick = (e) =>
+    onClick(
+      e.currentTarget.querySelector('#buttonValue').innerHTML.toLowerCase()
+    );
+  // 'currentTarget' ref: https://www.carlrippon.com/event-target-v-current-target/
   return (
     <ControllerWrapper>
       <ScreenChanger>
@@ -20,21 +25,24 @@ const Controller = ({ onClick, itemName }) => {
           fontColor="white"
           buttonColor="blue"
           iconName="label"
-          onClick={() => onClick('labels')}
+          onClick={onBtnClick}
         />
         <Button
           message="Milestones"
           fontColor="black"
           buttonColor="white"
           iconName="mileStone"
-          onClick={() => onClick('mileStones')}
+          onClick={onBtnClick}
         />
       </ScreenChanger>
 
       <Button
-        message={`New ${itemName}`}
+        message={`New ${itemName}`.slice(0, -1)}
         fontColor="white"
         buttonColor="green"
+        onClick={() => {
+          onNewBtnClick();
+        }}
       />
     </ControllerWrapper>
   );

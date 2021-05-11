@@ -11,10 +11,14 @@ const ButtonWrapper = styled.div`
   border: 1px solid black;
 `;
 
-const ButtonContent = styled.p`
+const ButtonContent = styled.div`
   color: ${(props) => props.fontColor};
   margin: 0 0 0 0;
   font-weight: bold;
+`;
+
+const ButtonMSG = styled.span`
+  margin: 0;
 `;
 
 const Button = ({ message, buttonColor, fontColor, iconName, onClick }) => {
@@ -22,7 +26,7 @@ const Button = ({ message, buttonColor, fontColor, iconName, onClick }) => {
     <ButtonWrapper buttonColor={buttonColor} onClick={onClick}>
       <ButtonContent fontColor={fontColor}>
         {Icon(iconName)}
-        {message}
+        <ButtonMSG id="buttonValue">{message}</ButtonMSG>
       </ButtonContent>
     </ButtonWrapper>
   );

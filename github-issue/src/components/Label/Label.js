@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 const LabelWrapper = styled.div`
-  display: inline-flex;
+  display: flex;
   justify-content: center;
   align-items: center;
   background-color: ${(props) => props.buttonColor};
@@ -14,7 +14,11 @@ const LabelContent = styled.p`
   font-weight: bold;
 `;
 
-const Label = ({ buttonColor, fontColor, message }) => {
+const Label = ({
+  buttonColor = 'black',
+  fontColor = 'white',
+  message = 'Label preview',
+}) => {
   return (
     <LabelWrapper buttonColor={buttonColor}>
       <LabelContent fontColor={fontColor}>{message}</LabelContent>
