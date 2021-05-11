@@ -2,13 +2,13 @@ import React, {useState} from "react";
 import NewLabel from "./NewLabel";
 import styled from "styled-components";
 
-function LabelItem({labels, editLabelAPI, deleteLabel}) {
+function LabelItem({labels, editLabelAPI, deleteLabelAPI}) {
     const [editId, setEditId] = useState(null);
 
     const onClickDelete = async ({currentTarget}) => {
-        const id = currentTarget.getAttribute("data-id");
+        const id = currentTarget.dataset.id;
 
-        deleteLabel('http://localhost:3001/labels', id);
+        deleteLabelAPI('http://localhost:3001/labels', id);
     }
 
     const onClickEdit = ({target}) => {
@@ -16,12 +16,12 @@ function LabelItem({labels, editLabelAPI, deleteLabel}) {
             setEditId(null);
         }
         else {
-            const targetId = target.getAttribute("data-id");
+            const targetId = target.dataset.id;
             setEditId(targetId);
         }
     }
 
-    const cb = () => {
+    const editCallBack = () => {
         setEditId(null);
     }
 
@@ -40,7 +40,7 @@ function LabelItem({labels, editLabelAPI, deleteLabel}) {
                             <Button onClick={onClickDelete} data-id={id}>Delete</Button>
                         </LabelButtons>
                     </LabelInfoForm>
-                    { Number(editId) === id && <NewLabel insertType="edit" callBack={cb} editLabelAPI={editLabelAPI} param={{ id, name, desc, color }}/>}
+                    { Number(editId) === id && <NewLabel insertType="EDIT_LABEL" callBack={editCallBack} editLabelAPI={editLabelAPI} param={{ id, name, desc, color }}/>}
                 </LabelItemContainer>
              </>
         )

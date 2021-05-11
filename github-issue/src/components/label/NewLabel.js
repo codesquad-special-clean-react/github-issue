@@ -1,10 +1,10 @@
 import img from "../../images/random-icon.png";
-import React, {useState, useEffect} from "react";
+import React, {useState} from "react";
 import styled from 'styled-components';
 
 const NewLabel = ({callBack, addLabelAPI, editLabelAPI, insertType, param}) => {
-	// const NewLabel = ({openNewLabel, addLabelAPI, editLabelAPI, insertType, param}) => {
-	const initNewLabelInfo = (insertType === "new")
+
+	const initNewLabelInfo = (insertType === "NEW_LABEL")
 		? {
 			name: "",
 			desc: "",
@@ -20,6 +20,7 @@ const NewLabel = ({callBack, addLabelAPI, editLabelAPI, insertType, param}) => {
 
 	const [newLabelInfo, setNewLabelInfo] = useState(initNewLabelInfo);
 
+	// todo : useReducer
 	const onChangeName = ({target: {value: newLabelName}}) => {
 		setNewLabelInfo({
 			...newLabelInfo,
@@ -70,16 +71,12 @@ const NewLabel = ({callBack, addLabelAPI, editLabelAPI, insertType, param}) => {
 			"color": newLabelInfo.color,
 		};
 
-		if (insertType === "new")
-			addLabelAPI('http://localhost:3001/labels', paramObj);
-		else if (insertType === "edit")
-			editLabelAPI('http://localhost:3001/labels', newLabelInfo.id, paramObj);
+		if (insertType === "NEW_LABEL") addLabelAPI('http://localhost:3001/labels', paramObj);
+		else if (insertType === "EDIT_LABEL") editLabelAPI('http://localhost:3001/labels', newLabelInfo.id, paramObj);
 	}
 
-
 	const onClickCancel = () => {
-		if (insertType === "new") return callBack();
-		else if (insertType === "edit") return callBack();
+		if (insertType === "NEW_LABEL" || insertType === "EDIT_LABEL") return callBack();
 	}
 
 	return (
@@ -94,29 +91,29 @@ const NewLabel = ({callBack, addLabelAPI, editLabelAPI, insertType, param}) => {
 					<TitleInput className="name">
 						<label>Label Name</label>
 						<input type="text" placeholder="Label name" maxLength={20} onChange={onChangeName}
-							   value={newLabelInfo.name}/>
+						       value={newLabelInfo.name}/>
 					</TitleInput>
 
 					<TitleInput className="desc">
 						<label>Description</label>
 						<input type="text" placeholder="Description (optional)" onChange={onChangeDesc}
-							   value={newLabelInfo.desc}/>
+						       value={newLabelInfo.desc}/>
 					</TitleInput>
 
 					<TitleInput className="color">
 						<label>Color</label>
 						<div>
-							<Button type={"randomColor"} bgColor={newLabelInfo.color} onClick={makeRandomColor}/>
+							<Button type="randomColor" bgColor={newLabelInfo.color} onClick={makeRandomColor}/>
 							<input type="text" onChange={onChangeColor} value={newLabelInfo.color}/>
 						</div>
 					</TitleInput>
 
 					<Button onClick={onClickCancel}>Cancel</Button>
-					<Button type={"green"}
-							disabled={newLabelInfo.disabledYn.length == 0}
-							disabledYn={newLabelInfo.disabledYn}
-							onClick={onClickCreateLabel}>
-						{insertType === "new" ? "Create Label" : "Save changes"}
+					<Button type="green"
+					        disabled={newLabelInfo.disabledYn.length === 0}
+					        disabledYn={newLabelInfo.disabledYn}
+					        onClick={onClickCreateLabel}>
+						{insertType === "NEW_LABEL" ? "Create Label" : "Save changes"}
 					</Button>
 				</NewLabelInfo>
 				{newLabelInfo.errorMessage && <ErrorMessage>* {newLabelInfo.errorMessage}</ErrorMessage>}
@@ -129,19 +126,20 @@ export default NewLabel;
 
 const NewLabelContainer = styled.div`
     margin-top: 1.5em;
+    
     ${props => {
-	if (props.type === "new") {
+	if (props.type === "NEW_LABEL") {
 		return `
-            padding: 1.5em;
-            background-color: #f6f8fa;
-            border: 1px solid #d9dce0;
-            border-radius: 5px;
-        `
-	} else if (props.type === "edit") {
+	            padding: 1.5em;
+	            background-color: #f6f8fa;
+	            border: 1px solid #d9dce0;
+	            border-radius: 5px;
+	        `
+	} else if (props.type === "EDIT_LABEL") {
 		return `
-            background-color: #fff
-            border: none;
-        `
+	            background-color: #fff
+	            border: none;
+	        `
 	}
 }}
 `;
@@ -174,33 +172,33 @@ const Button = styled.button`
     &: last-child {
         margin-right: 0;
     }
-    
-    ${props => {
-	if (props.disabled) {
-		return `
-					background-color: #94d3a2;
-					color: #ffffff;`
-	}
 
-	if (props.type === "green") {
-		return `
-                    background-color: ${props.disabledYn ? "#31c553" : "#94d3a2"};
-                    color: #ffffff;
-                    font-weight: bold;
-                    float: right;
-                `
-	} else if (props.type === "randomColor") {
-		return `
-                    width: 35px;
-                    height: 100%;
-                    background: url("${img}") no-repeat;
-                    background-size: 40%;
-                    background-position: 50%;
-                    background-color: ${props.bgColor};
-                    border: none;
-                `
-	}
-}}
+    ${props => {
+		if (props.disabled) {
+			return `
+				background-color: #94d3a2;
+				color: #ffffff;`
+		}
+	
+		if (props.type === "green") {
+			return `
+	            background-color: ${props.disabledYn ? "#31c553" : "#94d3a2"};
+	            color: #ffffff;
+	            font-weight: bold;
+	            float: right;
+	        `
+		} else if (props.type === "randomColor") {
+			return `
+	            width: 35px;
+	            height: 100%;
+	            background: url("${img}") no-repeat;
+	            background-size: 40%;
+	            background-position: 50%;
+	            background-color: ${props.bgColor};
+	            border: none;
+	        `
+		}
+	}}
 `;
 
 const NewLabelInfo = styled.div`
@@ -210,14 +208,12 @@ const NewLabelInfo = styled.div`
 
 
 const TitleInput = styled.div`
-    margin: 0 10px 0 0;
+	margin: 0 10px 0 0;
 	display: flex;
 	flex-flow: column;
 	
 	&.name { flex: 1; }
-
 	&.desc { flex: 3; }
-	
 	&.color {
 		flex: 1;
 		margin-right: 20px;
@@ -237,12 +233,12 @@ const TitleInput = styled.div`
 				border-radius: 5px;
 			}
 		}
-    }
+	}
     
-    & > label {
+	& > label {
 		font-weight: bold;
 		margin-bottom: 5px;
-    }
+	}
     
 	& input {
 		height: 15px;
@@ -256,5 +252,4 @@ const TitleInput = styled.div`
 			outline: none;
 		}
 	}
-	
 `;
