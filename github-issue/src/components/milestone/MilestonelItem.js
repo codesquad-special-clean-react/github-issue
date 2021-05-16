@@ -1,13 +1,13 @@
 import React, {useEffect} from "react";
 import styled from "styled-components";
 import DueDate from "../templates/DueDate";
-import {GetDate} from "../../util/Date";
+import {GetDate} from "../../util/GetDate";
 const MilestoneItem = ({milestones}) => {
 
    useEffect(() => {
    }, []);
 
-  let items = milestones.map( ({ id, title, dueDate, desc, issueCnt, closedIssueCnt }) => {
+  let items = (milestones.length > 0) && milestones.map( ({ id, title, dueDate, desc, issueCnt, closedIssueCnt }) => {
     let progressPercent = Math.floor((closedIssueCnt/issueCnt)*100);
     progressPercent = isNaN(progressPercent)? 0 : progressPercent;
 
@@ -35,9 +35,7 @@ const MilestoneItem = ({milestones}) => {
       )
   });
 
-  return (
-      <>{items}</>
-  );
+  return <>{items}</>;
 }
 
 export default MilestoneItem;
@@ -78,17 +76,14 @@ const Buttons = styled.div`
 `;
 
 const Button = styled.div`
-    margin: 10px 10px 0 0;
-    cursor: pointer;
-   ${({color}) => {
-     console.log("color",color)
-    if (color === "blue"){
-      return `color: #356ed6`
+  margin: 10px 10px 0 0;
+  cursor: pointer;
+  
+  
+  ${({color}) => {
+      if (color === "blue") return `color: #356ed6`
+      else if (color === "red") return `color: #d63535`
     }
-    else if (color === "red"){
-      return `color: #d63535`
-    }
-  }
   }
 `;
 

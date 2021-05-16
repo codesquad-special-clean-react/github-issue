@@ -1,12 +1,9 @@
 import Header from "./label/Header";
-import NewMilestone from "./milestone/NewMilestone";
 import LabelContainer from "./label/LabelContainer";
 import MilestoneContainer from "./milestone/MilestoneContainer";
-
 import {getLabel, addLabels, editLabel, deleteLabel} from "../api/LabelApi";
-import {LabelListContainer} from "../components/templates/Common"
-
 import React, {useState, useEffect} from "react";
+import {labelUrl} from "../api/ApiUrl";
 
 const Main = () => {
 	const [pageType, setPageType] = useState("label");
@@ -14,10 +11,17 @@ const Main = () => {
 	const [labelsLength, setLabelsLength] = useState(0);
 
 	const getLabels = async () => {
-		const data = await getLabel("http://localhost:3001/labels");
+		let data = [];
 
-		setLabels(data);
-		setLabelsLength(data.length);
+		try {
+			data = await getLabel(labelUrl);
+
+			setLabels(data);
+			setLabelsLength(data.length);
+		}
+		catch (error) {
+			console.log("ERR :: ", error);
+		}
 	}
 
 	const addLabelAPI = (url, params) => {
@@ -39,14 +43,7 @@ const Main = () => {
 		getLabels();
 	}, []);
 
-	const labelPageParam = {
-		labels: {labels},
-		labelsLength: {labelsLength},
-		getLabels: {getLabels},
-		addLabelAPI: {addLabelAPI},
-		editLabelAPI: {editLabelAPI},
-		deleteLabelAPI: {deleteLabelAPI},
-	}
+	let labelPageParam = { labels,	labelsLength,	getLabels,	addLabelAPI,	editLabelAPI,	deleteLabelAPI }
 
 	return (
 		<>

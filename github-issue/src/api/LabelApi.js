@@ -42,10 +42,10 @@ export const addLabels = async (url, params) => {
             },
             body: JSON.stringify(params)
         });
-        const data = response.json();
 
-        return data;
-    } catch (e) {
-        alert(e);
+        return response.json();
+    }
+    catch (error) {
+        console.log("ERR :: ", error);
     }
 };
