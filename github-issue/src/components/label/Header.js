@@ -28,7 +28,7 @@ function Header({addLabelAPI, setPageType}) {
 
 			{(tabType === "label")
 				? <NewLabelButton color="green" onClick={openNewLabel}>New label</NewLabelButton>
-				: <Link to="/new"><NewLabelButton color="green" >New milestone</NewLabelButton></Link>
+				: <Link to="/new/new"><NewLabelButton color="green" >New milestone</NewLabelButton></Link>
 			}
 
 			{labelInputShow && <NewLabel insertType="NEW_LABEL" callBack={openNewLabel} addLabelAPI={addLabelAPI}/>}

@@ -2,16 +2,27 @@ import CommentTitle from "../milestone/CommentTitle";
 import TitleInput from "../templates/TitleInput";
 import TitleTextarea from "../templates/TitleTextarea";
 import Button from "../templates/Button";
-import React, {useReducer} from 'react';
-import {addLabels} from "../../api/LabelApi";
+import React, {useEffect, useReducer} from 'react';
+import {addLabels, editLabel, getLabel} from "../../api/LabelApi";
 import {Link} from "react-router-dom";
 import {milestoneUrl} from "../../api/ApiUrl";
 import styled from 'styled-components';
 import {DateFormat} from "../../util/DateFormat";
 
-const NewMilestone = () => {
+const NewMilestone = (props) => {
+	const { params } = props.match;
+	const paramId = params.id;
 
 	const initialState = {
+		title: "",
+		dueDate: "",
+		desc: "",
+		activeType: "open",
+		issueCnt: 0,
+		closedIssueCnt: 0,
+	}
+
+	let editState = {
 		title: "",
 		dueDate: "",
 		desc: "",
@@ -23,6 +34,7 @@ const NewMilestone = () => {
 	const reducer = (state, action) => {
 		switch (action.type) {
 			case "reset": return initialState;
+			case "edit": return editState;
 			case 'updateTitle': return {...state, title: action.title};
 			case 'updateDueDate': return {...state, dueDate: action.dueDate};
 			case 'updateDesc': return {...state, desc: action.desc};
@@ -30,6 +42,26 @@ const NewMilestone = () => {
 	}
 
 	const [state, dispatch] = useReducer(reducer, initialState);
+
+	const getEditData = () => {
+		if (paramId === "new") {
+			const data = getLabel(`${milestoneUrl}?id=${paramId}`);
+			editState = {
+				title:  data.title,
+				dueDate:  data.dueDate,
+				desc:  data.desc,
+				activeType:  data.activeType,
+				issueCnt: data.issueCnt,
+				closedIssueCnt: data.closedIssueCnt,
+			}
+
+			dispatch({ type: "edit"})
+		}
+	};
+
+	useEffect(() => {
+		getEditData();
+	}, []);
 
 	const validateDate = (date) => {
 		const result = DateFormat(date);
@@ -44,8 +76,9 @@ const NewMilestone = () => {
 	const onChangeDesc = event => dispatch({ type: "updateDesc", desc: event.target.value });
 
 	const chkAddValidate = () => {
-
-		addLabels(milestoneUrl, state);
+		paramId === "new"
+		? addLabels(milestoneUrl, state)
+		: editLabel(milestoneUrl, paramId, state);
 	};
 
 	const onClickCreate = () => chkAddValidate();
@@ -58,7 +91,7 @@ const NewMilestone = () => {
 				<TitleInput label="Due date (optional)" placehlder="연도. 월. 일" onChange={onChangeDueDate} value={state.dueDate}/>
 				<TitleTextarea label="Description (optional)" onChange={onChangeDesc}/>
 			</Contents>
-			<Link to="/"><Button type="green" onClick={onClickCreate}>Create milestone</Button></Link>
+			<Link to="/"><Button type="green" onClick={onClickCreate}>{paramId === "new" ? "Create milestone" : "Edit milestone"}</Button></Link>
 		</>
 	);
 };

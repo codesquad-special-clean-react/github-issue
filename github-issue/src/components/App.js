@@ -12,7 +12,7 @@ function App() {
       <PageBody>
         <Router>
           <Route exact path="/" component={Main}/>
-          <Route path="/new" component={NewMilestone}/>
+          <Route path="/new/:id" component={NewMilestone}/>
         </Router>
       </PageBody>
     </>
