@@ -30,6 +30,7 @@ const ButtonLayout = styled.button`
 			return `
 				background-color: #94d3a2;
 				color: #ffffff;
+	            float: right;
 			`
 		}
 	
