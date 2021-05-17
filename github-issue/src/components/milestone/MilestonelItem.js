@@ -12,7 +12,8 @@ const MilestoneItem = ({milestones, setReload}) => {
     const id = target.dataset.id;
     const data = await getItem(milestoneUrl, id);
 
-    editLabel(milestoneUrl, id, {...data, activeType: "closed"});
+    const activeType = data.activeType === "closed" ? "open" : "closed";
+    editLabel(milestoneUrl, id, {...data, activeType: activeType});
     setReload("go");
   }
 
@@ -26,7 +27,7 @@ const MilestoneItem = ({milestones, setReload}) => {
   useEffect(() => {
   }, []);
 
-  let items = (milestones.length > 0) && milestones.map( ({ id, title, dueDate, desc, issueCnt, closedIssueCnt }) => {
+  let items = (milestones.length > 0) && milestones.map( ({ id, title, dueDate, desc, activeType, issueCnt, closedIssueCnt }) => {
     let progressPercent = Math.floor((closedIssueCnt/issueCnt)*100);
     progressPercent = isNaN(progressPercent)? 0 : progressPercent;
 
@@ -46,7 +47,7 @@ const MilestoneItem = ({milestones, setReload}) => {
             <Chart>{progressPercent}% complete    {issueCnt-closedIssueCnt} open    {closedIssueCnt} closed</Chart>
             <Buttons>
               <Link to={ `/new/${id}` }><Button color="blue" >Edit</Button></Link>
-              <Button color="blue" onClick={onClickClose} data-id={id}>Close</Button>
+              <Button color="blue" onClick={onClickClose} data-id={id}>{activeType === "open" ? "Close" : "Open"}</Button>
               <Button color="red" onClick={onClickDelete} data-id={id}>Delete</Button>
             </Buttons>
           </div>
