@@ -7,10 +7,15 @@ function Header({addLabelAPI, setPageType}) {
 	const [labelInputShow, setLabelInputShow] = useState(false);
 	const [tabType, setTabType] = useState("label");
 
-	const openNewLabel = () => setLabelInputShow(!labelInputShow);
-	const openNewMilestone = () => {};
+	const onClickTab = ({target}) => {
+		const type = target.getAttribute("type");
 
-	const onClickTab = ({target}) => setTabType(target.getAttribute("type"));
+		setTabType(type);
+
+		(type === "milestone") && setLabelInputShow(false);
+	}
+
+	const openNewLabel = () => setLabelInputShow(!labelInputShow);
 
 	useEffect(() => {
 		setPageType(tabType);
@@ -23,7 +28,7 @@ function Header({addLabelAPI, setPageType}) {
 
 			{(tabType === "label")
 				? <NewLabelButton color="green" onClick={openNewLabel}>New label</NewLabelButton>
-				: <Link to="/new"><NewLabelButton color="green" onClick={openNewMilestone}>New milestone</NewLabelButton></Link>
+				: <Link to="/new/new"><NewLabelButton color="green" >New milestone</NewLabelButton></Link>
 			}
 
 			{labelInputShow && <NewLabel insertType="NEW_LABEL" callBack={openNewLabel} addLabelAPI={addLabelAPI}/>}

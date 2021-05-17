@@ -1,8 +1,9 @@
 import MilestonelItem from "./MilestonelItem";
 import React, {useState, useEffect} from 'react';
 import styled from "styled-components";
-import {List, ListTitle} from "../templates/Common"
 import {getLabel} from "../../api/LabelApi";
+import {milestoneUrl} from "../../api/ApiUrl";
+import {List, ListTitle} from "../templates/Common"
 
 
 const MilestoneContainer = () => {
@@ -13,28 +14,23 @@ const MilestoneContainer = () => {
 		const activeType = target.getAttribute("type");
 
 		await setMileStoneActive(activeType);
-		await getMilestones();
 	}
 
-	const getMilestones = async () => {
-		const data = await getLabel(`http://localhost:3001/milestones?activeType=${mileStoneActive}`);
-
-		await setMilestones(data);
-	}
-
-	useEffect(() => {
-		getMilestones();
+	useEffect(async () => {
+		const data = await getLabel(`${milestoneUrl}?activeType=${mileStoneActive}`);
+		setMilestones(data);
 	}, [mileStoneActive]);
 
 	return (
 		<List>
 			<ListTitle>
-				<MilestoneTitleButton type="open" activeYn={mileStoneActive}
-																			onClick={onClickMileStoneTitle}>open</MilestoneTitleButton>
-				<MilestoneTitleButton type="closed" activeYn={mileStoneActive}
+				<MilestoneTitleButton type="open"
+															activeYn={mileStoneActive}
+															onClick={onClickMileStoneTitle}>open</MilestoneTitleButton>
+				<MilestoneTitleButton type="closed"
+															activeYn={mileStoneActive}
 															onClick={onClickMileStoneTitle}>closed</MilestoneTitleButton>
 			</ListTitle>
-
 			<MilestonelItem milestones={milestones}/>
 		</List>
 	);

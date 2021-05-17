@@ -1,11 +1,11 @@
 import React from 'react';
 import styled from "styled-components";
 
-const TitleInput = ({label, placehlder, onChange}) => {
+const TitleInput = ({label, placehlder, onChange, value}) => {
 	return (
-		<InputTemplate InputTemplate2>
+		<InputTemplate>
 			<label>{label}</label>
-			<input type="text" placeholder={placehlder} maxLength={20} onChange={onChange}/>
+			<input type="text" placeholder={placehlder} maxLength={20} onChange={onChange} value={value && value}/>
 			<reset>
 			</reset>
 		</InputTemplate>
@@ -13,9 +13,6 @@ const TitleInput = ({label, placehlder, onChange}) => {
 };
 
 export default TitleInput;
-const InputTemplate2 = styled.div`
-	resize: none;
-`;
 
 const InputTemplate = styled.div`
   margin-bottom: 20px;

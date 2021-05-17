@@ -1,6 +1,7 @@
 import img from "../../images/random-icon.png";
 import React, {useState} from "react";
 import styled from 'styled-components';
+import {labelUrl} from "../../api/ApiUrl";
 
 const NewLabel = ({callBack, addLabelAPI, editLabelAPI, insertType, param}) => {
 
@@ -71,8 +72,8 @@ const NewLabel = ({callBack, addLabelAPI, editLabelAPI, insertType, param}) => {
 			"color": newLabelInfo.color,
 		};
 
-		if (insertType === "NEW_LABEL") addLabelAPI('http://localhost:3001/labels', paramObj);
-		else if (insertType === "EDIT_LABEL") editLabelAPI('http://localhost:3001/labels', newLabelInfo.id, paramObj);
+		if (insertType === "NEW_LABEL") addLabelAPI(labelUrl, paramObj);
+		else if (insertType === "EDIT_LABEL") editLabelAPI(labelUrl, newLabelInfo.id, paramObj);
 	}
 
 	const onClickCancel = () => {
@@ -80,45 +81,43 @@ const NewLabel = ({callBack, addLabelAPI, editLabelAPI, insertType, param}) => {
 	}
 
 	return (
-		<>
-			<NewLabelContainer type={insertType}>
-				<NewLabelPreview>
-					{newLabelInfo.name &&
-					<NewLabelPreviewTag bgColor={newLabelInfo.color}>{newLabelInfo.name}</NewLabelPreviewTag>}
-				</NewLabelPreview>
+		<NewLabelContainer type={insertType}>
+			<NewLabelPreview>
+				{newLabelInfo.name &&
+				<NewLabelPreviewTag bgColor={newLabelInfo.color}>{newLabelInfo.name}</NewLabelPreviewTag>}
+			</NewLabelPreview>
 
-				<NewLabelInfo className="label-info">
-					<TitleInput className="name">
-						<label>Label Name</label>
-						<input type="text" placeholder="Label name" maxLength={20} onChange={onChangeName}
-						       value={newLabelInfo.name}/>
-					</TitleInput>
+			<NewLabelInfo className="label-info">
+				<TitleInput className="name">
+					<label>Label Name</label>
+					<input type="text" placeholder="Label name" maxLength={20} onChange={onChangeName}
+								 value={newLabelInfo.name}/>
+				</TitleInput>
 
-					<TitleInput className="desc">
-						<label>Description</label>
-						<input type="text" placeholder="Description (optional)" onChange={onChangeDesc}
-						       value={newLabelInfo.desc}/>
-					</TitleInput>
+				<TitleInput className="desc">
+					<label>Description</label>
+					<input type="text" placeholder="Description (optional)" onChange={onChangeDesc}
+								 value={newLabelInfo.desc}/>
+				</TitleInput>
 
-					<TitleInput className="color">
-						<label>Color</label>
-						<div>
-							<Button type="randomColor" bgColor={newLabelInfo.color} onClick={makeRandomColor}/>
-							<input type="text" onChange={onChangeColor} value={newLabelInfo.color}/>
-						</div>
-					</TitleInput>
+				<TitleInput className="color">
+					<label>Color</label>
+					<div>
+						<Button type="randomColor" bgColor={newLabelInfo.color} onClick={makeRandomColor}/>
+						<input type="text" onChange={onChangeColor} value={newLabelInfo.color}/>
+					</div>
+				</TitleInput>
 
-					<Button onClick={onClickCancel}>Cancel</Button>
-					<Button type="green"
-					        disabled={newLabelInfo.disabledYn.length === 0}
-					        disabledYn={newLabelInfo.disabledYn}
-					        onClick={onClickCreateLabel}>
-						{insertType === "NEW_LABEL" ? "Create Label" : "Save changes"}
-					</Button>
-				</NewLabelInfo>
-				{newLabelInfo.errorMessage && <ErrorMessage>* {newLabelInfo.errorMessage}</ErrorMessage>}
-			</NewLabelContainer>
-		</>
+				<Button onClick={onClickCancel}>Cancel</Button>
+				<Button type="green"
+								disabled={newLabelInfo.disabledYn.length === 0}
+								disabledYn={newLabelInfo.disabledYn}
+								onClick={onClickCreateLabel}>
+					{insertType === "NEW_LABEL" ? "Create Label" : "Save changes"}
+				</Button>
+			</NewLabelInfo>
+			{newLabelInfo.errorMessage && <ErrorMessage>* {newLabelInfo.errorMessage}</ErrorMessage>}
+		</NewLabelContainer>
 	);
 };
 

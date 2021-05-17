@@ -1,15 +1,16 @@
-import React, {useState, useEffect} from "react";
+import React, {useEffect, useState} from "react";
 import LabelItem from "./LabelItem";
-import {getLabel, addLabels, editLabel, deteleLabel} from "../../api/LabelApi";
+import {addLabels, deteleLabel, editLabel, getLabel} from "../../api/LabelApi";
 import Header from "./Header";
 import styled from "styled-components";
+import {labelUrl} from "../../api/ApiUrl";
 
 function LabelList() {
 	const [labels, setLabels] = useState([]);
 	const [labelsLength, setLabelsLength] = useState(0);
 
 	const getLabels = () => {
-		getLabel("http://localhost:3001/labels")
+		getLabel(labelUrl)
 			.then((data) => {
 				setLabels(data);
 				setLabelsLength(data.length);
@@ -49,19 +50,19 @@ function LabelList() {
 export default LabelList;
 
 const LabelListContainer = styled.div`
-    padding: 3em 10% 0 10%;
+	padding: 3em 10% 0 10%;
 `
 
 const List = styled.ul`
-    padding: 0px;
-    list-style:none;
-    border: 1px solid #e4e7ea;
-    border-radius: 5px;
+	padding: 0px;
+	list-style:none;
+	border: 1px solid #e4e7ea;
+	border-radius: 5px;
 `
 
 const ListTitle = styled.li`
-    padding: 20px 20px;
-    background-color: #f6f8fa;
-    border-bottom: 1px solid #e3e6e9;
-    font-weight: bold;
+	padding: 20px 20px;
+	background-color: #f6f8fa;
+	border-bottom: 1px solid #e3e6e9;
+	font-weight: bold;
 `
