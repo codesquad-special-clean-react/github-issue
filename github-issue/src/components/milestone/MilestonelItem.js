@@ -20,7 +20,7 @@ const MilestoneItem = ({milestones}) => {
         <Milestone key={ id }>
           <div className="milestoneInfo">
             <Title>{ title }</Title>
-            <DueDate>{ GetDate(dueDate) }</DueDate>
+            <DueDate isExist={dueDate ? "Y" : "N"}>{ GetDate(dueDate) }</DueDate>
             <Desc>{ desc }</Desc>
           </div>
           <div>

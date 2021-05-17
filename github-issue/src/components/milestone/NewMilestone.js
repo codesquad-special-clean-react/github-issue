@@ -60,7 +60,7 @@ const NewMilestone = (props) => {
 	};
 
 	const onChangeTitle = ({target}) => {
-		(target.value.length === 0) && setErrMsg("제목을 입력해 주세요.");
+		(target.value.length === 0) ? setErrMsg("제목을 입력해 주세요.") : setErrMsg("");
 
 		dispatch({ type: "updateTitle", title: target.value });
 	};
@@ -69,7 +69,7 @@ const NewMilestone = (props) => {
 	const onChangeDesc = ({target}) => dispatch({ type: "updateDesc", desc: target.value });
 
 	const chkAddValidate = () => {
-		if (state.title.length === 0) return console.log("그만");
+		if (state.title.length === 0) return;
 
 		paramId === "new"
 		? addLabels(milestoneUrl, state)

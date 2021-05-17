@@ -3,11 +3,22 @@ import React from 'react';
 import calendarIcon from "../../images/calendar-icon.png";
 
 const DueDate = (props) => {
+	console.log("props ", props.isExist)
 	return (
 		<DueDateContainer>
 			<CalendarIcon></CalendarIcon>
-			<Text>Due by</Text>
-			<Date>{props.children}</Date>
+			{ props.isExist === "Y"
+				?
+				<DateForm>
+					<Text>Due by</Text>
+					<Date>{props.children}</Date>
+				</DateForm>
+				:
+				<DateForm>
+					<Text>No due date</Text>
+				</DateForm>
+			}
+
 		</DueDateContainer>
 	);
 };
@@ -27,6 +38,10 @@ const CalendarIcon = styled.div`
 	background-size: 50%;
 	background-position: 0%;
 `;
+
+const DateForm = styled.div`
+	display: flex;
+	flex-wrap: row;`
 
 const Text = styled.div`
 	margin-left: -5px;
