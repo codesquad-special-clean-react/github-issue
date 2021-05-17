@@ -18,7 +18,6 @@ const DueDate = (props) => {
 					<Text>No due date</Text>
 				</DateForm>
 			}
-
 		</DueDateContainer>
 	);
 };

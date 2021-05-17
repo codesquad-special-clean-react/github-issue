@@ -9,6 +9,7 @@ import {List, ListTitle} from "../templates/Common"
 const MilestoneContainer = () => {
 	const [mileStoneActive, setMileStoneActive] = useState("open");
 	const [milestones, setMilestones] = useState([]);
+	const [reload, setReload] = useState("");
 
 	const onClickMileStoneTitle = async ({target}) => {
 		const activeType = target.getAttribute("type");
@@ -16,10 +17,14 @@ const MilestoneContainer = () => {
 		await setMileStoneActive(activeType);
 	}
 
-	useEffect(async () => {
+	const getList = async () => {
 		const data = await getLabel(`${milestoneUrl}?activeType=${mileStoneActive}`);
 		setMilestones(data);
-	}, [mileStoneActive]);
+	}
+
+	useEffect( () => {
+		getList();
+	}, [reload, mileStoneActive]);
 
 	return (
 		<List>
@@ -31,7 +36,7 @@ const MilestoneContainer = () => {
 															activeYn={mileStoneActive}
 															onClick={onClickMileStoneTitle}>closed</MilestoneTitleButton>
 			</ListTitle>
-			<MilestonelItem milestones={milestones}/>
+			<MilestonelItem milestones={milestones} setReload={setReload}/>
 		</List>
 	);
 };

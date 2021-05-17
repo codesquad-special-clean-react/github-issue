@@ -3,10 +3,24 @@ import styled from "styled-components";
 import DueDate from "../templates/DueDate";
 import {GetDate} from "../../util/GetDate";
 import {Link} from "react-router-dom";
-const MilestoneItem = ({milestones}) => {
+import {milestoneUrl} from "../../api/ApiUrl";
+import {deleteLabel, editLabel, getItem} from "../../api/LabelApi";
 
-  const onClickEdit = () => {
+const MilestoneItem = ({milestones, setReload}) => {
 
+  const onClickClose = async ({target}) => {
+    const id = target.dataset.id;
+    const data = await getItem(milestoneUrl, id);
+
+    editLabel(milestoneUrl, id, {...data, activeType: "closed"});
+    setReload("go");
+  }
+
+  const onClickDelete = ({target}) => {
+    const id = target.dataset.id;
+
+    deleteLabel(milestoneUrl, id);
+    setReload("go");
   }
 
   useEffect(() => {
@@ -31,16 +45,16 @@ const MilestoneItem = ({milestones}) => {
 
             <Chart>{progressPercent}% complete    {issueCnt-closedIssueCnt} open    {closedIssueCnt} closed</Chart>
             <Buttons>
-              <Link to={ "/new/" + id }><Button color="blue" >Edit</Button></Link>
-              <Button color="blue">Close</Button>
-              <Button color="red">Delete</Button>
+              <Link to={ `/new/${id}` }><Button color="blue" >Edit</Button></Link>
+              <Button color="blue" onClick={onClickClose} data-id={id}>Close</Button>
+              <Button color="red" onClick={onClickDelete} data-id={id}>Delete</Button>
             </Buttons>
           </div>
          </Milestone>
       )
   });
 
-  return <>{items}</>;
+  return (<>{items}</>);
 }
 
 export default MilestoneItem;

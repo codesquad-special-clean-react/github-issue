@@ -9,6 +9,17 @@ export const getLabel = async (url) => {
     }
 };
 
+export const getItem = async (url, id) => {
+    try {
+        const response = await fetch(`${url}/${id}`);
+        const data = response.json();
+
+        return data;
+    } catch (e) {
+        alert(e);
+    }
+};
+
 export const deleteLabel = async (url, labelId) => {
     try {
         await fetch(`${url}/${labelId}`, {
